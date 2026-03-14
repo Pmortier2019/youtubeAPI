@@ -1,0 +1,37 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+# mail:                            # TODO: mail configureren voor payout notificaties
+#   host: smtp.gmail.com
+#   port: 587
+#   username: jouw@email.com
+#   password: jouw-app-wachtwoord
+#   from: noreply@soundtracker.com
+#   properties:
+#     mail.smtp.auth: true
+#     mail.smtp.starttls.enable: true
+  datasource:
+    url: jdbc:postgresql://${PGHOST:localhost}:${PGPORT:5432}/${PGDATABASE:soundtracker}
+    username: ${PGUSER:soundtracker}
+    password: ${PGPASSWORD:soundtracker}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+
+youtube:
+  apiKey: ${YOUTUBE_API_KEY:changeme}
+  baseUrl: https://www.googleapis.com/youtube/v3
+  batchSize: 50
+
+scheduler:
+  enabled: true
+  cron: "0 15 2 * * *"
+
+jwt:
+  secret: ${JWT_SECRET:changeme-set-a-strong-secret-in-production-min-32-chars}
+  expirationMs: 86400000

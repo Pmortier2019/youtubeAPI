@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SoundTracker — Stats</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f1117;
+      color: #e2e8f0;
+      min-height: 100vh;
+    }
+
+    /* ── Top bar ── */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: #1a1d27;
+      border-bottom: 1px solid #2d3148;
+    }
+    header h1 { font-size: 1.25rem; font-weight: 700; letter-spacing: .02em; }
+    header h1 span { color: #6366f1; }
+
+    .header-right { display: flex; align-items: center; gap: 1rem; }
+
+    #refresh-btn {
+      background: #6366f1;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: .5rem 1.2rem;
+      font-size: .9rem;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    #refresh-btn:hover { background: #4f52d4; }
+    #refresh-btn:disabled { opacity: .5; cursor: not-allowed; }
+
+    #refresh-msg {
+      font-size: .85rem;
+      color: #94a3b8;
+      min-width: 200px;
+    }
+
+    /* ── Layout ── */
+    main {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 2rem;
+      display: grid;
+      gap: 2rem;
+    }
+
+    /* ── Summary cards ── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+    .card {
+      background: #1a1d27;
+      border: 1px solid #2d3148;
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+    }
+    .card-label { font-size: .75rem; color: #64748b; text-transform: uppercase; letter-spacing: .06em; margin-bottom: .4rem; }
+    .card-value { font-size: 1.8rem; font-weight: 700; color: #e2e8f0; }
+
+    /* ── Sections ── */
+    .section-title {
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: #64748b;
+      margin-bottom: .75rem;
+    }
+
+    /* ── Tables ── */
+    .table-wrap { overflow-x: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .875rem;
+    }
+    thead th {
+      text-align: left;
+      padding: .6rem 1rem;
+      background: #1a1d27;
+      color: #64748b;
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      border-bottom: 1px solid #2d3148;
+    }
+    tbody tr {
+      border-bottom: 1px solid #1e2235;
+      transition: background .1s;
+    }
+    tbody tr:hover { background: #1e2235; }
+    tbody td { padding: .65rem 1rem; vertical-align: middle; }
+
+    .clickable { cursor: pointer; }
+    .clickable td:first-child { color: #818cf8; font-family: monospace; }
+
+    .badge {
+      display: inline-block;
+      padding: .2rem .6rem;
+      border-radius: 999px;
+      font-size: .75rem;
+      font-weight: 600;
+      background: #1e293b;
+      color: #94a3b8;
+    }
+
+    /* ── Chart modal ── */
+    #modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.6);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+    #modal-overlay.open { display: flex; }
+
+    #modal {
+      background: #1a1d27;
+      border: 1px solid #2d3148;
+      border-radius: 14px;
+      padding: 2rem;
+      width: min(860px, 95vw);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    #modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+      gap: 1rem;
+    }
+    #modal-title { font-size: 1rem; font-weight: 600; word-break: break-all; }
+    #modal-subtitle { font-size: .8rem; color: #64748b; margin-top: .2rem; }
+    #modal-close {
+      background: none;
+      border: none;
+      color: #64748b;
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    #modal-close:hover { color: #e2e8f0; }
+
+    #chart-container { position: relative; height: 320px; }
+
+    /* ── Creators grid ── */
+    .creators-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: .75rem;
+    }
+    .creator-card {
+      background: #1a1d27;
+      border: 1px solid #2d3148;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .creator-name { font-weight: 600; font-size: .9rem; }
+    .creator-views { font-size: .85rem; color: #818cf8; font-weight: 700; }
+
+    /* ── Utility ── */
+    .loading { color: #475569; font-size: .875rem; padding: 1rem 0; }
+    .error-msg { color: #f87171; font-size: .875rem; padding: 1rem 0; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Sound<span>Tracker</span></h1>
+  <div class="header-right">
+    <span id="refresh-msg"></span>
+    <button id="refresh-btn">Refresh from YouTube</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- Summary cards -->
+  <div class="cards">
+    <div class="card">
+      <div class="card-label">Videos tracked</div>
+      <div class="card-value" id="card-videos">—</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Total views</div>
+      <div class="card-value" id="card-views">—</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Total likes</div>
+      <div class="card-value" id="card-likes">—</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Creators</div>
+      <div class="card-value" id="card-creators">—</div>
+    </div>
+  </div>
+
+  <!-- Creators leaderboard -->
+  <div>
+    <div class="section-title">Creator Leaderboard</div>
+    <div id="creators-grid" class="creators-grid">
+      <div class="loading">Loading…</div>
+    </div>
+  </div>
+
+  <!-- Video table -->
+  <div>
+    <div class="section-title">Videos — click a row for history</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Video ID</th>
+            <th>Creator</th>
+            <th>Views</th>
+            <th>Likes</th>
+            <th>Comments</th>
+            <th>Last snapshot</th>
+          </tr>
+        </thead>
+        <tbody id="videos-body">
+          <tr><td colspan="6" class="loading">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</main>
+
+<!-- Chart modal -->
+<div id="modal-overlay">
+  <div id="modal">
+    <div id="modal-header">
+      <div>
+        <div id="modal-title">—</div>
+        <div id="modal-subtitle">—</div>
+      </div>
+      <button id="modal-close" title="Close">&#x2715;</button>
+    </div>
+    <div id="chart-container">
+      <canvas id="history-chart"></canvas>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── Helpers ──────────────────────────────────────────────
+  const fmt = n => n >= 1_000_000
+    ? (n / 1_000_000).toFixed(1) + 'M'
+    : n >= 1_000
+    ? (n / 1_000).toFixed(1) + 'K'
+    : String(n);
+
+  async function apiFetch(path, opts) {
+    const res = await fetch(path, opts);
+    if (!res.ok) throw new Error(await res.text());
+    return res.json().catch(() => null);
+  }
+
+  // ── State ────────────────────────────────────────────────
+  let chartInstance = null;
+
+  // ── Load overview ────────────────────────────────────────
+  async function loadOverview() {
+    const [videos, creators] = await Promise.all([
+      apiFetch('/api/stats/videos'),
+      apiFetch('/api/stats/creators'),
+    ]);
+
+    // Summary cards
+    const totalViews = videos.reduce((s, v) => s + v.views, 0);
+    const totalLikes = videos.reduce((s, v) => s + v.likes, 0);
+    document.getElementById('card-videos').textContent = videos.length;
+    document.getElementById('card-views').textContent = fmt(totalViews);
+    document.getElementById('card-likes').textContent = fmt(totalLikes);
+    document.getElementById('card-creators').textContent = creators.length;
+
+    // Creator leaderboard
+    const grid = document.getElementById('creators-grid');
+    grid.innerHTML = creators.map((c, i) => `
+      <div class="creator-card">
+        <span class="creator-name">#${i + 1} ${c.creator}</span>
+        <span class="creator-views">${fmt(c.totalViews)} views</span>
+      </div>`).join('');
+
+    // Video table
+    const tbody = document.getElementById('videos-body');
+    if (videos.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="6" class="loading">No snapshots yet — click Refresh.</td></tr>';
+      return;
+    }
+    tbody.innerHTML = videos.map(v => `
+      <tr class="clickable" data-id="${v.videoId}" data-url="${v.url ?? ''}" data-creator="${v.creator ?? ''}">
+        <td>${v.videoId}</td>
+        <td><span class="badge">${v.creator ?? '—'}</span></td>
+        <td>${fmt(v.views)}</td>
+        <td>${fmt(v.likes)}</td>
+        <td>${fmt(v.comments)}</td>
+        <td>${v.snapshotDate ?? '—'}</td>
+      </tr>`).join('');
+
+    tbody.querySelectorAll('tr.clickable').forEach(row => {
+      row.addEventListener('click', () =>
+        openModal(row.dataset.id, row.dataset.url, row.dataset.creator));
+    });
+  }
+
+  // ── Chart modal ──────────────────────────────────────────
+  async function openModal(videoId, url, creator) {
+    document.getElementById('modal-title').textContent = videoId;
+    document.getElementById('modal-subtitle').textContent =
+      [creator, url].filter(Boolean).join(' · ');
+    document.getElementById('modal-overlay').classList.add('open');
+
+    const data = await apiFetch(`/api/stats/videos/${videoId}`);
+
+    if (chartInstance) { chartInstance.destroy(); chartInstance = null; }
+
+    const labels = data.history.map(s => s.date);
+    const views  = data.history.map(s => s.views);
+    const likes  = data.history.map(s => s.likes);
+
+    chartInstance = new Chart(
+      document.getElementById('history-chart'),
+      {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [
+            {
+              label: 'Views',
+              data: views,
+              borderColor: '#6366f1',
+              backgroundColor: 'rgba(99,102,241,.1)',
+              fill: true,
+              tension: .35,
+              pointRadius: labels.length > 30 ? 0 : 3,
+              yAxisID: 'yViews',
+            },
+            {
+              label: 'Likes',
+              data: likes,
+              borderColor: '#34d399',
+              backgroundColor: 'transparent',
+              tension: .35,
+              pointRadius: labels.length > 30 ? 0 : 3,
+              yAxisID: 'yLikes',
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { labels: { color: '#94a3b8' } },
+            tooltip: {
+              callbacks: {
+                label: ctx => ` ${ctx.dataset.label}: ${fmt(ctx.parsed.y)}`,
+              },
+            },
+          },
+          scales: {
+            x: { ticks: { color: '#475569' }, grid: { color: '#1e2235' } },
+            yViews: {
+              position: 'left',
+              ticks: { color: '#818cf8', callback: fmt },
+              grid: { color: '#1e2235' },
+            },
+            yLikes: {
+              position: 'right',
+              ticks: { color: '#34d399', callback: fmt },
+              grid: { drawOnChartArea: false },
+            },
+          },
+        },
+      }
+    );
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('open');
+    if (chartInstance) { chartInstance.destroy(); chartInstance = null; }
+  }
+
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  document.getElementById('modal-overlay').addEventListener('click', e => {
+    if (e.target === document.getElementById('modal-overlay')) closeModal();
+  });
+
+  // ── Refresh button ───────────────────────────────────────
+  document.getElementById('refresh-btn').addEventListener('click', async () => {
+    const btn = document.getElementById('refresh-btn');
+    const msg = document.getElementById('refresh-msg');
+    btn.disabled = true;
+    msg.textContent = 'Fetching from YouTube…';
+    try {
+      const text = await fetch('/api/stats/refresh', { method: 'POST' })
+        .then(r => r.text());
+      msg.textContent = text;
+      await loadOverview();
+    } catch (e) {
+      msg.textContent = 'Error: ' + e.message;
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
+  // ── Init ─────────────────────────────────────────────────
+  loadOverview().catch(e => {
+    document.getElementById('videos-body').innerHTML =
+      `<tr><td colspan="6" class="error-msg">${e.message}</td></tr>`;
+  });
+</script>
+</body>
+</html>

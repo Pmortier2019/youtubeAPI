@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(node:*)",
+      "Bash(npm run:*)",
+      "Bash(mvn spring-boot:run:*)",
+      "Bash(./mvnw spring-boot:run:*)",
+      "Bash(where mvn:*)",
+      "Bash(cmd.exe:*)",
+      "Bash(curl:*)",
+      "Bash(unzip:*)",
+      "Bash(powershell.exe:*)",
+      "Bash(/c/Users/Piete/maven/apache-maven-3.9.13/bin/mvn spring-boot:run:*)",
+      "Bash(docker:*)",
+      "Bash(pkill:*)",
+      "Bash(/c/Users/Piete/maven/apache-maven-3.9.13/bin/mvn clean:*)",
+      "Bash(java:*)",
+      "Bash(JAVA_HOME=\"/c/Users/Piete/.jdks/openjdk-21.0.2\" /c/Users/Piete/maven/apache-maven-3.9.13/bin/mvn clean:*)",
+      "WebFetch(domain:www.youtube.com)",
+      "Bash(JAVA_HOME=\"/c/Users/Piete/.jdks/openjdk-21.0.2\" /c/Users/Piete/maven/apache-maven-3.9.13/bin/mvn spring-boot:run:*)",
+      "WebSearch",
+      "WebFetch(domain:www.blastoffmedia.co)",
+      "WebFetch(domain:www.oreateai.com)",
+      "WebFetch(domain:music.blastoffmedia.co)",
+      "WebFetch(domain:aifounderkit.com)",
+      "WebFetch(domain:completemusicupdate.com)",
+      "WebFetch(domain:soundcamps.com)",
+      "WebFetch(domain:playlistpush.com)",
+      "WebFetch(domain:www.billboard.com)",
+      "WebFetch(domain:bom.zenish.cloud)",
+      "Bash(powershell:*)",
+      "Bash(__NEW_LINE_e4e380cb5e462852__ curl:*)",
+      "Bash(find /c/Users/Piete/IdeaProjects/YoutubeAPI1/src -name \"*.java\" | xargs grep -l \"repo\\\\|Repository\" | grep -v target | head -10)",
+      "Bash(grep -roh '#[0-9a-fA-F]\\\\{6\\\\}\\\\|rgba\\([0-9, .]*\\)'  /c/Users/Piete/IdeaProjects/YoutubeAPI1/frontend/src --include=\"*.jsx\" | sort | uniq -c | sort -rn | head -40)",
+      "Bash(cd /c/Users/Piete/IdeaProjects/YoutubeAPI1/frontend/src\ngrep -rn \"#6366f1\\\\|#8b5cf6\\\\|#a5b4fc\\\\|#c7d2fe\\\\|#4338ca\\\\|#a78bfa\\\\|#ede9fe\\\\|#eef2ff\\\\|#f0f4ff\" pages/ components/ --include=\"*.jsx\" | grep -v \".orig\")",
+      "Bash(ls /c/Users/Piete/IdeaProjects/YoutubeAPI1/*.cmd /c/Users/Piete/IdeaProjects/YoutubeAPI1/mvnw* 2>/dev/null; which mvn 2>/dev/null; ls /c/Users/Piete/IdeaProjects/YoutubeAPI1/target/*.jar 2>/dev/null)"
+    ]
+  }
+}

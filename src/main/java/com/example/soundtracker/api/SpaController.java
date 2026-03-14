@@ -1,0 +1,18 @@
+package com.example.soundtracker.api;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class SpaController {
+
+    @GetMapping(value = "/{path:[^\\.]*}")
+    public String forwardRoot() {
+        return "forward:/index.html";
+    }
+
+    @GetMapping(value = "/**/{path:[^\\.]*}")
+    public String forwardNested() {
+        return "forward:/index.html";
+    }
+}
