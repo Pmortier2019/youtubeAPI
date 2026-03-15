@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: soundtracker
+      POSTGRES_USER: soundtracker
+      POSTGRES_PASSWORD: soundtracker
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U soundtracker"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    image: soundtracker:latest
+    build: .
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - .env
+
+volumes:
+  postgres_data:
