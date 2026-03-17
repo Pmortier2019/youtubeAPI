@@ -25,6 +25,12 @@ services:
         condition: service_healthy
     env_file:
       - .env
+    environment:
+      PGHOST: db
+      PGPORT: 5432
+      PGDATABASE: soundtracker
+      PGUSER: soundtracker
+      PGPASSWORD: soundtracker
 
 volumes:
   postgres_data:

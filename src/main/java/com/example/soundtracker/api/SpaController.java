@@ -11,7 +11,7 @@ public class SpaController {
         return "forward:/index.html";
     }
 
-    @GetMapping(value = "/**/{path:[^\\.]*}")
+    @GetMapping(value = "/**")
     public String forwardNested() {
         return "forward:/index.html";
     }
