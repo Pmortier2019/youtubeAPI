@@ -1,10 +1,14 @@
-FROM eclipse-temurin:21-jdk AS build
+FROM maven:3.9-eclipse-temurin-21 AS build
 WORKDIR /app
+
+# Cache Maven dependencies
 COPY pom.xml .
+RUN mvn dependency:go-offline -q
+
+# Build frontend + backend
 COPY src ./src
 COPY frontend ./frontend
-RUN apt-get update && apt-get install -y maven && \
-    mvn package -DskipTests
+RUN mvn package -DskipTests -q
 
 FROM eclipse-temurin:21-jre
 WORKDIR /app
