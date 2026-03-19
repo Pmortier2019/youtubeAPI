@@ -117,6 +117,9 @@ export const addPaymentMethod = (data) => request('/me/payment-methods', { metho
 export const deletePaymentMethod = (id) => request(`/me/payment-methods/${id}`, { method: 'DELETE' })
 export const getAllPayouts = () => request('/payouts')
 
+// Admin — payment methods
+export const getAllPaymentMethods = () => request('/admin/payment-methods')
+
 // Admin — users
 export const getUsers = () => request('/admin/users')
 export const updateUserRole = (id, role) => request(`/admin/users/${id}/role`, { method: 'PATCH', body: JSON.stringify({ role }) })

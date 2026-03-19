@@ -14,13 +14,18 @@ import java.util.NoSuchElementException;
 public class PaymentMethodService {
 
     private final PaymentMethodRepository paymentMethodRepo;
+    private final EncryptionService encryptionService;
 
-    public PaymentMethodService(PaymentMethodRepository paymentMethodRepo) {
+    public PaymentMethodService(PaymentMethodRepository paymentMethodRepo,
+                                EncryptionService encryptionService) {
         this.paymentMethodRepo = paymentMethodRepo;
+        this.encryptionService = encryptionService;
     }
 
     public List<PaymentMethod> list(Long userId) {
-        return paymentMethodRepo.findByAppUserId(userId);
+        List<PaymentMethod> methods = paymentMethodRepo.findByAppUserId(userId);
+        methods.forEach(m -> m.setDetails(encryptionService.decrypt(m.getDetails())));
+        return methods;
     }
 
     @Transactional
@@ -28,10 +33,13 @@ public class PaymentMethodService {
         PaymentMethod paymentMethod = new PaymentMethod(
                 user,
                 req.type(),
-                req.details(),
+                encryptionService.encrypt(req.details()),
                 req.isDefault()
         );
-        return paymentMethodRepo.save(paymentMethod);
+        PaymentMethod saved = paymentMethodRepo.save(paymentMethod);
+        // Return with decrypted details so the response shows the original value
+        saved.setDetails(req.details());
+        return saved;
     }
 
     @Transactional

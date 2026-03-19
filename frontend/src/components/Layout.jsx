@@ -11,6 +11,7 @@ const ADMIN_LINKS = [
   { to: '/admin/payout', label: 'Payouts', icon: '💰' },
   { to: '/admin/payouts', label: 'Payout Requests', icon: '💳' },
   { to: '/admin/users', label: 'Users', icon: '👤' },
+  { to: '/admin/payment-methods', label: 'Payment Methods', icon: '🏦' },
 ]
 
 const CREATOR_LINKS = [
