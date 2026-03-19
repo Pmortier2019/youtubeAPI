@@ -1,16 +1,13 @@
 server:
   port: ${PORT:8080}
 
+logging:
+  level:
+    root: WARN
+    org.springframework.security: WARN
+    org.springframework.web: WARN
+
 spring:
-# mail:                            # TODO: mail configureren voor payout notificaties
-#   host: smtp.gmail.com
-#   port: 587
-#   username: jouw@email.com
-#   password: jouw-app-wachtwoord
-#   from: noreply@soundtracker.com
-#   properties:
-#     mail.smtp.auth: true
-#     mail.smtp.starttls.enable: true
   datasource:
     url: jdbc:postgresql://${PGHOST:localhost}:${PGPORT:5432}/${PGDATABASE:soundtracker}
     username: ${PGUSER:soundtracker}
