@@ -31,19 +31,15 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(AbstractHttpConfigurer::disable)
-            .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/campaigns/active").hasAnyRole("CREATOR", "ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/api/campaigns/*/join").hasAnyRole("CREATOR", "ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/sounds").hasAnyRole("CREATOR", "ADMIN")
-                        .requestMatchers("/api/me/**").hasAnyRole("CREATOR", "ADMIN")
-                        .requestMatchers("/api/**").authenticated()  // All other /api/** require auth
-                        .anyRequest().permitAll()  // Everything else (static files, homepage) is public
+                        .requestMatchers("/api/**").authenticated()
+                        .anyRequest().permitAll()
                 )
-            .authenticationProvider(authenticationProvider())
-            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .authenticationProvider(authenticationProvider())
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
