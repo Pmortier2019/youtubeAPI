@@ -32,22 +32,22 @@ public class EmailService {
 
     public void sendVerificationEmail(String toEmail, String creatorName, String verificationLink) {
         String html = "<p>Hi " + creatorName + ",</p>" +
-                "<p>Welcome to SoundTracker! Please verify your email address by clicking the link below:</p>" +
+                "<p>Welcome to PierreMusic! Please verify your email address by clicking the link below:</p>" +
                 "<p><a href=\"" + verificationLink + "\">Verify my email</a></p>" +
                 "<p>This link expires in 24 hours.</p>" +
                 "<p>If you did not create an account, you can ignore this email.</p>" +
-                "<p>Best regards,<br>The SoundTracker Team</p>";
+                "<p>Best regards,<br>The PierreMusic Team</p>";
 
-        send(toEmail, "Verify your email - SoundTracker", html);
+        send(toEmail, "Verify your email - PierreMusic", html);
     }
 
     public void sendPayoutNotification(String toEmail, String creatorName, BigDecimal amount) {
         String html = "<p>Hi " + creatorName + ",</p>" +
                 "<p>Great news! Your payout of <strong>€" + String.format("%.2f", amount) + "</strong> has been processed.</p>" +
                 "<p>The amount will be transferred via your registered payment method.</p>" +
-                "<p>Best regards,<br>The SoundTracker Team</p>";
+                "<p>Best regards,<br>The PierreMusic Team</p>";
 
-        send(toEmail, "Your payout has been processed - SoundTracker", html);
+        send(toEmail, "Your payout has been processed - PierreMusic", html);
     }
 
     private void send(String toEmail, String subject, String html) {

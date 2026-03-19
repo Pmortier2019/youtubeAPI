@@ -50,7 +50,7 @@ export default function Layout({ children }) {
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <span style={{ fontSize: 24 }}>🎵</span>
-            <span style={{ color: '#fff', fontWeight: 800, fontSize: 18, letterSpacing: '-0.3px' }}>SoundTracker</span>
+            <span style={{ color: '#fff', fontWeight: 800, fontSize: 18, letterSpacing: '-0.3px' }}>PierreMusic</span>
           </div>
         </div>
 

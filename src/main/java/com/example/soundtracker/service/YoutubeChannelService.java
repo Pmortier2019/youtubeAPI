@@ -37,7 +37,7 @@ public class YoutubeChannelService {
 
         // Check if this channel is already linked to a different account
         if (channelRepository.existsByChannelId(channelId)) {
-            throw new IllegalArgumentException("This YouTube channel is already linked to another SoundTracker account.");
+            throw new IllegalArgumentException("This YouTube channel is already linked to another PierreMusic account.");
         }
 
         YoutubeChannel channel = new YoutubeChannel(

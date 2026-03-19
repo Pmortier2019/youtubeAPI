@@ -48,7 +48,7 @@ export default function LoginPage() {
         {/* Logo */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 48 }}>
           <span style={{ fontSize: 36 }}>🎵</span>
-          <span style={{ color: '#fff', fontWeight: 800, fontSize: 26, letterSpacing: '-0.5px' }}>SoundTracker</span>
+          <span style={{ color: '#fff', fontWeight: 800, fontSize: 26, letterSpacing: '-0.5px' }}>PierreMusic</span>
         </div>
 
         {/* Tagline */}
@@ -110,7 +110,7 @@ export default function LoginPage() {
           boxShadow: '0 4px 32px rgba(0,0,0,0.08)',
         }}>
           <h2 style={{ fontSize: 26, fontWeight: 800, marginBottom: 6, color: '#0f172a' }}>Welcome back</h2>
-          <p style={{ color: '#64748b', fontSize: 14, marginBottom: 32 }}>Sign in to your SoundTracker account</p>
+          <p style={{ color: '#64748b', fontSize: 14, marginBottom: 32 }}>Sign in to your PierreMusic account</p>
 
           {error && (
             <div style={{

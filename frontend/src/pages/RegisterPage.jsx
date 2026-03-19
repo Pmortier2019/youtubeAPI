@@ -109,7 +109,7 @@ export default function RegisterPage() {
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 48 }}>
           <span style={{ fontSize: 36 }}>🎵</span>
-          <span style={{ color: '#fff', fontWeight: 800, fontSize: 26, letterSpacing: '-0.5px' }}>SoundTracker</span>
+          <span style={{ color: '#fff', fontWeight: 800, fontSize: 26, letterSpacing: '-0.5px' }}>PierreMusic</span>
         </div>
 
         <h1 style={{
