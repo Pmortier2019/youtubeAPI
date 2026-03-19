@@ -3,6 +3,8 @@ package com.example.soundtracker.api;
 import com.example.soundtracker.domain.AppUser;
 import com.example.soundtracker.domain.Role;
 import com.example.soundtracker.repo.AppUserRepository;
+import com.example.soundtracker.repo.EmailVerificationTokenRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -15,9 +17,11 @@ import java.util.Map;
 public class AdminUserController {
 
     private final AppUserRepository userRepo;
+    private final EmailVerificationTokenRepository tokenRepo;
 
-    public AdminUserController(AppUserRepository userRepo) {
+    public AdminUserController(AppUserRepository userRepo, EmailVerificationTokenRepository tokenRepo) {
         this.userRepo = userRepo;
+        this.tokenRepo = tokenRepo;
     }
 
     @GetMapping
@@ -42,11 +46,12 @@ public class AdminUserController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Transactional
     public void deleteUser(@PathVariable Long id) {
-        if (!userRepo.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
-        }
-        userRepo.deleteById(id);
+        AppUser user = userRepo.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+        tokenRepo.deleteByUser(user);
+        userRepo.delete(user);
     }
 
     public record UserDto(Long id, String email, String creatorName, String role, boolean emailVerified) {

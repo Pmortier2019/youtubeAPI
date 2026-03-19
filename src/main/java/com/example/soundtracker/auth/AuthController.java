@@ -68,6 +68,7 @@ public class AuthController {
         );
         userRepo.save(user);
 
+        tokenRepo.deleteByUser(user);
         String token = UUID.randomUUID().toString();
         tokenRepo.save(new EmailVerificationToken(user, token, Instant.now().plus(24, ChronoUnit.HOURS)));
 
