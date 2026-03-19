@@ -5,7 +5,7 @@ const AuthContext = createContext(null)
 function parseRole(token) {
   try {
     const payload = JSON.parse(atob(token.split('.')[1]))
-    // Spring Security zet de rol als "ROLE_ADMIN" of "ROLE_CREATOR"
+    if (payload.exp && payload.exp * 1000 < Date.now()) return null
     if (payload.authorities?.includes('ROLE_ADMIN')) return 'ADMIN'
     return 'CREATOR'
   } catch {
@@ -14,7 +14,14 @@ function parseRole(token) {
 }
 
 export function AuthProvider({ children }) {
-  const [token, setToken] = useState(() => localStorage.getItem('token'))
+  const [token, setToken] = useState(() => {
+    const stored = localStorage.getItem('token')
+    if (!stored || parseRole(stored) === null) {
+      localStorage.removeItem('token')
+      return null
+    }
+    return stored
+  })
   const role = token ? parseRole(token) : null
 
   function saveToken(t) {
