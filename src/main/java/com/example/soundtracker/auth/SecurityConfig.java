@@ -34,6 +34,7 @@ public class SecurityConfig {
             .csrf(AbstractHttpConfigurer::disable)
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/", "/index.html", "/static/**", "/css/**", "/js/**", "/assets/**", "/*.js", "/*.css", "/*.ico").permitAll()
                 .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/campaigns/active").hasAnyRole("CREATOR", "ADMIN")
                 .requestMatchers(HttpMethod.POST, "/api/campaigns/*/join").hasAnyRole("CREATOR", "ADMIN")
