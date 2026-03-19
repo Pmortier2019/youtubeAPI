@@ -12,6 +12,7 @@ import CampaignsPage from './pages/admin/CampaignsPage'
 import SoundLibraryPage from './pages/admin/SoundLibraryPage'
 import ParticipationsPage from './pages/admin/ParticipationsPage'
 import PayoutsAdminPage from './pages/admin/PayoutsAdminPage'
+import UsersPage from './pages/admin/UsersPage'
 import MyStatsPage from './pages/creator/MyStatsPage'
 import MyPayoutPage from './pages/creator/MyPayoutPage'
 import CampaignsBrowsePage from './pages/creator/CampaignsBrowsePage'
@@ -63,6 +64,11 @@ function AppRoutes() {
       <Route path="/admin/payouts" element={
         <ProtectedRoute role="ADMIN">
           <Layout><PayoutsAdminPage /></Layout>
+        </ProtectedRoute>
+      } />
+      <Route path="/admin/users" element={
+        <ProtectedRoute role="ADMIN">
+          <Layout><UsersPage /></Layout>
         </ProtectedRoute>
       } />
 

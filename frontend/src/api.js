@@ -117,6 +117,11 @@ export const addPaymentMethod = (data) => request('/me/payment-methods', { metho
 export const deletePaymentMethod = (id) => request(`/me/payment-methods/${id}`, { method: 'DELETE' })
 export const getAllPayouts = () => request('/payouts')
 
+// Admin — users
+export const getUsers = () => request('/admin/users')
+export const updateUserRole = (id, role) => request(`/admin/users/${id}/role`, { method: 'PATCH', body: JSON.stringify({ role }) })
+export const deleteUser = (id) => request(`/admin/users/${id}`, { method: 'DELETE' })
+
 // Sound Library
 export const getSounds = () => request('/sounds')
 export const getSoundPreview = (videoId) => request(`/sounds/preview?videoId=${encodeURIComponent(videoId)}`)

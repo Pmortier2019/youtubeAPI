@@ -50,6 +50,7 @@ public class AppUser implements UserDetails {
     public String getCreatorName() { return creatorName; }
     public boolean isEmailVerified() { return emailVerified; }
     public void setEmailVerified(boolean emailVerified) { this.emailVerified = emailVerified; }
+    public void setRole(Role role) { this.role = role; }
 
     // --- UserDetails ---
 

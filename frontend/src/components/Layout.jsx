@@ -10,6 +10,7 @@ const ADMIN_LINKS = [
   { to: '/admin/participations', label: 'Participations', icon: '👥' },
   { to: '/admin/payout', label: 'Payouts', icon: '💰' },
   { to: '/admin/payouts', label: 'Payout Requests', icon: '💳' },
+  { to: '/admin/users', label: 'Users', icon: '👤' },
 ]
 
 const CREATOR_LINKS = [
