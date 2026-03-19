@@ -6,6 +6,8 @@ logging:
     root: WARN
     org.springframework.security: WARN
     org.springframework.web: WARN
+    org.springframework.mail: DEBUG
+    com.example.soundtracker: DEBUG
 
 spring:
   datasource:
