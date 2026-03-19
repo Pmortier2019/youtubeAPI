@@ -37,6 +37,12 @@ export const login = (email, password) =>
 export const register = (data) =>
   request('/auth/register', { method: 'POST', body: JSON.stringify(data) })
 
+export const verifyEmail = (token) =>
+  request(`/auth/verify?token=${encodeURIComponent(token)}`)
+
+export const resendVerification = (email) =>
+  request('/auth/resend-verification', { method: 'POST', body: JSON.stringify({ email }) })
+
 // Admin — review shorts
 export const getPendingShorts = () => request('/shorts/pending')
 export const scrapeSound = (soundVideoId, creator) =>

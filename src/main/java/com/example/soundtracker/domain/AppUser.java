@@ -32,6 +32,9 @@ public class AppUser implements UserDetails {
     @Column
     private String creatorName;
 
+    @Column(nullable = false)
+    private boolean emailVerified = false;
+
     protected AppUser() {}
 
     public AppUser(String email, String passwordHash, Role role, String creatorName) {
@@ -45,6 +48,8 @@ public class AppUser implements UserDetails {
     public String getEmail() { return email; }
     public Role getRole() { return role; }
     public String getCreatorName() { return creatorName; }
+    public boolean isEmailVerified() { return emailVerified; }
+    public void setEmailVerified(boolean emailVerified) { this.emailVerified = emailVerified; }
 
     // --- UserDetails ---
 

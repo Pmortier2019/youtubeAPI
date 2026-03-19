@@ -4,6 +4,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Layout from './components/Layout'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
+import VerifyEmailPage from './pages/VerifyEmailPage'
 import ReviewPage from './pages/admin/ReviewPage'
 import PayoutPage from './pages/admin/PayoutPage'
 import StatsPage from './pages/admin/StatsPage'
@@ -26,6 +27,7 @@ function AppRoutes() {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/verify" element={<VerifyEmailPage />} />
 
       {/* Admin routes inside Layout */}
       <Route path="/admin/review" element={

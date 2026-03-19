@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
-import { register } from '../api'
-import { useAuth } from '../AuthContext'
+import { Link } from 'react-router-dom'
+import { register, resendVerification } from '../api'
 
 function FormInput({ label, type, name, placeholder, value, onChange, required, minLength, hint }) {
   const [focused, setFocused] = useState(false)
@@ -42,8 +41,8 @@ export default function RegisterPage() {
   const [form, setForm] = useState({ email: '', password: '', creatorName: '' })
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
-  const { saveToken } = useAuth()
-  const navigate = useNavigate()
+  const [registered, setRegistered] = useState(false)
+  const [resent, setResent] = useState(false)
 
   function handleChange(e) {
     setForm(f => ({ ...f, [e.target.name]: e.target.value }))
@@ -52,17 +51,48 @@ export default function RegisterPage() {
   async function handleSubmit(e) {
     e.preventDefault()
     setError(null)
-
     setLoading(true)
     try {
-      const res = await register(form)
-      saveToken(res.token)
-      navigate('/me/stats')
+      await register(form)
+      setRegistered(true)
     } catch (err) {
       setError(err.message)
     } finally {
       setLoading(false)
     }
+  }
+
+  async function handleResend() {
+    setResent(false)
+    await resendVerification(form.email)
+    setResent(true)
+  }
+
+  if (registered) {
+    return (
+      <div style={{ display: 'flex', minHeight: '100vh', alignItems: 'center', justifyContent: 'center', background: '#f8fafc' }}>
+        <div style={{ maxWidth: 440, width: '100%', background: '#fff', borderRadius: 16, padding: '48px 40px', boxShadow: '0 4px 32px rgba(0,0,0,0.08)', textAlign: 'center' }}>
+          <div style={{ fontSize: 48, marginBottom: 16 }}>📬</div>
+          <h2 style={{ fontSize: 24, fontWeight: 800, color: '#0f172a', marginBottom: 12 }}>Check your email</h2>
+          <p style={{ color: '#64748b', fontSize: 15, lineHeight: 1.6, marginBottom: 28 }}>
+            We've sent a verification link to <strong>{form.email}</strong>.<br />
+            Click the link in the email to activate your account.
+          </p>
+          {resent && (
+            <p style={{ color: '#16a34a', fontSize: 13, marginBottom: 16 }}>A new link has been sent!</p>
+          )}
+          <button
+            onClick={handleResend}
+            style={{ background: 'none', border: 'none', color: '#0ea5e9', fontWeight: 600, cursor: 'pointer', fontSize: 14 }}
+          >
+            Didn't receive it? Resend email
+          </button>
+          <p style={{ marginTop: 24, fontSize: 14, color: '#64748b' }}>
+            Already verified? <Link to="/login" style={{ color: '#0ea5e9', fontWeight: 600 }}>Sign in</Link>
+          </p>
+        </div>
+      </div>
+    )
   }
 
   return (

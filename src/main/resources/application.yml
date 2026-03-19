@@ -21,6 +21,19 @@ spring:
         jdbc:
           time_zone: UTC
 
+app:
+  base-url: ${APP_BASE_URL:http://localhost:8080}
+
+spring.mail:
+  host: ${MAIL_HOST:smtp.resend.com}
+  port: ${MAIL_PORT:587}
+  username: ${MAIL_USERNAME:resend}
+  password: ${MAIL_PASSWORD:}
+  from: ${MAIL_FROM:onboarding@resend.dev}
+  properties:
+    mail.smtp.auth: true
+    mail.smtp.starttls.enable: true
+
 youtube:
   apiKey: ${YOUTUBE_API_KEY:changeme}
   baseUrl: https://www.googleapis.com/youtube/v3
