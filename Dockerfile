@@ -8,7 +8,7 @@ RUN mvn dependency:go-offline -q
 # Build frontend + backend
 COPY src ./src
 COPY frontend ./frontend
-RUN mvn package -DskipTests -q
+RUN mvn package -DskipTests
 
 FROM eclipse-temurin:21-jre
 WORKDIR /app

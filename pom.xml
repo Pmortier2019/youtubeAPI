@@ -141,6 +141,9 @@
                         <phase>generate-resources</phase>
                         <configuration>
                             <arguments>run build</arguments>
+                            <environmentVariables>
+                                <NODE_OPTIONS>--max-old-space-size=1536</NODE_OPTIONS>
+                            </environmentVariables>
                         </configuration>
                     </execution>
                 </executions>
