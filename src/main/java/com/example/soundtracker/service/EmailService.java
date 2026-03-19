@@ -2,78 +2,75 @@ package com.example.soundtracker.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.lang.Nullable;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class EmailService {
 
     private static final Logger log = LoggerFactory.getLogger(EmailService.class);
+    private static final String RESEND_URL = "https://api.resend.com/emails";
 
-    @Nullable
-    private final JavaMailSender mailSender;
+    private final RestTemplate restTemplate = new RestTemplate();
+    private final String apiKey;
     private final String fromAddress;
 
-    public EmailService(@Autowired(required = false) JavaMailSender mailSender,
-                        @Value("${spring.mail.from:noreply@soundtracker.com}") String fromAddress) {
-        this.mailSender = mailSender;
+    public EmailService(
+            @Value("${resend.api-key:}") String apiKey,
+            @Value("${spring.mail.from:onboarding@resend.dev}") String fromAddress) {
+        this.apiKey = apiKey;
         this.fromAddress = fromAddress;
     }
 
     public void sendVerificationEmail(String toEmail, String creatorName, String verificationLink) {
-        if (mailSender == null) {
-            log.warn("Mail not configured — skipping verification email to {}", toEmail);
-            return;
-        }
-        try {
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom(fromAddress);
-            message.setTo(toEmail);
-            message.setSubject("Verify your email - SoundTracker");
-            message.setText(
-                    "Hi " + creatorName + ",\n\n" +
-                    "Welcome to SoundTracker! Please verify your email address by clicking the link below:\n\n" +
-                    verificationLink + "\n\n" +
-                    "This link expires in 24 hours.\n\n" +
-                    "If you did not create an account, you can ignore this email.\n\n" +
-                    "Best regards,\n" +
-                    "The SoundTracker Team"
-            );
-            mailSender.send(message);
-            log.info("Verification email sent to {}", toEmail);
-        } catch (Exception e) {
-            log.error("Failed to send verification email to {}: {}", toEmail, e.getMessage());
-        }
+        String html = "<p>Hi " + creatorName + ",</p>" +
+                "<p>Welcome to SoundTracker! Please verify your email address by clicking the link below:</p>" +
+                "<p><a href=\"" + verificationLink + "\">Verify my email</a></p>" +
+                "<p>This link expires in 24 hours.</p>" +
+                "<p>If you did not create an account, you can ignore this email.</p>" +
+                "<p>Best regards,<br>The SoundTracker Team</p>";
+
+        send(toEmail, "Verify your email - SoundTracker", html);
     }
 
     public void sendPayoutNotification(String toEmail, String creatorName, BigDecimal amount) {
-        if (mailSender == null) {
-            log.warn("Mail not configured — skipping payout notification to {}", toEmail);
+        String html = "<p>Hi " + creatorName + ",</p>" +
+                "<p>Great news! Your payout of <strong>€" + String.format("%.2f", amount) + "</strong> has been processed.</p>" +
+                "<p>The amount will be transferred via your registered payment method.</p>" +
+                "<p>Best regards,<br>The SoundTracker Team</p>";
+
+        send(toEmail, "Your payout has been processed - SoundTracker", html);
+    }
+
+    private void send(String toEmail, String subject, String html) {
+        if (apiKey == null || apiKey.isBlank()) {
+            log.warn("Resend API key not configured — skipping email to {}", toEmail);
             return;
         }
         try {
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom(fromAddress);
-            message.setTo(toEmail);
-            message.setSubject("Your payout has been processed - SoundTracker");
-            message.setText(
-                    "Hi " + creatorName + ",\n\n" +
-                    "Great news! Your payout of €" + String.format("%.2f", amount) + " has been processed.\n\n" +
-                    "The amount will be transferred via your registered payment method. " +
-                    "You can view the details in your SoundTracker account.\n\n" +
-                    "Best regards,\n" +
-                    "The SoundTracker Team"
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.setBearerAuth(apiKey);
+
+            Map<String, Object> body = Map.of(
+                    "from", fromAddress,
+                    "to", List.of(toEmail),
+                    "subject", subject,
+                    "html", html
             );
-            mailSender.send(message);
-            log.info("Payout notification sent to {}", toEmail);
+
+            restTemplate.postForObject(RESEND_URL, new HttpEntity<>(body, headers), String.class);
+            log.info("Email sent to {}", toEmail);
         } catch (Exception e) {
-            log.error("Failed to send payout notification to {}: {}", toEmail, e.getMessage());
+            log.error("Failed to send email to {}: {}", toEmail, e.getMessage());
         }
     }
 }
