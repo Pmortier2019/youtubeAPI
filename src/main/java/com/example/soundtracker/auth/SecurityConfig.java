@@ -33,15 +33,15 @@ public class SecurityConfig {
         http
             .csrf(AbstractHttpConfigurer::disable)
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/index.html", "/static/**", "/css/**", "/js/**", "/assets/**", "/*.js", "/*.css", "/*.ico").permitAll()
-                .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/campaigns/active").hasAnyRole("CREATOR", "ADMIN")
-                .requestMatchers(HttpMethod.POST, "/api/campaigns/*/join").hasAnyRole("CREATOR", "ADMIN")
-                .requestMatchers(HttpMethod.GET, "/api/sounds").hasAnyRole("CREATOR", "ADMIN")
-                .requestMatchers("/api/me/**").hasAnyRole("CREATOR", "ADMIN")
-                .anyRequest().hasRole("ADMIN")
-            )
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/campaigns/active").hasAnyRole("CREATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/campaigns/*/join").hasAnyRole("CREATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/sounds").hasAnyRole("CREATOR", "ADMIN")
+                        .requestMatchers("/api/me/**").hasAnyRole("CREATOR", "ADMIN")
+                        .requestMatchers("/api/**").authenticated()  // All other /api/** require auth
+                        .anyRequest().permitAll()  // Everything else (static files, homepage) is public
+                )
             .authenticationProvider(authenticationProvider())
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
