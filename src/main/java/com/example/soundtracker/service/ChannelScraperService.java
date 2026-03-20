@@ -333,10 +333,15 @@ public class ChannelScraperService {
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         String responseBody = response.body();
+        log.debug("Innertube response status: {}, body length: {}, first 500 chars: {}",
+                response.statusCode(), responseBody.length(),
+                responseBody.substring(0, Math.min(500, responseBody.length())));
 
         try {
             JsonNode root = objectMapper.readTree(responseBody);
+            int before = videoIds.size();
             extractVideoIds(root, videoIds);
+            log.debug("extractVideoIds found {} new IDs (total so far: {})", videoIds.size() - before, videoIds.size());
             return extractContinuationToken(root);
         } catch (Exception e) {
             // Fall back to regex if JSON parsing fails — no continuation possible
@@ -344,6 +349,7 @@ public class ChannelScraperService {
             while (matcher.find()) {
                 videoIds.add(matcher.group(1));
             }
+            log.debug("JSON parse failed, regex fallback found {} IDs", videoIds.size());
             return null;
         }
     }
