@@ -1,11 +1,8 @@
 import { useState, useEffect } from 'react'
-import { getMyChannels, addMyChannel, deleteMyChannel, scrapeMyChannel } from '../../api'
+import { getMyChannels, addMyChannel, deleteMyChannel } from '../../api'
 
-function ChannelCard({ channel, onRemove, onScrape }) {
+function ChannelCard({ channel, onRemove }) {
   const [removing, setRemoving] = useState(false)
-  const [scraping, setScraping] = useState(false)
-  const [scrapeResult, setScrapeResult] = useState(null)
-  const [scrapeError, setScrapeError] = useState(null)
   const [hover, setHover] = useState(false)
 
   async function handleRemove() {
@@ -18,20 +15,6 @@ function ChannelCard({ channel, onRemove, onScrape }) {
       alert(err.message)
     } finally {
       setRemoving(false)
-    }
-  }
-
-  async function handleScrape() {
-    setScrapeResult(null)
-    setScrapeError(null)
-    setScraping(true)
-    try {
-      const res = await scrapeMyChannel(channel.id)
-      setScrapeResult(res?.count ?? res?.submitted ?? 0)
-    } catch (err) {
-      setScrapeError(err.message)
-    } finally {
-      setScraping(false)
     }
   }
 
@@ -85,61 +68,10 @@ function ChannelCard({ channel, onRemove, onScrape }) {
         <div style={{ fontSize: 12, color: '#94a3b8' }}>
           Added: {addedDate}
         </div>
-
-        {/* Scrape feedback */}
-        {scrapeResult !== null && (
-          <div style={{
-            marginTop: 8,
-            background: '#f0fdf4',
-            border: '1px solid #bbf7d0',
-            borderRadius: 6,
-            padding: '6px 10px',
-            fontSize: 13,
-            color: '#15803d',
-            fontWeight: 600,
-            display: 'inline-block',
-          }}>
-            Scraped {scrapeResult} Short{scrapeResult !== 1 ? 's' : ''} submitted for review
-          </div>
-        )}
-        {scrapeError && (
-          <div style={{
-            marginTop: 8,
-            background: '#fef2f2',
-            border: '1px solid #fecaca',
-            borderRadius: 6,
-            padding: '6px 10px',
-            fontSize: 13,
-            color: '#dc2626',
-            display: 'inline-block',
-          }}>
-            {scrapeError}
-          </div>
-        )}
       </div>
 
       {/* Actions */}
       <div style={{ display: 'flex', gap: 8, flexShrink: 0, alignItems: 'center' }}>
-        <button
-          onClick={handleScrape}
-          disabled={scraping}
-          style={{
-            padding: '8px 14px',
-            background: scraping ? '#f1f5f9' : '#f8fafc',
-            color: scraping ? '#94a3b8' : '#374151',
-            border: '1.5px solid #e2e8f0',
-            borderRadius: 8,
-            cursor: scraping ? 'not-allowed' : 'pointer',
-            fontSize: 13,
-            fontWeight: 600,
-            transition: 'all 0.15s ease',
-            whiteSpace: 'nowrap',
-          }}
-          onMouseEnter={e => { if (!scraping) { e.currentTarget.style.borderColor = '#0ea5e9'; e.currentTarget.style.color = '#0ea5e9' } }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = '#e2e8f0'; e.currentTarget.style.color = scraping ? '#94a3b8' : '#374151' }}
-        >
-          {scraping ? 'Scraping...' : 'Scrape now'}
-        </button>
         <button
           onClick={handleRemove}
           disabled={removing}
@@ -360,7 +292,6 @@ export default function MyChannelsPage() {
                 key={channel.id}
                 channel={channel}
                 onRemove={handleRemoved}
-                onScrape={() => {}}
               />
             ))}
           </div>

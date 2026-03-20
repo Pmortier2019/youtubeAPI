@@ -98,6 +98,16 @@ public class YoutubeChannelService {
     }
 
     /**
+     * Scrapes a channel by ID. Called by the admin.
+     */
+    @Transactional
+    public int scrapeChannelAsAdmin(Long channelId) throws Exception {
+        YoutubeChannel channel = channelRepository.findById(channelId)
+                .orElseThrow(() -> new IllegalArgumentException("Channel not found: " + channelId));
+        return channelScraperService.scrapeChannelShorts(channel);
+    }
+
+    /**
      * Scrapes all registered channels. Called by the scheduler.
      */
     public void scrapeAllChannels() {

@@ -14,6 +14,7 @@ import ParticipationsPage from './pages/admin/ParticipationsPage'
 import PayoutsAdminPage from './pages/admin/PayoutsAdminPage'
 import UsersPage from './pages/admin/UsersPage'
 import PaymentMethodsPage from './pages/admin/PaymentMethodsPage'
+import ChannelsPage from './pages/admin/ChannelsPage'
 import MyStatsPage from './pages/creator/MyStatsPage'
 import MyPayoutPage from './pages/creator/MyPayoutPage'
 import CampaignsBrowsePage from './pages/creator/CampaignsBrowsePage'
@@ -75,6 +76,11 @@ function AppRoutes() {
       <Route path="/admin/payment-methods" element={
         <ProtectedRoute role="ADMIN">
           <Layout><PaymentMethodsPage /></Layout>
+        </ProtectedRoute>
+      } />
+      <Route path="/admin/channels" element={
+        <ProtectedRoute role="ADMIN">
+          <Layout><ChannelsPage /></Layout>
         </ProtectedRoute>
       } />
 
