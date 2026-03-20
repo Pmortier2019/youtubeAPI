@@ -1,6 +1,40 @@
 import { useEffect, useState } from 'react'
 import { getMyPayouts, getMyPaymentMethods, addPaymentMethod, deletePaymentMethod } from '../../api'
 
+function HowItWorks({ steps }) {
+  return (
+    <div style={{
+      background: '#FFFBEB',
+      border: '1px solid #FDE68A',
+      borderLeft: '4px solid #F0B429',
+      borderRadius: 12,
+      padding: '20px 24px',
+      marginBottom: 32,
+    }}>
+      <div style={{ fontSize: 11, fontWeight: 700, color: '#D97706', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: 14 }}>
+        How it works
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        {steps.map((step, i) => (
+          <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+            <div style={{
+              width: 22, height: 22, borderRadius: '50%',
+              background: '#F0B429', color: '#111827',
+              fontSize: 11, fontWeight: 800,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              flexShrink: 0, marginTop: 1,
+            }}>{i + 1}</div>
+            <div style={{ fontSize: 14, color: '#374151', lineHeight: 1.55 }}>
+              <strong style={{ color: '#111827' }}>{step.title}</strong>
+              {step.desc && <span style={{ color: '#6B7280' }}> — {step.desc}</span>}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 const MONTHS = [
   'January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December',
@@ -293,6 +327,13 @@ export default function MyPayoutPage() {
         <h1 style={{ fontSize: 26, fontWeight: 700, color: '#111827', marginBottom: 6 }}>My Payouts</h1>
         <p style={{ fontSize: 14, color: '#6B7280' }}>Manage your payment methods and view payout history</p>
       </div>
+
+      <HowItWorks steps={[
+        { title: 'Add a payment method', desc: 'Add your IBAN bank account or PayPal email address so we know where to send your money.' },
+        { title: 'Request a payout', desc: 'Go to the Earnings tab and click "Request Payout" when you have a balance.' },
+        { title: 'Payouts are processed every ~2 months', desc: 'We batch payouts to keep transaction costs low. You\'ll be notified by email.' },
+        { title: 'Check your payout history below', desc: 'Every processed payout is listed with its amount, date, and status.' },
+      ]} />
 
       <PaymentMethodsSection />
 

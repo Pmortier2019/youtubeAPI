@@ -1,6 +1,40 @@
 import { useState, useEffect } from 'react'
 import { getMyChannels, addMyChannel, deleteMyChannel } from '../../api'
 
+function HowItWorks({ steps }) {
+  return (
+    <div style={{
+      background: '#FFFBEB',
+      border: '1px solid #FDE68A',
+      borderLeft: '4px solid #F0B429',
+      borderRadius: 12,
+      padding: '20px 24px',
+      marginBottom: 32,
+    }}>
+      <div style={{ fontSize: 11, fontWeight: 700, color: '#D97706', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: 14 }}>
+        How it works
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        {steps.map((step, i) => (
+          <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+            <div style={{
+              width: 22, height: 22, borderRadius: '50%',
+              background: '#F0B429', color: '#111827',
+              fontSize: 11, fontWeight: 800,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              flexShrink: 0, marginTop: 1,
+            }}>{i + 1}</div>
+            <div style={{ fontSize: 14, color: '#374151', lineHeight: 1.55 }}>
+              <strong style={{ color: '#111827' }}>{step.title}</strong>
+              {step.desc && <span style={{ color: '#6B7280' }}> — {step.desc}</span>}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function ChannelCard({ channel, onRemove }) {
   const [removing, setRemoving] = useState(false)
   const [hover, setHover] = useState(false)
@@ -151,6 +185,13 @@ export default function MyChannelsPage() {
           Link your YouTube channels to automatically submit your Shorts for review
         </p>
       </div>
+
+      <HowItWorks steps={[
+        { title: 'Link your YouTube channel', desc: 'Paste your channel URL or @handle in the form below and click "Add Channel".' },
+        { title: 'We import your Shorts automatically', desc: 'After linking, we fetch your most recent Shorts (last 5 days). New Shorts are picked up daily.' },
+        { title: 'Shorts are reviewed', desc: 'Our team checks whether each Short uses the correct sound. This usually takes 1–3 days.' },
+        { title: 'Approved Shorts start earning', desc: 'Once approved, views on your Short count towards your earnings at the campaign RPM rate.' },
+      ]} />
 
       {/* Info banner */}
       <div style={{

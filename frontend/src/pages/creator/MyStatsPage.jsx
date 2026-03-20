@@ -4,6 +4,40 @@ import {
   LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid,
 } from 'recharts'
 
+function HowItWorks({ steps }) {
+  return (
+    <div style={{
+      background: '#FFFBEB',
+      border: '1px solid #FDE68A',
+      borderLeft: '4px solid #F0B429',
+      borderRadius: 12,
+      padding: '20px 24px',
+      marginBottom: 32,
+    }}>
+      <div style={{ fontSize: 11, fontWeight: 700, color: '#D97706', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: 14 }}>
+        How it works
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        {steps.map((step, i) => (
+          <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+            <div style={{
+              width: 22, height: 22, borderRadius: '50%',
+              background: '#F0B429', color: '#111827',
+              fontSize: 11, fontWeight: 800,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              flexShrink: 0, marginTop: 1,
+            }}>{i + 1}</div>
+            <div style={{ fontSize: 14, color: '#374151', lineHeight: 1.55 }}>
+              <strong style={{ color: '#111827' }}>{step.title}</strong>
+              {step.desc && <span style={{ color: '#6B7280' }}> — {step.desc}</span>}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function StatCard({ icon, label, value }) {
   const [hover, setHover] = useState(false)
   return (
@@ -80,6 +114,12 @@ export default function MyStatsPage() {
         <h1 style={{ fontSize: 26, fontWeight: 700, color: '#111827', marginBottom: 6 }}>My Stats</h1>
         <p style={{ fontSize: 14, color: '#6B7280' }}>Performance of your Shorts using our sound</p>
       </div>
+
+      <HowItWorks steps={[
+        { title: 'Only approved Shorts are shown here', desc: 'Stats are only tracked for Shorts that have passed review and use the correct sound.' },
+        { title: 'Stats update once per day', desc: 'Views, likes, and comments are fetched from YouTube every day at night.' },
+        { title: 'Use this to track your growth', desc: 'The chart shows how your views have grown over time across all your approved Shorts.' },
+      ]} />
 
       {/* Stat cards */}
       <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', marginBottom: 36 }}>

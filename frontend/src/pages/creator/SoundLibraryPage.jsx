@@ -1,6 +1,40 @@
 import { useEffect, useState } from 'react'
 import { getSounds } from '../../api'
 
+function HowItWorks({ steps }) {
+  return (
+    <div style={{
+      background: '#FFFBEB',
+      border: '1px solid #FDE68A',
+      borderLeft: '4px solid #F0B429',
+      borderRadius: 12,
+      padding: '20px 24px',
+      marginBottom: 32,
+    }}>
+      <div style={{ fontSize: 11, fontWeight: 700, color: '#D97706', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: 14 }}>
+        How it works
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        {steps.map((step, i) => (
+          <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+            <div style={{
+              width: 22, height: 22, borderRadius: '50%',
+              background: '#F0B429', color: '#111827',
+              fontSize: 11, fontWeight: 800,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              flexShrink: 0, marginTop: 1,
+            }}>{i + 1}</div>
+            <div style={{ fontSize: 14, color: '#374151', lineHeight: 1.55 }}>
+              <strong style={{ color: '#111827' }}>{step.title}</strong>
+              {step.desc && <span style={{ color: '#6B7280' }}> — {step.desc}</span>}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export default function SoundLibraryPage() {
   const [sounds, setSounds] = useState([])
   const [loading, setLoading] = useState(true)
@@ -31,6 +65,13 @@ export default function SoundLibraryPage() {
         <h1 style={{ fontSize: 26, fontWeight: 700, color: '#111827', marginBottom: 6 }}>Sound Library</h1>
         <p style={{ fontSize: 14, color: '#6B7280' }}>Use these sounds in your YouTube Shorts to earn money</p>
       </div>
+
+      <HowItWorks steps={[
+        { title: 'Browse the available sounds', desc: 'These are the sounds you can use in your YouTube Shorts to earn money.' },
+        { title: 'Listen before you use it', desc: 'Click the Listen button to preview a sound on YouTube before adding it to your Short.' },
+        { title: 'Use the sound in your Short', desc: 'When you upload your Short, make sure the sound is clearly audible throughout the video.' },
+        { title: 'We detect it automatically', desc: 'After you link your channel, we find and review your Short within 1–3 days.' },
+      ]} />
 
       {/* Info banner */}
       <div style={{

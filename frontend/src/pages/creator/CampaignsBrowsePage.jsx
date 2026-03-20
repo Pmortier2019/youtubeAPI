@@ -1,6 +1,40 @@
 import { useEffect, useState } from 'react'
 import { getActiveCampaigns, joinCampaign, getMyParticipations } from '../../api'
 
+function HowItWorks({ steps }) {
+  return (
+    <div style={{
+      background: '#FFFBEB',
+      border: '1px solid #FDE68A',
+      borderLeft: '4px solid #F0B429',
+      borderRadius: 12,
+      padding: '20px 24px',
+      marginBottom: 32,
+    }}>
+      <div style={{ fontSize: 11, fontWeight: 700, color: '#D97706', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: 14 }}>
+        How it works
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        {steps.map((step, i) => (
+          <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+            <div style={{
+              width: 22, height: 22, borderRadius: '50%',
+              background: '#F0B429', color: '#111827',
+              fontSize: 11, fontWeight: 800,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              flexShrink: 0, marginTop: 1,
+            }}>{i + 1}</div>
+            <div style={{ fontSize: 14, color: '#374151', lineHeight: 1.55 }}>
+              <strong style={{ color: '#111827' }}>{step.title}</strong>
+              {step.desc && <span style={{ color: '#6B7280' }}> — {step.desc}</span>}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 const PARTICIPATION_STATUS = {
   PENDING_REVIEW: { label: 'Pending Review', bg: '#FEF3C7', color: '#92400E', border: '#FDE68A' },
   APPROVED:       { label: 'Approved',       bg: '#D1FAE5', color: '#065F46', border: '#A7F3D0' },
@@ -70,6 +104,13 @@ export default function CampaignsBrowsePage() {
         <h1 style={{ fontSize: 26, fontWeight: 700, color: '#111827', marginBottom: 6 }}>Campaigns</h1>
         <p style={{ fontSize: 14, color: '#6B7280' }}>Join a campaign and earn money with your Shorts</p>
       </div>
+
+      <HowItWorks steps={[
+        { title: 'Browse active campaigns', desc: 'Each campaign has a sound, an RPM rate (earnings per 1,000 views), and specific rules.' },
+        { title: 'Join a campaign', desc: 'Paste the URL of a Short that uses the campaign sound and click Join. Your Short will be reviewed.' },
+        { title: 'Track your participation', desc: 'See your joined campaigns and their status (Pending, Approved, Rejected) in "My Participations" above.' },
+        { title: 'Earn per 1,000 views', desc: 'Once approved, every 1,000 views on that Short earns you the RPM rate shown on the campaign.' },
+      ]} />
 
       {/* My participations */}
       {participations.length > 0 && (
