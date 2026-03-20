@@ -36,6 +36,7 @@ encryption:
 
 youtube:
   apiKey: ${YOUTUBE_API_KEY:changeme}
+  innertubeKey: ${INNERTUBE_SCRAPE_KEY:}
   baseUrl: https://www.googleapis.com/youtube/v3
   batchSize: 50
 

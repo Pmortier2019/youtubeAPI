@@ -6,7 +6,11 @@ import java.time.Instant;
 @Entity
 @Table(
         name = "campaign_participations",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"campaign_id", "videoId"})
+        uniqueConstraints = @UniqueConstraint(columnNames = {"campaign_id", "videoId"}),
+        indexes = {
+                @Index(name = "idx_cp_creator_name", columnList = "creatorName"),
+                @Index(name = "idx_cp_video_id",     columnList = "videoId")
+        }
 )
 public class CampaignParticipation {
 

@@ -7,7 +7,11 @@ import java.time.Instant;
 @Entity
 @Table(
         name = "short_videos",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"videoId"})
+        uniqueConstraints = @UniqueConstraint(columnNames = {"videoId"}),
+        indexes = {
+                @Index(name = "idx_short_video_creator", columnList = "creator"),
+                @Index(name = "idx_short_video_id",      columnList = "videoId")
+        }
 )
 public class ShortVideo {
 

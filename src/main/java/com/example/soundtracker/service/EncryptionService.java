@@ -28,15 +28,20 @@ public class EncryptionService {
 
     public EncryptionService(@Value("${encryption.key:}") String base64Key) {
         if (base64Key == null || base64Key.isBlank()) {
-            log.warn("ENCRYPTION_KEY not set — payment details will be stored unencrypted!");
-            this.keyBytes = null;
-        } else {
-            this.keyBytes = Base64.getDecoder().decode(base64Key);
+            throw new IllegalStateException(
+                "ENCRYPTION_KEY environment variable is not set. " +
+                "Generate one with: openssl rand -base64 32 (or PowerShell equivalent).");
         }
+        byte[] decoded = Base64.getDecoder().decode(base64Key);
+        if (decoded.length != 32) {
+            throw new IllegalStateException(
+                "ENCRYPTION_KEY must decode to exactly 32 bytes (256-bit); got " + decoded.length + " bytes.");
+        }
+        this.keyBytes = decoded;
     }
 
     public String encrypt(String plaintext) {
-        if (keyBytes == null || plaintext == null) return plaintext;
+        if (plaintext == null) return null;
         try {
             byte[] iv = new byte[IV_LENGTH];
             new SecureRandom().nextBytes(iv);
@@ -56,7 +61,7 @@ public class EncryptionService {
     }
 
     public String decrypt(String encoded) {
-        if (keyBytes == null || encoded == null) return encoded;
+        if (encoded == null) return null;
         try {
             byte[] combined = Base64.getDecoder().decode(encoded);
             byte[] iv = new byte[IV_LENGTH];
@@ -69,8 +74,8 @@ public class EncryptionService {
 
             return new String(cipher.doFinal(ciphertext));
         } catch (Exception e) {
-            log.error("Decryption failed — returning raw value", e);
-            return encoded;
+            log.error("Decryption failed — possible key mismatch or data corruption", e);
+            throw new RuntimeException("Decryption failed — possible key mismatch or data corruption", e);
         }
     }
 }

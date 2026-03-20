@@ -6,6 +6,7 @@ import com.example.soundtracker.youtube.YouTubeVideoIdExtractor;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
@@ -18,14 +19,18 @@ import java.util.Set;
 @Service
 public class SoundScrapeService {
 
-    private static final String INNERTUBE_KEY = "AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8";
-    private static final String INNERTUBE_URL = "https://www.youtube.com/youtubei/v1/browse?key=" + INNERTUBE_KEY;
-
+    private final String innertubeUrl;
     private final HttpClient httpClient;
     private final ObjectMapper objectMapper;
     private final ShortVideoRepository repo;
 
-    public SoundScrapeService(ShortVideoRepository repo) {
+    public SoundScrapeService(ShortVideoRepository repo,
+                               @Value("${youtube.innertubeKey:}") String innertubeKey) {
+        if (innertubeKey == null || innertubeKey.isBlank()) {
+            throw new IllegalStateException(
+                "youtube.innertubeKey / INNERTUBE_SCRAPE_KEY must be set as an environment variable");
+        }
+        this.innertubeUrl = "https://www.youtube.com/youtubei/v1/browse?key=" + innertubeKey;
         this.httpClient = HttpClient.newBuilder()
                 .followRedirects(HttpClient.Redirect.ALWAYS)
                 .build();
@@ -115,7 +120,7 @@ public class SoundScrapeService {
         body.put("browseId", browseId);
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(INNERTUBE_URL))
+                .uri(URI.create(innertubeUrl))
                 .header("Content-Type", "application/json")
                 .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
                 .header("X-YouTube-Client-Name", "1")

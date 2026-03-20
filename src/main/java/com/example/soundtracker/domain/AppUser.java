@@ -10,7 +10,12 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "app_users")
+@Table(
+        name = "app_users",
+        indexes = {
+                @Index(name = "idx_app_user_creator_name", columnList = "creatorName")
+        }
+)
 public class AppUser implements UserDetails {
 
     @Id

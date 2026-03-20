@@ -1,6 +1,5 @@
 package com.example.soundtracker.api;
 
-import com.example.soundtracker.service.StatsRefreshService;
 import com.example.soundtracker.service.StatsService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -13,19 +12,10 @@ import java.util.NoSuchElementException;
 @RequestMapping("/api/stats")
 public class StatsController {
 
-    private final StatsRefreshService refreshService;
     private final StatsService statsService;
 
-    public StatsController(StatsRefreshService refreshService, StatsService statsService) {
-        this.refreshService = refreshService;
+    public StatsController(StatsService statsService) {
         this.statsService = statsService;
-    }
-
-    /** Fetch fresh stats from YouTube and save today's snapshots. */
-    @PostMapping("/refresh")
-    public String refresh() {
-        int created = refreshService.refreshToday();
-        return "Created snapshots today: " + created;
     }
 
     /**
