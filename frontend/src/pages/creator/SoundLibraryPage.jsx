@@ -19,21 +19,21 @@ export default function SoundLibraryPage() {
 
   if (loading) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300 }}>
-      <div style={{ color: '#0ea5e9', fontSize: 16, fontWeight: 600 }}>Loading sounds...</div>
+      <div style={{ color: '#C9A84C', fontSize: 16, fontWeight: 600 }}>Loading sounds...</div>
     </div>
   )
 
   return (
     <div style={{ padding: '40px 40px 60px' }}>
       <div style={{ marginBottom: 32 }}>
-        <h1 style={{ fontSize: 28, fontWeight: 800, color: '#0f172a', marginBottom: 6 }}>Sound Library</h1>
-        <p style={{ fontSize: 14, color: '#64748b' }}>Use these sounds in your YouTube Shorts to earn money</p>
+        <h1 style={{ fontSize: 28, fontWeight: 800, color: '#1A1A1A', marginBottom: 6, fontFamily: 'Georgia, "Times New Roman", serif' }}>Sound Library</h1>
+        <p style={{ fontSize: 14, color: '#6B7280' }}>Use these sounds in your YouTube Shorts to earn money</p>
       </div>
 
       {/* Info banner */}
       <div style={{
-        background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)',
-        border: '1.5px solid #bae6fd',
+        background: 'linear-gradient(135deg, #FDF8EE 0%, #F7F4EF 100%)',
+        border: '1.5px solid #E8D9A0',
         borderRadius: 12,
         padding: '16px 20px',
         marginBottom: 32,
@@ -42,7 +42,7 @@ export default function SoundLibraryPage() {
         gap: 12,
       }}>
         <span style={{ fontSize: 20, flexShrink: 0, marginTop: 1 }}>ℹ️</span>
-        <div style={{ fontSize: 14, color: '#0369a1', lineHeight: 1.7 }}>
+        <div style={{ fontSize: 14, color: '#A07830', lineHeight: 1.7 }}>
           <strong>Hoe werkt het:</strong> Gebruik een van deze nummers in je YouTube Short, koppel je kanaal en scrape je shorts. Wij controleren of het geluid gebruikt is en tellen je views mee voor je verdiensten.
         </div>
       </div>
@@ -53,10 +53,11 @@ export default function SoundLibraryPage() {
           borderRadius: 12,
           padding: '60px 40px',
           textAlign: 'center',
-          boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+          border: '1px solid #EAE4D9',
+          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
         }}>
           <span style={{ fontSize: 48, display: 'block', marginBottom: 16 }}>🎵</span>
-          <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 8 }}>Geen nummers beschikbaar</div>
+          <div style={{ fontSize: 16, fontWeight: 700, color: '#1A1A1A', marginBottom: 8 }}>Geen nummers beschikbaar</div>
           <div style={{ fontSize: 14, color: '#94a3b8' }}>Er zijn nog geen nummers toegevoegd aan de bibliotheek.</div>
         </div>
       ) : (
@@ -67,10 +68,10 @@ export default function SoundLibraryPage() {
                 padding: '9px 12px',
                 fontSize: 14,
                 borderRadius: 8,
-                border: '1.5px solid #e2e8f0',
+                border: '1.5px solid #EAE4D9',
                 outline: 'none',
-                background: '#f8fafc',
-                color: '#0f172a',
+                background: '#FDFAF5',
+                color: '#1A1A1A',
                 width: '100%',
                 maxWidth: 360,
                 boxSizing: 'border-box',
@@ -112,7 +113,8 @@ function SoundCard({ sound }) {
         background: '#fff',
         borderRadius: 12,
         overflow: 'hidden',
-        boxShadow: hover ? '0 8px 32px rgba(0,0,0,0.12)' : '0 2px 12px rgba(0,0,0,0.06)',
+        border: '1px solid #EAE4D9',
+        boxShadow: hover ? '0 8px 32px rgba(0,0,0,0.12)' : '0 1px 4px rgba(0,0,0,0.06)',
         transition: 'all 0.2s ease',
         display: 'flex',
         flexDirection: 'column',
@@ -129,14 +131,14 @@ function SoundCard({ sound }) {
           <div style={{
             position: 'absolute',
             inset: 0,
-            background: 'linear-gradient(to top, rgba(15,23,42,0.80) 0%, transparent 55%)',
+            background: 'linear-gradient(to top, rgba(26,39,68,0.80) 0%, transparent 55%)',
           }} />
           {sound.genre && (
             <div style={{
               position: 'absolute',
               top: 10,
               left: 12,
-              background: 'rgba(14,165,233,0.9)',
+              background: 'rgba(201,168,76,0.9)',
               color: '#fff',
               fontSize: 10,
               fontWeight: 700,
@@ -156,7 +158,7 @@ function SoundCard({ sound }) {
         </div>
       ) : (
         <div style={{
-          background: 'linear-gradient(135deg, #0ea5e9 0%, #0891b2 100%)',
+          background: 'linear-gradient(135deg, #C9A84C 0%, #A07830 100%)',
           padding: '20px',
           minHeight: 80,
           display: 'flex',
@@ -170,7 +172,7 @@ function SoundCard({ sound }) {
 
       {/* Footer */}
       <div style={{ padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <span style={{ fontSize: 13, color: '#64748b' }}>
+        <span style={{ fontSize: 13, color: '#6B7280' }}>
           {sound.artistName || '—'}
         </span>
         <a
@@ -182,12 +184,13 @@ function SoundCard({ sound }) {
             alignItems: 'center',
             gap: 5,
             padding: '6px 14px',
-            background: 'linear-gradient(135deg, #0ea5e9, #0891b2)',
+            background: 'linear-gradient(135deg, #C9A84C, #A07830)',
             color: '#fff',
             borderRadius: 7,
             fontSize: 12,
             fontWeight: 700,
             textDecoration: 'none',
+            boxShadow: '0 2px 6px rgba(201,168,76,0.3)',
           }}
         >
           ▶ Beluisteren

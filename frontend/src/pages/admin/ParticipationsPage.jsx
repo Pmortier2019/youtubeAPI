@@ -67,7 +67,7 @@ export default function ParticipationsPage() {
 
   if (loadingCampaigns) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300 }}>
-      <div style={{ color: '#0ea5e9', fontSize: 16, fontWeight: 600 }}>Loading...</div>
+      <div style={{ color: '#C9A84C', fontSize: 16, fontWeight: 600 }}>Loading...</div>
     </div>
   )
 
@@ -75,8 +75,8 @@ export default function ParticipationsPage() {
     <div style={{ padding: '40px 40px 60px' }}>
       {/* Page header */}
       <div style={{ marginBottom: 36 }}>
-        <h1 style={{ fontSize: 28, fontWeight: 800, color: '#0f172a', marginBottom: 6 }}>Participations</h1>
-        <p style={{ fontSize: 14, color: '#64748b' }}>Review creator submissions for each campaign</p>
+        <h1 style={{ fontSize: 28, fontWeight: 800, color: '#1A1A1A', marginBottom: 6, fontFamily: 'Georgia, "Times New Roman", serif' }}>Participations</h1>
+        <p style={{ fontSize: 14, color: '#6B7280' }}>Review creator submissions for each campaign</p>
       </div>
 
       {/* Campaign selector */}
@@ -84,7 +84,8 @@ export default function ParticipationsPage() {
         background: '#fff',
         borderRadius: 12,
         padding: '20px 24px',
-        boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+        border: '1px solid #EAE4D9',
+        boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
         marginBottom: 28,
         display: 'flex',
         alignItems: 'center',
@@ -100,9 +101,9 @@ export default function ParticipationsPage() {
             padding: '10px 14px',
             fontSize: 14,
             borderRadius: 8,
-            border: '1.5px solid #e2e8f0',
-            background: '#f8fafc',
-            color: '#0f172a',
+            border: '1.5px solid #EAE4D9',
+            background: '#FDFAF5',
+            color: '#1A1A1A',
             outline: 'none',
             cursor: 'pointer',
           }}
@@ -114,8 +115,9 @@ export default function ParticipationsPage() {
         </select>
         {selectedId && participations.length > 0 && (
           <span style={{
-            background: 'linear-gradient(135deg, #0ea5e9, #0891b2)',
-            color: '#fff',
+            background: '#FDF8EE',
+            color: '#A07830',
+            border: '1px solid #E8D9A0',
             fontSize: 12,
             fontWeight: 700,
             padding: '4px 12px',
@@ -125,7 +127,7 @@ export default function ParticipationsPage() {
       </div>
 
       {loadingParts && (
-        <div style={{ textAlign: 'center', padding: '48px', color: '#0ea5e9', fontWeight: 600 }}>
+        <div style={{ textAlign: 'center', padding: '48px', color: '#C9A84C', fontWeight: 600 }}>
           Loading participations...
         </div>
       )}
@@ -136,10 +138,11 @@ export default function ParticipationsPage() {
           borderRadius: 12,
           padding: '60px 40px',
           textAlign: 'center',
-          boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+          border: '1px solid #EAE4D9',
+          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
         }}>
           <span style={{ fontSize: 40, display: 'block', marginBottom: 12 }}>👥</span>
-          <p style={{ color: '#64748b', fontSize: 15 }}>No participations for this campaign yet.</p>
+          <p style={{ color: '#6B7280', fontSize: 15 }}>No participations for this campaign yet.</p>
         </div>
       )}
 
@@ -147,19 +150,20 @@ export default function ParticipationsPage() {
         <div style={{
           background: '#fff',
           borderRadius: 12,
-          boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+          border: '1px solid #EAE4D9',
+          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
           overflow: 'hidden',
         }}>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
-              <tr style={{ background: '#f8fafc' }}>
+              <tr style={{ background: '#FDFAF5' }}>
                 {['Video', 'Creator', 'Status', 'Joined', 'Actions'].map(h => (
                   <th key={h} style={{
                     textAlign: 'left',
                     padding: '12px 20px',
                     fontSize: 12,
                     fontWeight: 700,
-                    color: '#64748b',
+                    color: '#6B7280',
                     letterSpacing: 0.5,
                     textTransform: 'uppercase',
                   }}>{h}</th>
@@ -172,8 +176,8 @@ export default function ParticipationsPage() {
                 return (
                   <tr
                     key={p.id}
-                    style={{ borderTop: '1px solid #f1f5f9' }}
-                    onMouseEnter={e => e.currentTarget.style.background = '#f8fafc'}
+                    style={{ borderTop: '1px solid #EAE4D9' }}
+                    onMouseEnter={e => e.currentTarget.style.background = '#FDFAF5'}
                     onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                   >
                     <td style={{ padding: '14px 20px' }}>
@@ -186,10 +190,10 @@ export default function ParticipationsPage() {
                           />
                         </a>
                       ) : p.url ? (
-                        <a href={p.url} target="_blank" rel="noreferrer" style={{ color: '#0ea5e9', fontSize: 13 }}>{p.url}</a>
+                        <a href={p.url} target="_blank" rel="noreferrer" style={{ color: '#A07830', fontSize: 13 }}>{p.url}</a>
                       ) : <span style={{ color: '#cbd5e1' }}>—</span>}
                     </td>
-                    <td style={{ padding: '14px 20px', fontSize: 14, fontWeight: 600, color: '#0f172a' }}>
+                    <td style={{ padding: '14px 20px', fontSize: 14, fontWeight: 600, color: '#1A1A1A' }}>
                       {p.creatorName ?? p.creatorId ?? '—'}
                     </td>
                     <td style={{ padding: '14px 20px' }}>

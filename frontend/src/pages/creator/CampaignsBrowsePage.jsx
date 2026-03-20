@@ -59,7 +59,7 @@ export default function CampaignsBrowsePage() {
 
   if (loading) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300 }}>
-      <div style={{ color: '#0ea5e9', fontSize: 16, fontWeight: 600 }}>Loading campaigns...</div>
+      <div style={{ color: '#C9A84C', fontSize: 16, fontWeight: 600 }}>Loading campaigns...</div>
     </div>
   )
 
@@ -67,23 +67,24 @@ export default function CampaignsBrowsePage() {
     <div style={{ padding: '40px 40px 60px' }}>
       {/* Page header */}
       <div style={{ marginBottom: 36 }}>
-        <h1 style={{ fontSize: 28, fontWeight: 800, color: '#0f172a', marginBottom: 6 }}>Campaigns</h1>
-        <p style={{ fontSize: 14, color: '#64748b' }}>Join a campaign and earn money with your Shorts</p>
+        <h1 style={{ fontSize: 28, fontWeight: 800, color: '#1A1A1A', marginBottom: 6, fontFamily: 'Georgia, "Times New Roman", serif' }}>Campaigns</h1>
+        <p style={{ fontSize: 14, color: '#6B7280' }}>Join a campaign and earn money with your Shorts</p>
       </div>
 
       {/* My participations */}
       {participations.length > 0 && (
         <div style={{ marginBottom: 48 }}>
-          <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0f172a', marginBottom: 16 }}>My Participations</h2>
+          <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1A1A1A', marginBottom: 16, fontFamily: 'Georgia, "Times New Roman", serif' }}>My Participations</h2>
           <div style={{
             background: '#fff',
             borderRadius: 12,
-            boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+            border: '1px solid #EAE4D9',
+            boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
             overflow: 'hidden',
           }}>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
-                <tr style={{ background: '#f8fafc', borderBottom: '1px solid #e2e8f0' }}>
+                <tr style={{ background: '#FDFAF5', borderBottom: '1px solid #EAE4D9' }}>
                   <th style={thStyle}>Campagne</th>
                   <th style={thStyle}>Short</th>
                   <th style={thStyle}>Status</th>
@@ -92,16 +93,16 @@ export default function CampaignsBrowsePage() {
               </thead>
               <tbody>
                 {participations.map((p, i) => (
-                  <tr key={p.participationId} style={{ borderBottom: i < participations.length - 1 ? '1px solid #f1f5f9' : 'none' }}>
+                  <tr key={p.participationId} style={{ borderBottom: i < participations.length - 1 ? '1px solid #EAE4D9' : 'none' }}>
                     <td style={tdStyle}>
-                      <span style={{ fontWeight: 600, color: '#0f172a', fontSize: 14 }}>{p.campaignTitle}</span>
+                      <span style={{ fontWeight: 600, color: '#1A1A1A', fontSize: 14 }}>{p.campaignTitle}</span>
                     </td>
                     <td style={tdStyle}>
                       <a
                         href={p.shortUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        style={{ color: '#0ea5e9', fontWeight: 600, fontSize: 13, textDecoration: 'none' }}
+                        style={{ color: '#A07830', fontWeight: 600, fontSize: 13, textDecoration: 'none' }}
                       >
                         {p.videoId} ↗
                       </a>
@@ -125,11 +126,12 @@ export default function CampaignsBrowsePage() {
         borderRadius: 12,
         padding: '64px 40px',
         textAlign: 'center',
-        boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+        border: '1px solid #EAE4D9',
+        boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
       }}>
         <span style={{ fontSize: 52, display: 'block', marginBottom: 16 }}>🚀</span>
-        <h3 style={{ fontSize: 20, fontWeight: 800, color: '#0f172a', marginBottom: 10 }}>Coming soon</h3>
-        <p style={{ color: '#64748b', fontSize: 14, maxWidth: 420, margin: '0 auto' }}>
+        <h3 style={{ fontSize: 20, fontWeight: 800, color: '#1A1A1A', marginBottom: 10, fontFamily: 'Georgia, "Times New Roman", serif' }}>Coming soon</h3>
+        <p style={{ color: '#6B7280', fontSize: 14, maxWidth: 420, margin: '0 auto' }}>
           Campaigns are coming soon. In the meantime, link your channel — your Shorts will be automatically submitted for review.
         </p>
       </div>
@@ -142,7 +144,7 @@ const thStyle = {
   textAlign: 'left',
   fontSize: 12,
   fontWeight: 700,
-  color: '#64748b',
+  color: '#6B7280',
   letterSpacing: 0.5,
 }
 
@@ -174,7 +176,8 @@ function CampaignCard({
         background: '#fff',
         borderRadius: 12,
         overflow: 'hidden',
-        boxShadow: hover ? '0 8px 32px rgba(0,0,0,0.12)' : '0 2px 12px rgba(0,0,0,0.06)',
+        border: '1px solid #EAE4D9',
+        boxShadow: hover ? '0 8px 32px rgba(0,0,0,0.12)' : '0 1px 4px rgba(0,0,0,0.06)',
         transition: 'all 0.2s ease',
         display: 'flex',
         flexDirection: 'column',
@@ -191,7 +194,7 @@ function CampaignCard({
           <div style={{
             position: 'absolute',
             inset: 0,
-            background: 'linear-gradient(to top, rgba(15,23,42,0.75) 0%, transparent 60%)',
+            background: 'linear-gradient(to top, rgba(26,39,68,0.75) 0%, transparent 60%)',
           }} />
           <div style={{
             position: 'absolute',
@@ -199,7 +202,7 @@ function CampaignCard({
             left: 16,
             right: 16,
           }}>
-            <h3 style={{ color: '#fff', fontSize: 18, fontWeight: 800, margin: 0, textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}>
+            <h3 style={{ color: '#fff', fontSize: 18, fontWeight: 800, margin: 0, textShadow: '0 1px 3px rgba(0,0,0,0.5)', fontFamily: 'Georgia, "Times New Roman", serif' }}>
               {c.title}
             </h3>
           </div>
@@ -213,7 +216,7 @@ function CampaignCard({
                 top: 12,
                 right: 12,
                 background: 'rgba(255,255,255,0.9)',
-                color: '#0f172a',
+                color: '#1A2744',
                 fontSize: 11,
                 fontWeight: 700,
                 padding: '4px 10px',
@@ -228,19 +231,19 @@ function CampaignCard({
       ) : (
         <div style={{
           height: 120,
-          background: 'linear-gradient(135deg, #0ea5e9, #0891b2)',
+          background: 'linear-gradient(135deg, #C9A84C, #A07830)',
           display: 'flex',
           alignItems: 'flex-end',
           padding: '16px 20px',
         }}>
-          <h3 style={{ color: '#fff', fontSize: 18, fontWeight: 800, margin: 0 }}>{c.title}</h3>
+          <h3 style={{ color: '#fff', fontSize: 18, fontWeight: 800, margin: 0, fontFamily: 'Georgia, "Times New Roman", serif' }}>{c.title}</h3>
         </div>
       )}
 
       {/* Card body */}
       <div style={{ padding: '20px', flex: 1, display: 'flex', flexDirection: 'column', gap: 14 }}>
         {c.description && (
-          <p style={{ fontSize: 13, color: '#64748b', lineHeight: 1.6, margin: 0 }}>{c.description}</p>
+          <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.6, margin: 0 }}>{c.description}</p>
         )}
 
         {/* RPM rate highlight */}
@@ -248,36 +251,36 @@ function CampaignCard({
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          background: '#f0fdf4',
+          background: '#FDF8EE',
           borderRadius: 8,
           padding: '10px 14px',
-          border: '1px solid #bbf7d0',
+          border: '1px solid #E8D9A0',
         }}>
-          <span style={{ fontSize: 13, color: '#15803d', fontWeight: 600 }}>💰 RPM Rate</span>
-          <span style={{ fontSize: 20, fontWeight: 900, color: '#15803d' }}>
+          <span style={{ fontSize: 13, color: '#A07830', fontWeight: 600 }}>💰 RPM Rate</span>
+          <span style={{ fontSize: 20, fontWeight: 900, color: '#A07830' }}>
             €{Number(c.rpmRate).toFixed(4)}<span style={{ fontSize: 11, fontWeight: 500, color: '#6b7280' }}>/1K views</span>
           </span>
         </div>
 
         {/* Rules */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-          <span style={{ background: '#f0f9ff', color: '#0ea5e9', fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 999 }}>
+          <span style={{ background: '#FDF8EE', color: '#A07830', border: '1px solid #E8D9A0', fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 999 }}>
             ⏱ {c.minDurationSeconds}–{c.maxDurationSeconds}s
           </span>
-          <span style={{ background: '#f0f9ff', color: '#0ea5e9', fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 999 }}>
+          <span style={{ background: '#FDF8EE', color: '#A07830', border: '1px solid #E8D9A0', fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 999 }}>
             🔊 min {c.minVolumePercent}% vol
           </span>
         </div>
 
         {/* Budget remaining */}
         <div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: '#64748b', marginBottom: 5 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: '#6B7280', marginBottom: 5 }}>
             <span>Budget remaining</span>
-            <span style={{ fontWeight: 700, color: '#0f172a' }}>€{budgetRemaining.toFixed(2)}</span>
+            <span style={{ fontWeight: 700, color: '#1A1A1A' }}>€{budgetRemaining.toFixed(2)}</span>
           </div>
-          <div style={{ background: '#e2e8f0', borderRadius: 4, height: 6 }}>
+          <div style={{ background: '#EAE4D9', borderRadius: 4, height: 6 }}>
             <div style={{
-              background: 'linear-gradient(90deg, #0ea5e9, #0891b2)',
+              background: 'linear-gradient(90deg, #C9A84C, #A07830)',
               borderRadius: 4,
               height: 6,
               width: `${budgetPct}%`,
@@ -309,14 +312,14 @@ function CampaignCard({
             onClick={() => onOpen(c.id)}
             style={{
               padding: '11px 20px',
-              background: 'linear-gradient(135deg, #0ea5e9, #0891b2)',
+              background: 'linear-gradient(135deg, #C9A84C, #A07830)',
               color: '#fff',
               border: 'none',
               borderRadius: 8,
               cursor: 'pointer',
               fontSize: 14,
               fontWeight: 700,
-              boxShadow: '0 2px 10px rgba(14,165,233,0.3)',
+              boxShadow: '0 2px 10px rgba(201,168,76,0.35)',
               transition: 'all 0.2s ease',
               alignSelf: 'flex-start',
             }}
@@ -328,8 +331,8 @@ function CampaignCard({
           <form
             onSubmit={e => onSubmit(e, c.id)}
             style={{
-              background: '#f8fafc',
-              border: '1.5px solid #e2e8f0',
+              background: '#FDFAF5',
+              border: '1.5px solid #EAE4D9',
               borderRadius: 10,
               padding: '16px',
               display: 'flex',
@@ -352,10 +355,10 @@ function CampaignCard({
                 padding: '9px 12px',
                 fontSize: 14,
                 borderRadius: 8,
-                border: urlFocus ? '2px solid #0ea5e9' : '1.5px solid #e2e8f0',
+                border: urlFocus ? '2px solid #C9A84C' : '1.5px solid #EAE4D9',
                 outline: 'none',
                 background: '#fff',
-                color: '#0f172a',
+                color: '#1A1A1A',
                 transition: 'border 0.15s ease',
               }}
             />
@@ -365,7 +368,7 @@ function CampaignCard({
                 border: '1px solid #fecaca',
                 borderRadius: 6,
                 padding: '8px 12px',
-                color: '#dc2626',
+                color: '#B91C1C',
                 fontSize: 13,
               }}>{status.error}</div>
             )}
@@ -375,13 +378,14 @@ function CampaignCard({
                 style={{
                   flex: 1,
                   padding: '9px 0',
-                  background: 'linear-gradient(135deg, #0ea5e9, #0891b2)',
+                  background: 'linear-gradient(135deg, #C9A84C, #A07830)',
                   color: '#fff',
                   border: 'none',
                   borderRadius: 7,
                   cursor: 'pointer',
                   fontSize: 13,
                   fontWeight: 700,
+                  boxShadow: '0 2px 10px rgba(201,168,76,0.35)',
                 }}
               >Submit</button>
               <button
@@ -391,7 +395,7 @@ function CampaignCard({
                   padding: '9px 16px',
                   background: '#fff',
                   color: '#374151',
-                  border: '1.5px solid #e2e8f0',
+                  border: '1.5px solid #EAE4D9',
                   borderRadius: 7,
                   cursor: 'pointer',
                   fontSize: 13,

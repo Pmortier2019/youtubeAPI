@@ -39,7 +39,7 @@ export default function Layout({ children }) {
         left: 0,
         width: 240,
         height: '100vh',
-        background: '#0f172a',
+        background: '#1A2744',
         display: 'flex',
         flexDirection: 'column',
         zIndex: 100,
@@ -48,11 +48,11 @@ export default function Layout({ children }) {
         {/* Brand */}
         <div style={{
           padding: '28px 24px 20px',
-          borderBottom: '1px solid #1e293b',
+          borderBottom: '1px solid rgba(255,255,255,0.08)',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <span style={{ fontSize: 24 }}>🎵</span>
-            <span style={{ color: '#fff', fontWeight: 800, fontSize: 18, letterSpacing: '-0.3px' }}>PierreMusic</span>
+            <span style={{ color: '#C9A84C', fontWeight: 800, fontSize: 18, letterSpacing: '-0.3px', fontFamily: 'Georgia, "Times New Roman", serif' }}>PierreMusic</span>
           </div>
         </div>
 
@@ -67,11 +67,11 @@ export default function Layout({ children }) {
                 alignItems: 'center',
                 gap: 12,
                 padding: '11px 24px',
-                color: isActive ? '#fff' : '#94a3b8',
+                color: isActive ? '#C9A84C' : '#94A3B8',
                 fontWeight: isActive ? 600 : 400,
                 fontSize: 14,
-                background: isActive ? 'linear-gradient(90deg, #1e293b 0%, #1e2a45 100%)' : 'transparent',
-                borderLeft: isActive ? '3px solid #0ea5e9' : '3px solid transparent',
+                background: isActive ? 'rgba(201,168,76,0.10)' : 'transparent',
+                borderLeft: isActive ? '3px solid #C9A84C' : '3px solid transparent',
                 transition: 'all 0.15s ease',
                 cursor: 'pointer',
               })}
@@ -85,12 +85,12 @@ export default function Layout({ children }) {
         {/* User info + logout */}
         <div style={{
           padding: '16px 24px',
-          borderTop: '1px solid #1e293b',
+          borderTop: '1px solid rgba(255,255,255,0.08)',
         }}>
           <div style={{ marginBottom: 12 }}>
             <div style={{
               display: 'inline-block',
-              background: role === 'ADMIN' ? 'linear-gradient(135deg, #0ea5e9, #0891b2)' : 'linear-gradient(135deg, #06b6d4, #0ea5e9)',
+              background: 'linear-gradient(135deg, #C9A84C, #A07830)',
               color: '#fff',
               fontSize: 10,
               fontWeight: 700,
@@ -108,9 +108,9 @@ export default function Layout({ children }) {
             style={{
               width: '100%',
               padding: '9px 0',
-              background: logoutHover ? '#1e293b' : 'transparent',
-              color: logoutHover ? '#fff' : '#64748b',
-              border: '1px solid #1e293b',
+              background: logoutHover ? 'rgba(201,168,76,0.10)' : 'transparent',
+              color: logoutHover ? '#C9A84C' : '#94A3B8',
+              border: '1px solid rgba(255,255,255,0.10)',
               borderRadius: 8,
               cursor: 'pointer',
               fontSize: 13,
@@ -127,7 +127,7 @@ export default function Layout({ children }) {
       <main style={{
         marginLeft: 240,
         flex: 1,
-        background: '#f8fafc',
+        background: '#F7F4EF',
         minHeight: '100vh',
       }}>
         {children}

@@ -15,7 +15,8 @@ function StatCard({ icon, label, value, color }) {
         background: '#fff',
         borderRadius: 12,
         padding: '24px 28px',
-        boxShadow: hover ? '0 8px 32px rgba(0,0,0,0.10)' : '0 2px 12px rgba(0,0,0,0.06)',
+        border: '1px solid #EAE4D9',
+        boxShadow: hover ? '0 8px 32px rgba(0,0,0,0.10)' : '0 1px 4px rgba(0,0,0,0.06)',
         transition: 'all 0.2s ease',
         cursor: 'default',
       }}
@@ -23,8 +24,9 @@ function StatCard({ icon, label, value, color }) {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16 }}>
         <span style={{ fontSize: 28 }}>{icon}</span>
         <span style={{
-          background: color + '18',
-          color: color,
+          background: '#FDF8EE',
+          color: '#A07830',
+          border: '1px solid #E8D9A0',
           fontSize: 11,
           fontWeight: 700,
           padding: '3px 9px',
@@ -32,10 +34,10 @@ function StatCard({ icon, label, value, color }) {
           letterSpacing: 0.5,
         }}>TOTAL</span>
       </div>
-      <div style={{ fontSize: 32, fontWeight: 800, color: '#0f172a', letterSpacing: '-1px', marginBottom: 4 }}>
+      <div style={{ fontSize: 32, fontWeight: 800, color: '#1A1A1A', letterSpacing: '-1px', marginBottom: 4 }}>
         {typeof value === 'number' ? value.toLocaleString() : value}
       </div>
-      <div style={{ fontSize: 13, color: '#64748b', fontWeight: 500 }}>{label}</div>
+      <div style={{ fontSize: 13, color: '#6B7280', fontWeight: 500 }}>{label}</div>
     </div>
   )
 }
@@ -53,7 +55,7 @@ export default function MyStatsPage() {
 
   if (loading) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300 }}>
-      <div style={{ color: '#0ea5e9', fontSize: 16, fontWeight: 600 }}>Loading your stats...</div>
+      <div style={{ color: '#C9A84C', fontSize: 16, fontWeight: 600 }}>Loading your stats...</div>
     </div>
   )
 
@@ -75,14 +77,14 @@ export default function MyStatsPage() {
     <div style={{ padding: '40px 40px 60px' }}>
       {/* Page header */}
       <div style={{ marginBottom: 36 }}>
-        <h1 style={{ fontSize: 28, fontWeight: 800, color: '#0f172a', marginBottom: 6 }}>My Stats</h1>
-        <p style={{ fontSize: 14, color: '#64748b' }}>Performance of your Shorts using our sound</p>
+        <h1 style={{ fontSize: 28, fontWeight: 800, color: '#1A1A1A', marginBottom: 6, fontFamily: 'Georgia, "Times New Roman", serif' }}>My Stats</h1>
+        <p style={{ fontSize: 14, color: '#6B7280' }}>Performance of your Shorts using our sound</p>
       </div>
 
       {/* Stat cards */}
       <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', marginBottom: 36 }}>
-        <StatCard icon="🎵" label="My Videos" value={videos.length} color="#0ea5e9" />
-        <StatCard icon="👁️" label="Total Views" value={totalViews} color="#0ea5e9" />
+        <StatCard icon="🎵" label="My Videos" value={videos.length} color="#C9A84C" />
+        <StatCard icon="👁️" label="Total Views" value={totalViews} color="#C9A84C" />
         <StatCard icon="👍" label="Total Likes" value={totalLikes} color="#22c55e" />
         <StatCard icon="💬" label="Total Comments" value={totalComments} color="#f59e0b" />
       </div>
@@ -93,15 +95,16 @@ export default function MyStatsPage() {
           background: '#fff',
           borderRadius: 12,
           padding: '28px 28px 20px',
-          boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+          border: '1px solid #EAE4D9',
+          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
           marginBottom: 36,
         }}>
-          <h2 style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 24 }}>
+          <h2 style={{ fontSize: 16, fontWeight: 700, color: '#1A1A1A', marginBottom: 24, fontFamily: 'Georgia, "Times New Roman", serif' }}>
             📈 View Growth Over Time
           </h2>
           <ResponsiveContainer width="100%" height={240}>
             <LineChart data={lineData} margin={{ top: 0, right: 20, left: 0, bottom: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+              <CartesianGrid strokeDasharray="3 3" stroke="#EAE4D9" />
               <XAxis
                 dataKey="date"
                 tick={{ fontSize: 11, fill: '#94a3b8' }}
@@ -116,7 +119,7 @@ export default function MyStatsPage() {
               />
               <Tooltip
                 contentStyle={{
-                  background: '#0f172a',
+                  background: '#1A2744',
                   border: 'none',
                   borderRadius: 8,
                   color: '#fff',
@@ -127,10 +130,10 @@ export default function MyStatsPage() {
               <Line
                 type="monotone"
                 dataKey="views"
-                stroke="#0ea5e9"
+                stroke="#C9A84C"
                 strokeWidth={2.5}
-                dot={{ fill: '#0ea5e9', r: 3 }}
-                activeDot={{ r: 5, fill: '#0891b2' }}
+                dot={{ fill: '#C9A84C', r: 3 }}
+                activeDot={{ r: 5, fill: '#A07830' }}
               />
             </LineChart>
           </ResponsiveContainer>
@@ -144,11 +147,12 @@ export default function MyStatsPage() {
           borderRadius: 12,
           padding: '80px 40px',
           textAlign: 'center',
-          boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+          border: '1px solid #EAE4D9',
+          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
         }}>
           <span style={{ fontSize: 48, display: 'block', marginBottom: 16 }}>🎵</span>
-          <h3 style={{ fontSize: 18, fontWeight: 700, color: '#0f172a', marginBottom: 8 }}>No stats yet</h3>
-          <p style={{ color: '#64748b', fontSize: 14 }}>
+          <h3 style={{ fontSize: 18, fontWeight: 700, color: '#1A1A1A', marginBottom: 8, fontFamily: 'Georgia, "Times New Roman", serif' }}>No stats yet</h3>
+          <p style={{ color: '#6B7280', fontSize: 14 }}>
             Link your channel via "My Channels" to get started. Stats will appear once your Shorts are approved.
           </p>
         </div>
@@ -156,23 +160,24 @@ export default function MyStatsPage() {
         <div style={{
           background: '#fff',
           borderRadius: 12,
-          boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+          border: '1px solid #EAE4D9',
+          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
           overflow: 'hidden',
         }}>
-          <div style={{ padding: '20px 28px', borderBottom: '1px solid #f1f5f9' }}>
-            <h2 style={{ fontSize: 16, fontWeight: 700, color: '#0f172a' }}>Your Videos</h2>
+          <div style={{ padding: '20px 28px', borderBottom: '1px solid #EAE4D9' }}>
+            <h2 style={{ fontSize: 16, fontWeight: 700, color: '#1A1A1A', fontFamily: 'Georgia, "Times New Roman", serif' }}>Your Videos</h2>
           </div>
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
-                <tr style={{ background: '#f8fafc' }}>
+                <tr style={{ background: '#FDFAF5' }}>
                   {['Thumbnail', 'Video', 'Views', 'Likes', 'Comments', 'Date'].map(h => (
                     <th key={h} style={{
                       textAlign: 'left',
                       padding: '12px 20px',
                       fontSize: 12,
                       fontWeight: 700,
-                      color: '#64748b',
+                      color: '#6B7280',
                       letterSpacing: 0.5,
                       textTransform: 'uppercase',
                       whiteSpace: 'nowrap',
@@ -184,8 +189,8 @@ export default function MyStatsPage() {
                 {videos.map((v, idx) => (
                   <tr
                     key={v.videoId || idx}
-                    style={{ borderTop: '1px solid #f1f5f9' }}
-                    onMouseEnter={e => e.currentTarget.style.background = '#f8fafc'}
+                    style={{ borderTop: '1px solid #EAE4D9' }}
+                    onMouseEnter={e => e.currentTarget.style.background = '#FDFAF5'}
                     onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                   >
                     <td style={{ padding: '14px 20px' }}>
@@ -202,12 +207,12 @@ export default function MyStatsPage() {
                         href={v.url}
                         target="_blank"
                         rel="noreferrer"
-                        style={{ color: '#0ea5e9', fontSize: 13, fontWeight: 500 }}
+                        style={{ color: '#A07830', fontSize: 13, fontWeight: 500 }}
                       >
                         {v.videoId || 'link'}
                       </a>
                     </td>
-                    <td style={{ padding: '14px 20px', fontSize: 14, fontWeight: 700, color: '#0f172a' }}>
+                    <td style={{ padding: '14px 20px', fontSize: 14, fontWeight: 700, color: '#1A1A1A' }}>
                       {(v.views || 0).toLocaleString()}
                     </td>
                     <td style={{ padding: '14px 20px', fontSize: 14, color: '#374151' }}>

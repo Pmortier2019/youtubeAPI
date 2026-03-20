@@ -10,8 +10,9 @@ function RoleBadge({ role }) {
       borderRadius: 999,
       fontSize: 12,
       fontWeight: 700,
-      background: isAdmin ? '#ede9fe' : '#f0f9ff',
-      color: isAdmin ? '#7c3aed' : '#0369a1',
+      background: isAdmin ? '#FDF8EE' : '#FDFAF5',
+      color: isAdmin ? '#A07830' : '#6B7280',
+      border: isAdmin ? '1px solid #E8D9A0' : '1px solid #EAE4D9',
     }}>{role}</span>
   )
 }
@@ -45,28 +46,28 @@ export default function UsersPage() {
 
   if (loading) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300 }}>
-      <div style={{ color: '#0ea5e9', fontSize: 16, fontWeight: 600 }}>Loading...</div>
+      <div style={{ color: '#C9A84C', fontSize: 16, fontWeight: 600 }}>Loading...</div>
     </div>
   )
 
   return (
     <div style={{ padding: '40px 40px 60px' }}>
       <div style={{ marginBottom: 36 }}>
-        <h1 style={{ fontSize: 28, fontWeight: 800, color: '#0f172a', marginBottom: 6 }}>Users</h1>
-        <p style={{ fontSize: 14, color: '#64748b' }}>{users.length} registered accounts</p>
+        <h1 style={{ fontSize: 28, fontWeight: 800, color: '#1A1A1A', marginBottom: 6, fontFamily: 'Georgia, "Times New Roman", serif' }}>Users</h1>
+        <p style={{ fontSize: 14, color: '#6B7280' }}>{users.length} registered accounts</p>
       </div>
 
-      <div style={{ background: '#fff', borderRadius: 12, boxShadow: '0 2px 12px rgba(0,0,0,0.06)', overflow: 'hidden' }}>
+      <div style={{ background: '#fff', borderRadius: 12, border: '1px solid #EAE4D9', boxShadow: '0 1px 4px rgba(0,0,0,0.06)', overflow: 'hidden' }}>
         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
           <thead>
-            <tr style={{ background: '#f8fafc' }}>
+            <tr style={{ background: '#FDFAF5' }}>
               {['Name', 'Email', 'Role', 'Verified', 'Actions'].map(h => (
                 <th key={h} style={{
                   textAlign: 'left',
                   padding: '12px 20px',
                   fontSize: 12,
                   fontWeight: 700,
-                  color: '#64748b',
+                  color: '#6B7280',
                   letterSpacing: 0.5,
                   textTransform: 'uppercase',
                 }}>{h}</th>
@@ -77,11 +78,11 @@ export default function UsersPage() {
             {users.map(u => (
               <tr
                 key={u.id}
-                style={{ borderTop: '1px solid #f1f5f9' }}
-                onMouseEnter={e => e.currentTarget.style.background = '#f8fafc'}
+                style={{ borderTop: '1px solid #EAE4D9' }}
+                onMouseEnter={e => e.currentTarget.style.background = '#FDFAF5'}
                 onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
               >
-                <td style={{ padding: '14px 20px', fontWeight: 600, color: '#0f172a', fontSize: 14 }}>
+                <td style={{ padding: '14px 20px', fontWeight: 600, color: '#1A1A1A', fontSize: 14 }}>
                   {u.creatorName ?? '—'}
                 </td>
                 <td style={{ padding: '14px 20px', fontSize: 14, color: '#475569' }}>
@@ -104,8 +105,8 @@ export default function UsersPage() {
                         padding: '5px 10px',
                         fontSize: 13,
                         borderRadius: 7,
-                        border: '1.5px solid #e2e8f0',
-                        background: '#f8fafc',
+                        border: '1.5px solid #EAE4D9',
+                        background: '#FDFAF5',
                         cursor: 'pointer',
                       }}
                     >
@@ -117,7 +118,7 @@ export default function UsersPage() {
                       style={{
                         padding: '5px 12px',
                         background: '#fee2e2',
-                        color: '#dc2626',
+                        color: '#B91C1C',
                         border: 'none',
                         borderRadius: 7,
                         cursor: 'pointer',

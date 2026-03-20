@@ -35,10 +35,10 @@ export default function LoginPage() {
       display: 'flex',
       minHeight: '100vh',
     }}>
-      {/* Left panel — dark gradient with branding */}
+      {/* Left panel — navy with gold accents */}
       <div style={{
         flex: '0 0 45%',
-        background: 'linear-gradient(160deg, #0f172a 0%, #1e293b 60%, #1a1f3a 100%)',
+        background: '#1A2744',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -48,7 +48,7 @@ export default function LoginPage() {
         {/* Logo */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 48 }}>
           <span style={{ fontSize: 36 }}>🎵</span>
-          <span style={{ color: '#fff', fontWeight: 800, fontSize: 26, letterSpacing: '-0.5px' }}>PierreMusic</span>
+          <span style={{ color: '#C9A84C', fontWeight: 800, fontSize: 26, letterSpacing: '-0.5px', fontFamily: 'Georgia, "Times New Roman", serif' }}>PierreMusic</span>
         </div>
 
         {/* Tagline */}
@@ -59,10 +59,11 @@ export default function LoginPage() {
           lineHeight: 1.2,
           marginBottom: 20,
           letterSpacing: '-0.5px',
+          fontFamily: 'Georgia, "Times New Roman", serif',
         }}>
           Get paid for every Short
         </h1>
-        <p style={{ color: '#94a3b8', fontSize: 16, marginBottom: 48, lineHeight: 1.6 }}>
+        <p style={{ color: '#94A3B8', fontSize: 16, marginBottom: 48, lineHeight: 1.6 }}>
           Join the platform that connects sound creators with YouTube Shorts creators and pays you for every view.
         </p>
 
@@ -78,8 +79,8 @@ export default function LoginPage() {
                 width: 40,
                 height: 40,
                 borderRadius: 10,
-                background: 'rgba(14, 165, 233, 0.2)',
-                border: '1px solid rgba(14,165,233,0.3)',
+                background: 'rgba(201,168,76,0.15)',
+                border: '1px solid rgba(201,168,76,0.35)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -98,7 +99,7 @@ export default function LoginPage() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: '#f8fafc',
+        background: '#F7F4EF',
         padding: 40,
       }}>
         <div style={{
@@ -107,10 +108,11 @@ export default function LoginPage() {
           background: '#fff',
           borderRadius: 16,
           padding: '48px 40px',
-          boxShadow: '0 4px 32px rgba(0,0,0,0.08)',
+          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
+          border: '1px solid #EAE4D9',
         }}>
-          <h2 style={{ fontSize: 26, fontWeight: 800, marginBottom: 6, color: '#0f172a' }}>Welcome back</h2>
-          <p style={{ color: '#64748b', fontSize: 14, marginBottom: 32 }}>Sign in to your PierreMusic account</p>
+          <h2 style={{ fontSize: 26, fontWeight: 800, marginBottom: 6, color: '#1A1A1A', fontFamily: 'Georgia, "Times New Roman", serif' }}>Welcome back</h2>
+          <p style={{ color: '#6B7280', fontSize: 14, marginBottom: 32 }}>Sign in to your PierreMusic account</p>
 
           {error && (
             <div style={{
@@ -119,7 +121,7 @@ export default function LoginPage() {
               borderRadius: 8,
               padding: '10px 14px',
               marginBottom: 20,
-              color: '#dc2626',
+              color: '#B91C1C',
               fontSize: 14,
             }}>{error}</div>
           )}
@@ -143,10 +145,10 @@ export default function LoginPage() {
                   padding: '0 14px',
                   fontSize: 15,
                   borderRadius: 10,
-                  border: emailFocus ? '2px solid #0ea5e9' : '1.5px solid #e2e8f0',
+                  border: emailFocus ? '2px solid #C9A84C' : '1.5px solid #EAE4D9',
                   outline: 'none',
-                  background: '#f8fafc',
-                  color: '#0f172a',
+                  background: '#FDFAF5',
+                  color: '#1A1A1A',
                   transition: 'border 0.15s ease',
                 }}
               />
@@ -169,10 +171,10 @@ export default function LoginPage() {
                   padding: '0 14px',
                   fontSize: 15,
                   borderRadius: 10,
-                  border: passFocus ? '2px solid #0ea5e9' : '1.5px solid #e2e8f0',
+                  border: passFocus ? '2px solid #C9A84C' : '1.5px solid #EAE4D9',
                   outline: 'none',
-                  background: '#f8fafc',
-                  color: '#0f172a',
+                  background: '#FDFAF5',
+                  color: '#1A1A1A',
                   transition: 'border 0.15s ease',
                 }}
               />
@@ -184,7 +186,7 @@ export default function LoginPage() {
               style={{
                 width: '100%',
                 height: 48,
-                background: loading ? '#7dd3fc' : 'linear-gradient(135deg, #0ea5e9 0%, #0891b2 100%)',
+                background: loading ? '#D4AF37' : 'linear-gradient(135deg, #C9A84C, #A07830)',
                 color: '#fff',
                 border: 'none',
                 borderRadius: 10,
@@ -193,16 +195,16 @@ export default function LoginPage() {
                 cursor: loading ? 'not-allowed' : 'pointer',
                 marginTop: 8,
                 transition: 'opacity 0.15s ease',
-                boxShadow: '0 2px 12px rgba(14,165,233,0.3)',
+                boxShadow: '0 2px 10px rgba(201,168,76,0.35)',
               }}
             >
               {loading ? 'Signing in...' : 'Sign in'}
             </button>
           </form>
 
-          <p style={{ textAlign: 'center', marginTop: 24, fontSize: 14, color: '#64748b' }}>
+          <p style={{ textAlign: 'center', marginTop: 24, fontSize: 14, color: '#6B7280' }}>
             No account yet?{' '}
-            <Link to="/register" style={{ color: '#0ea5e9', fontWeight: 600 }}>Create one</Link>
+            <Link to="/register" style={{ color: '#A07830', fontWeight: 600 }}>Create one</Link>
           </p>
         </div>
       </div>

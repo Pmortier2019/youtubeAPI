@@ -57,14 +57,14 @@ export default function MyShortsPage() {
     <div style={{ padding: '40px 40px 60px' }}>
       {/* Page header */}
       <div style={{ marginBottom: 28 }}>
-        <h1 style={{ fontSize: 28, fontWeight: 800, color: '#0f172a', marginBottom: 6 }}>My Shorts</h1>
-        <p style={{ fontSize: 14, color: '#64748b' }}>Review status of your submitted YouTube Shorts</p>
+        <h1 style={{ fontSize: 28, fontWeight: 800, color: '#1A1A1A', marginBottom: 6, fontFamily: 'Georgia, "Times New Roman", serif' }}>My Shorts</h1>
+        <p style={{ fontSize: 14, color: '#6B7280' }}>Review status of your submitted YouTube Shorts</p>
       </div>
 
       {/* Review notice */}
       <div style={{
-        background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)',
-        border: '1.5px solid #bae6fd',
+        background: 'linear-gradient(135deg, #FDF8EE 0%, #F7F4EF 100%)',
+        border: '1.5px solid #E8D9A0',
         borderRadius: 12,
         padding: '16px 20px',
         marginBottom: 32,
@@ -73,17 +73,17 @@ export default function MyShortsPage() {
         gap: 12,
       }}>
         <span style={{ fontSize: 20, flexShrink: 0, marginTop: 1 }}>ℹ️</span>
-        <div style={{ fontSize: 14, color: '#0369a1', lineHeight: 1.7 }}>
+        <div style={{ fontSize: 14, color: '#A07830', lineHeight: 1.7 }}>
           Your Shorts are <strong>reviewed manually</strong> by the admin. This may take a few days.
           Approved Shorts count towards your earnings.
-          <span style={{ display: 'block', marginTop: 4, color: '#0ea5e9', fontSize: 13 }}>
+          <span style={{ display: 'block', marginTop: 4, color: '#C9A84C', fontSize: 13 }}>
             Make sure your Shorts clearly feature the sponsored sound.
           </span>
         </div>
       </div>
 
       {loading && (
-        <div style={{ color: '#64748b', fontSize: 14 }}>Loading...</div>
+        <div style={{ color: '#6B7280', fontSize: 14 }}>Loading...</div>
       )}
 
       {error && (
@@ -92,7 +92,7 @@ export default function MyShortsPage() {
           border: '1px solid #fecaca',
           borderRadius: 8,
           padding: '10px 14px',
-          color: '#dc2626',
+          color: '#B91C1C',
           fontSize: 14,
           marginBottom: 20,
         }}>{error}</div>
@@ -104,8 +104,9 @@ export default function MyShortsPage() {
           borderRadius: 12,
           padding: '48px 40px',
           textAlign: 'center',
-          boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
-          color: '#64748b',
+          border: '1px solid #EAE4D9',
+          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
+          color: '#6B7280',
           fontSize: 15,
         }}>
           No Shorts found. Add your YouTube channel to get started.
@@ -116,16 +117,17 @@ export default function MyShortsPage() {
         <div style={{
           background: '#fff',
           borderRadius: 12,
-          boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+          border: '1px solid #EAE4D9',
+          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
           overflow: 'hidden',
         }}>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
-              <tr style={{ background: '#f8fafc', borderBottom: '1px solid #e2e8f0' }}>
-                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: 12, fontWeight: 700, color: '#64748b', letterSpacing: 0.5 }}>THUMBNAIL</th>
-                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: 12, fontWeight: 700, color: '#64748b', letterSpacing: 0.5 }}>VIDEO</th>
-                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: 12, fontWeight: 700, color: '#64748b', letterSpacing: 0.5 }}>STATUS</th>
-                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: 12, fontWeight: 700, color: '#64748b', letterSpacing: 0.5 }}>DATE ADDED</th>
+              <tr style={{ background: '#FDFAF5', borderBottom: '1px solid #EAE4D9' }}>
+                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: 12, fontWeight: 700, color: '#6B7280', letterSpacing: 0.5 }}>THUMBNAIL</th>
+                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: 12, fontWeight: 700, color: '#6B7280', letterSpacing: 0.5 }}>VIDEO</th>
+                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: 12, fontWeight: 700, color: '#6B7280', letterSpacing: 0.5 }}>STATUS</th>
+                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: 12, fontWeight: 700, color: '#6B7280', letterSpacing: 0.5 }}>DATE ADDED</th>
               </tr>
             </thead>
             <tbody>
@@ -133,7 +135,7 @@ export default function MyShortsPage() {
                 <tr
                   key={short.videoId}
                   style={{
-                    borderBottom: i < shorts.length - 1 ? '1px solid #f1f5f9' : 'none',
+                    borderBottom: i < shorts.length - 1 ? '1px solid #EAE4D9' : 'none',
                   }}
                 >
                   <td style={{ padding: '12px 20px' }}>
@@ -148,7 +150,7 @@ export default function MyShortsPage() {
                       href={short.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{ color: '#0ea5e9', fontWeight: 600, fontSize: 14, textDecoration: 'none' }}
+                      style={{ color: '#A07830', fontWeight: 600, fontSize: 14, textDecoration: 'none' }}
                     >
                       {short.videoId}
                     </a>
@@ -156,7 +158,7 @@ export default function MyShortsPage() {
                   <td style={{ padding: '12px 20px' }}>
                     <StatusBadge soundUsed={short.soundUsed} />
                   </td>
-                  <td style={{ padding: '12px 20px', fontSize: 13, color: '#64748b' }}>
+                  <td style={{ padding: '12px 20px', fontSize: 13, color: '#6B7280' }}>
                     {short.createdAt
                       ? new Date(short.createdAt).toLocaleDateString('en-GB', {
                           day: '2-digit', month: 'short', year: 'numeric',

@@ -18,10 +18,10 @@ const inputStyle = {
   padding: '9px 12px',
   fontSize: 14,
   borderRadius: 8,
-  border: '1.5px solid #e2e8f0',
+  border: '1.5px solid #EAE4D9',
   outline: 'none',
-  background: '#f8fafc',
-  color: '#0f172a',
+  background: '#FDFAF5',
+  color: '#1A1A1A',
   marginTop: 2,
 }
 
@@ -136,7 +136,7 @@ export default function SoundLibraryPage() {
 
   if (loading) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300 }}>
-      <div style={{ color: '#0ea5e9', fontSize: 16, fontWeight: 600 }}>Loading library...</div>
+      <div style={{ color: '#C9A84C', fontSize: 16, fontWeight: 600 }}>Loading library...</div>
     </div>
   )
 
@@ -145,21 +145,21 @@ export default function SoundLibraryPage() {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 36, flexWrap: 'wrap', gap: 16 }}>
         <div>
-          <h1 style={{ fontSize: 28, fontWeight: 800, color: '#0f172a', marginBottom: 6 }}>Sound Library</h1>
-          <p style={{ fontSize: 14, color: '#64748b' }}>Manage tracks that can be used in campaigns</p>
+          <h1 style={{ fontSize: 28, fontWeight: 800, color: '#1A1A1A', marginBottom: 6, fontFamily: 'Georgia, "Times New Roman", serif' }}>Sound Library</h1>
+          <p style={{ fontSize: 14, color: '#6B7280' }}>Manage tracks that can be used in campaigns</p>
         </div>
         <button
           onClick={showForm ? closeForm : openForm}
           style={{
             padding: '11px 22px',
-            background: showForm ? '#f1f5f9' : 'linear-gradient(135deg, #0ea5e9, #0891b2)',
+            background: showForm ? '#fff' : 'linear-gradient(135deg, #C9A84C, #A07830)',
             color: showForm ? '#374151' : '#fff',
-            border: 'none',
+            border: showForm ? '1.5px solid #EAE4D9' : 'none',
             borderRadius: 10,
             cursor: 'pointer',
             fontSize: 14,
             fontWeight: 700,
-            boxShadow: showForm ? 'none' : '0 2px 10px rgba(14,165,233,0.35)',
+            boxShadow: showForm ? 'none' : '0 2px 10px rgba(201,168,76,0.35)',
           }}
         >
           {showForm ? '✕ Cancel' : '+ Add Track'}
@@ -172,11 +172,11 @@ export default function SoundLibraryPage() {
           background: '#fff',
           borderRadius: 12,
           padding: '28px 32px',
-          boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
+          border: '1px solid #EAE4D9',
+          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
           marginBottom: 32,
-          border: '1px solid #e2e8f0',
         }}>
-          <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0f172a', marginBottom: 20 }}>New Track</h2>
+          <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1A1A1A', marginBottom: 20, fontFamily: 'Georgia, "Times New Roman", serif' }}>New Track</h2>
 
           {/* URL input + preview */}
           <div style={{ marginBottom: 24 }}>
@@ -190,10 +190,10 @@ export default function SoundLibraryPage() {
               onChange={handleUrlChange}
             />
             {previewing && (
-              <div style={{ marginTop: 8, fontSize: 13, color: '#0ea5e9' }}>Ophalen...</div>
+              <div style={{ marginTop: 8, fontSize: 13, color: '#C9A84C' }}>Ophalen...</div>
             )}
             {previewError && (
-              <div style={{ marginTop: 8, fontSize: 13, color: '#dc2626' }}>{previewError}</div>
+              <div style={{ marginTop: 8, fontSize: 13, color: '#B91C1C' }}>{previewError}</div>
             )}
           </div>
 
@@ -203,8 +203,8 @@ export default function SoundLibraryPage() {
               display: 'flex',
               alignItems: 'center',
               gap: 16,
-              background: '#f0f9ff',
-              border: '1px solid #bae6fd',
+              background: '#FDF8EE',
+              border: '1px solid #E8D9A0',
               borderRadius: 10,
               padding: '12px 16px',
               marginBottom: 24,
@@ -215,8 +215,8 @@ export default function SoundLibraryPage() {
                 style={{ width: 120, height: 68, objectFit: 'cover', borderRadius: 8, flexShrink: 0 }}
               />
               <div>
-                <div style={{ fontSize: 14, fontWeight: 700, color: '#0f172a', marginBottom: 2 }}>{previewData.title}</div>
-                <div style={{ fontSize: 12, color: '#64748b', fontFamily: 'monospace' }}>{previewData.videoId}</div>
+                <div style={{ fontSize: 14, fontWeight: 700, color: '#1A1A1A', marginBottom: 2 }}>{previewData.title}</div>
+                <div style={{ fontSize: 12, color: '#6B7280', fontFamily: 'monospace' }}>{previewData.videoId}</div>
               </div>
             </div>
           )}
@@ -244,7 +244,7 @@ export default function SoundLibraryPage() {
                 border: '1px solid #fecaca',
                 borderRadius: 8,
                 padding: '10px 14px',
-                color: '#dc2626',
+                color: '#B91C1C',
                 fontSize: 14,
                 marginBottom: 16,
               }}>{formError}</div>
@@ -255,13 +255,14 @@ export default function SoundLibraryPage() {
                 disabled={saving || !form.soundVideoId}
                 style={{
                   padding: '10px 24px',
-                  background: saving || !form.soundVideoId ? '#7dd3fc' : 'linear-gradient(135deg, #0ea5e9, #0891b2)',
+                  background: saving || !form.soundVideoId ? '#D4AF37' : 'linear-gradient(135deg, #C9A84C, #A07830)',
                   color: '#fff',
                   border: 'none',
                   borderRadius: 8,
                   cursor: saving || !form.soundVideoId ? 'not-allowed' : 'pointer',
                   fontSize: 14,
                   fontWeight: 700,
+                  boxShadow: '0 2px 10px rgba(201,168,76,0.35)',
                 }}
               >{saving ? 'Saving...' : 'Save'}</button>
               <button
@@ -269,9 +270,9 @@ export default function SoundLibraryPage() {
                 onClick={closeForm}
                 style={{
                   padding: '10px 20px',
-                  background: '#f8fafc',
+                  background: '#fff',
                   color: '#374151',
-                  border: '1.5px solid #e2e8f0',
+                  border: '1.5px solid #EAE4D9',
                   borderRadius: 8,
                   cursor: 'pointer',
                   fontSize: 14,
@@ -302,10 +303,11 @@ export default function SoundLibraryPage() {
           borderRadius: 12,
           padding: '60px 40px',
           textAlign: 'center',
-          boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+          border: '1px solid #EAE4D9',
+          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
         }}>
           <span style={{ fontSize: 48, display: 'block', marginBottom: 16 }}>🎵</span>
-          <p style={{ color: '#64748b', fontSize: 16 }}>No tracks in the library yet. Add one to get started!</p>
+          <p style={{ color: '#6B7280', fontSize: 16 }}>No tracks in the library yet. Add one to get started!</p>
         </div>
       )}
 
@@ -340,7 +342,8 @@ function SoundCard({ sound, onDelete }) {
         background: '#fff',
         borderRadius: 12,
         overflow: 'hidden',
-        boxShadow: hover ? '0 8px 32px rgba(0,0,0,0.12)' : '0 2px 12px rgba(0,0,0,0.06)',
+        border: '1px solid #EAE4D9',
+        boxShadow: hover ? '0 8px 32px rgba(0,0,0,0.12)' : '0 1px 4px rgba(0,0,0,0.06)',
         transition: 'all 0.2s ease',
         display: 'flex',
         flexDirection: 'column',
@@ -357,7 +360,7 @@ function SoundCard({ sound, onDelete }) {
           <div style={{
             position: 'absolute',
             inset: 0,
-            background: 'linear-gradient(to top, rgba(15,23,42,0.80) 0%, transparent 55%)',
+            background: 'linear-gradient(to top, rgba(26,39,68,0.85) 0%, transparent 55%)',
           }} />
           <div style={{ position: 'absolute', bottom: 12, left: 14, right: 14 }}>
             <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.6)', fontWeight: 600, letterSpacing: 0.5, marginBottom: 3 }}>
@@ -371,7 +374,7 @@ function SoundCard({ sound, onDelete }) {
         </div>
       ) : (
         <div style={{
-          background: 'linear-gradient(135deg, #0ea5e9 0%, #0891b2 100%)',
+          background: 'linear-gradient(135deg, #C9A84C 0%, #A07830 100%)',
           padding: '16px 20px',
         }}>
           <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.65)', fontWeight: 600, letterSpacing: 0.5, marginBottom: 4 }}>
@@ -390,14 +393,14 @@ function SoundCard({ sound, onDelete }) {
           href={sound.soundUrl}
           target="_blank"
           rel="noreferrer"
-          style={{ fontSize: 13, color: '#0ea5e9', fontWeight: 600, textDecoration: 'none' }}
+          style={{ fontSize: 13, color: '#A07830', fontWeight: 600, textDecoration: 'none' }}
         >
           Watch on YouTube ↗
         </a>
       </div>
 
       {/* Footer */}
-      <div style={{ padding: '12px 20px 16px', borderTop: '1px solid #f1f5f9', display: 'flex', justifyContent: 'flex-end' }}>
+      <div style={{ padding: '12px 20px 16px', borderTop: '1px solid #EAE4D9', display: 'flex', justifyContent: 'flex-end' }}>
         <button
           onClick={() => onDelete(sound.id)}
           onMouseEnter={() => setDelHover(true)}

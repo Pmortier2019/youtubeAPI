@@ -23,7 +23,7 @@ export default function ReviewPage() {
 
   if (loading) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300 }}>
-      <div style={{ color: '#0ea5e9', fontSize: 16, fontWeight: 600 }}>Loading...</div>
+      <div style={{ color: '#C9A84C', fontSize: 16, fontWeight: 600 }}>Loading...</div>
     </div>
   )
 
@@ -33,11 +33,12 @@ export default function ReviewPage() {
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 36, flexWrap: 'wrap', gap: 16 }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
-            <h1 style={{ fontSize: 28, fontWeight: 800, color: '#0f172a' }}>Review Shorts</h1>
+            <h1 style={{ fontSize: 28, fontWeight: 800, color: '#1A1A1A', fontFamily: 'Georgia, "Times New Roman", serif' }}>Review Shorts</h1>
             {shorts.length > 0 && (
               <span style={{
-                background: 'linear-gradient(135deg, #0ea5e9, #0891b2)',
-                color: '#fff',
+                background: '#FDF8EE',
+                color: '#A07830',
+                border: '1px solid #E8D9A0',
                 fontSize: 13,
                 fontWeight: 700,
                 padding: '3px 12px',
@@ -45,7 +46,7 @@ export default function ReviewPage() {
               }}>{shorts.length} pending</span>
             )}
           </div>
-          <p style={{ fontSize: 14, color: '#64748b' }}>Review Shorts to confirm they use your sound</p>
+          <p style={{ fontSize: 14, color: '#6B7280' }}>Review Shorts to confirm they use your sound</p>
         </div>
       </div>
 
@@ -59,11 +60,12 @@ export default function ReviewPage() {
           padding: '80px 40px',
           background: '#fff',
           borderRadius: 16,
-          boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+          border: '1px solid #EAE4D9',
+          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
         }}>
           <span style={{ fontSize: 64, marginBottom: 16 }}>🎉</span>
-          <h3 style={{ fontSize: 20, fontWeight: 700, color: '#0f172a', marginBottom: 8 }}>All caught up!</h3>
-          <p style={{ fontSize: 14, color: '#64748b' }}>No pending reviews at the moment.</p>
+          <h3 style={{ fontSize: 20, fontWeight: 700, color: '#1A1A1A', marginBottom: 8, fontFamily: 'Georgia, "Times New Roman", serif' }}>All caught up!</h3>
+          <p style={{ fontSize: 14, color: '#6B7280' }}>No pending reviews at the moment.</p>
         </div>
       )}
 
@@ -92,7 +94,8 @@ function ShortCard({ short, onMark }) {
         background: '#fff',
         borderRadius: 12,
         padding: '20px 24px',
-        boxShadow: hover ? '0 6px 24px rgba(0,0,0,0.09)' : '0 2px 12px rgba(0,0,0,0.05)',
+        border: '1px solid #EAE4D9',
+        boxShadow: hover ? '0 6px 24px rgba(0,0,0,0.09)' : '0 1px 4px rgba(0,0,0,0.06)',
         transition: 'all 0.2s ease',
       }}
     >
@@ -108,7 +111,7 @@ function ShortCard({ short, onMark }) {
           width: 120,
           height: 68,
           borderRadius: 8,
-          background: '#f1f5f9',
+          background: '#FDFAF5',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -121,8 +124,9 @@ function ShortCard({ short, onMark }) {
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
           <span style={{
-            background: '#f0f9ff',
-            color: '#0ea5e9',
+            background: '#FDF8EE',
+            color: '#A07830',
+            border: '1px solid #E8D9A0',
             fontSize: 12,
             fontWeight: 700,
             padding: '2px 10px',
@@ -142,7 +146,7 @@ function ShortCard({ short, onMark }) {
             textOverflow: 'ellipsis',
             whiteSpace: 'nowrap',
             textDecoration: 'underline',
-            textDecorationColor: '#cbd5e1',
+            textDecorationColor: '#EAE4D9',
           }}
         >
           {short.url}

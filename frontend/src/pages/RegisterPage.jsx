@@ -25,10 +25,10 @@ function FormInput({ label, type, name, placeholder, value, onChange, required, 
           padding: '0 14px',
           fontSize: 15,
           borderRadius: 10,
-          border: focused ? '2px solid #0ea5e9' : '1.5px solid #e2e8f0',
+          border: focused ? '2px solid #C9A84C' : '1.5px solid #EAE4D9',
           outline: 'none',
-          background: '#f8fafc',
-          color: '#0f172a',
+          background: '#FDFAF5',
+          color: '#1A1A1A',
           transition: 'border 0.15s ease',
         }}
       />
@@ -70,11 +70,11 @@ export default function RegisterPage() {
 
   if (registered) {
     return (
-      <div style={{ display: 'flex', minHeight: '100vh', alignItems: 'center', justifyContent: 'center', background: '#f8fafc' }}>
-        <div style={{ maxWidth: 440, width: '100%', background: '#fff', borderRadius: 16, padding: '48px 40px', boxShadow: '0 4px 32px rgba(0,0,0,0.08)', textAlign: 'center' }}>
+      <div style={{ display: 'flex', minHeight: '100vh', alignItems: 'center', justifyContent: 'center', background: '#F7F4EF' }}>
+        <div style={{ maxWidth: 440, width: '100%', background: '#fff', borderRadius: 16, padding: '48px 40px', boxShadow: '0 1px 4px rgba(0,0,0,0.06)', border: '1px solid #EAE4D9', textAlign: 'center' }}>
           <div style={{ fontSize: 48, marginBottom: 16 }}>📬</div>
-          <h2 style={{ fontSize: 24, fontWeight: 800, color: '#0f172a', marginBottom: 12 }}>Check your email</h2>
-          <p style={{ color: '#64748b', fontSize: 15, lineHeight: 1.6, marginBottom: 28 }}>
+          <h2 style={{ fontSize: 24, fontWeight: 800, color: '#1A1A1A', marginBottom: 12, fontFamily: 'Georgia, "Times New Roman", serif' }}>Check your email</h2>
+          <p style={{ color: '#6B7280', fontSize: 15, lineHeight: 1.6, marginBottom: 28 }}>
             We've sent a verification link to <strong>{form.email}</strong>.<br />
             Click the link in the email to activate your account.
           </p>
@@ -83,12 +83,12 @@ export default function RegisterPage() {
           )}
           <button
             onClick={handleResend}
-            style={{ background: 'none', border: 'none', color: '#0ea5e9', fontWeight: 600, cursor: 'pointer', fontSize: 14 }}
+            style={{ background: 'none', border: 'none', color: '#A07830', fontWeight: 600, cursor: 'pointer', fontSize: 14 }}
           >
             Didn't receive it? Resend email
           </button>
-          <p style={{ marginTop: 24, fontSize: 14, color: '#64748b' }}>
-            Already verified? <Link to="/login" style={{ color: '#0ea5e9', fontWeight: 600 }}>Sign in</Link>
+          <p style={{ marginTop: 24, fontSize: 14, color: '#6B7280' }}>
+            Already verified? <Link to="/login" style={{ color: '#A07830', fontWeight: 600 }}>Sign in</Link>
           </p>
         </div>
       </div>
@@ -100,7 +100,7 @@ export default function RegisterPage() {
       {/* Left panel */}
       <div style={{
         flex: '0 0 45%',
-        background: 'linear-gradient(160deg, #0f172a 0%, #1e293b 60%, #1a1f3a 100%)',
+        background: '#1A2744',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -109,7 +109,7 @@ export default function RegisterPage() {
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 48 }}>
           <span style={{ fontSize: 36 }}>🎵</span>
-          <span style={{ color: '#fff', fontWeight: 800, fontSize: 26, letterSpacing: '-0.5px' }}>PierreMusic</span>
+          <span style={{ color: '#C9A84C', fontWeight: 800, fontSize: 26, letterSpacing: '-0.5px', fontFamily: 'Georgia, "Times New Roman", serif' }}>PierreMusic</span>
         </div>
 
         <h1 style={{
@@ -119,10 +119,11 @@ export default function RegisterPage() {
           lineHeight: 1.2,
           marginBottom: 20,
           letterSpacing: '-0.5px',
+          fontFamily: 'Georgia, "Times New Roman", serif',
         }}>
           Start earning today
         </h1>
-        <p style={{ color: '#94a3b8', fontSize: 16, marginBottom: 48, lineHeight: 1.6 }}>
+        <p style={{ color: '#94A3B8', fontSize: 16, marginBottom: 48, lineHeight: 1.6 }}>
           Create your creator account and we'll automatically find your Shorts using your YouTube handle.
         </p>
 
@@ -137,8 +138,8 @@ export default function RegisterPage() {
                 width: 40,
                 height: 40,
                 borderRadius: 10,
-                background: 'rgba(14, 165, 233, 0.2)',
-                border: '1px solid rgba(14,165,233,0.3)',
+                background: 'rgba(201,168,76,0.15)',
+                border: '1px solid rgba(201,168,76,0.35)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -157,7 +158,7 @@ export default function RegisterPage() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: '#f8fafc',
+        background: '#F7F4EF',
         padding: 40,
       }}>
         <div style={{
@@ -166,10 +167,11 @@ export default function RegisterPage() {
           background: '#fff',
           borderRadius: 16,
           padding: '48px 40px',
-          boxShadow: '0 4px 32px rgba(0,0,0,0.08)',
+          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
+          border: '1px solid #EAE4D9',
         }}>
-          <h2 style={{ fontSize: 26, fontWeight: 800, marginBottom: 6, color: '#0f172a' }}>Create account</h2>
-          <p style={{ color: '#64748b', fontSize: 14, marginBottom: 32 }}>Join as a YouTube Shorts creator</p>
+          <h2 style={{ fontSize: 26, fontWeight: 800, marginBottom: 6, color: '#1A1A1A', fontFamily: 'Georgia, "Times New Roman", serif' }}>Create account</h2>
+          <p style={{ color: '#6B7280', fontSize: 14, marginBottom: 32 }}>Join as a YouTube Shorts creator</p>
 
           {error && (
             <div style={{
@@ -178,7 +180,7 @@ export default function RegisterPage() {
               borderRadius: 8,
               padding: '10px 14px',
               marginBottom: 20,
-              color: '#dc2626',
+              color: '#B91C1C',
               fontSize: 14,
             }}>{error}</div>
           )}
@@ -218,7 +220,7 @@ export default function RegisterPage() {
               style={{
                 width: '100%',
                 height: 48,
-                background: loading ? '#7dd3fc' : 'linear-gradient(135deg, #0ea5e9 0%, #0891b2 100%)',
+                background: loading ? '#D4AF37' : 'linear-gradient(135deg, #C9A84C, #A07830)',
                 color: '#fff',
                 border: 'none',
                 borderRadius: 10,
@@ -227,16 +229,16 @@ export default function RegisterPage() {
                 cursor: loading ? 'not-allowed' : 'pointer',
                 marginTop: 8,
                 transition: 'opacity 0.15s ease',
-                boxShadow: '0 2px 12px rgba(14,165,233,0.3)',
+                boxShadow: '0 2px 10px rgba(201,168,76,0.35)',
               }}
             >
               {loading ? 'Fetching your Shorts...' : 'Create account'}
             </button>
           </form>
 
-          <p style={{ textAlign: 'center', marginTop: 24, fontSize: 14, color: '#64748b' }}>
+          <p style={{ textAlign: 'center', marginTop: 24, fontSize: 14, color: '#6B7280' }}>
             Already have an account?{' '}
-            <Link to="/login" style={{ color: '#0ea5e9', fontWeight: 600 }}>Sign in</Link>
+            <Link to="/login" style={{ color: '#A07830', fontWeight: 600 }}>Sign in</Link>
           </p>
         </div>
       </div>

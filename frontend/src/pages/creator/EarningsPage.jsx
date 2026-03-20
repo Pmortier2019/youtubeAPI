@@ -9,7 +9,7 @@ const MONTHS = [
   'July', 'August', 'September', 'October', 'November', 'December',
 ]
 
-const PIE_COLORS = ['#0ea5e9', '#0891b2', '#38bdf8', '#0ea5e9', '#22c55e', '#f59e0b', '#ec4899', '#14b8a6']
+const PIE_COLORS = ['#C9A84C', '#A07830', '#D4AF37', '#B8962E', '#E8C96B', '#C9A84C', '#22c55e', '#f59e0b']
 
 function SummaryCard({ icon, label, value, color, highlight }) {
   const [hover, setHover] = useState(false)
@@ -19,12 +19,13 @@ function SummaryCard({ icon, label, value, color, highlight }) {
       onMouseLeave={() => setHover(false)}
       style={{
         flex: '1 1 200px',
-        background: highlight ? 'linear-gradient(135deg, #0ea5e9 0%, #0891b2 100%)' : '#fff',
+        background: highlight ? 'linear-gradient(135deg, #C9A84C 0%, #A07830 100%)' : '#fff',
         borderRadius: 12,
         padding: '24px 28px',
+        border: highlight ? 'none' : '1px solid #EAE4D9',
         boxShadow: hover
-          ? highlight ? '0 8px 32px rgba(14,165,233,0.35)' : '0 8px 32px rgba(0,0,0,0.10)'
-          : highlight ? '0 4px 20px rgba(14,165,233,0.25)' : '0 2px 12px rgba(0,0,0,0.06)',
+          ? highlight ? '0 8px 32px rgba(201,168,76,0.35)' : '0 8px 32px rgba(0,0,0,0.10)'
+          : highlight ? '0 4px 20px rgba(201,168,76,0.25)' : '0 1px 4px rgba(0,0,0,0.06)',
         transition: 'all 0.2s ease',
         cursor: 'default',
       }}
@@ -41,7 +42,7 @@ function SummaryCard({ icon, label, value, color, highlight }) {
       }}>
         {value}
       </div>
-      <div style={{ fontSize: 13, color: highlight ? 'rgba(255,255,255,0.7)' : '#64748b', fontWeight: 500 }}>{label}</div>
+      <div style={{ fontSize: 13, color: highlight ? 'rgba(255,255,255,0.7)' : '#6B7280', fontWeight: 500 }}>{label}</div>
     </div>
   )
 }
@@ -85,7 +86,7 @@ export default function EarningsPage() {
 
   if (loading) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300 }}>
-      <div style={{ color: '#0ea5e9', fontSize: 16, fontWeight: 600 }}>Loading earnings...</div>
+      <div style={{ color: '#C9A84C', fontSize: 16, fontWeight: 600 }}>Loading earnings...</div>
     </div>
   )
 
@@ -102,10 +103,10 @@ export default function EarningsPage() {
     padding: '9px 12px',
     fontSize: 14,
     borderRadius: 8,
-    border: '1.5px solid #e2e8f0',
+    border: '1.5px solid #EAE4D9',
     outline: 'none',
-    background: '#f8fafc',
-    color: '#0f172a',
+    background: '#FDFAF5',
+    color: '#1A1A1A',
     minWidth: 160,
   }
 
@@ -113,14 +114,14 @@ export default function EarningsPage() {
     <div style={{ padding: '40px 40px 60px' }}>
       {/* Page header */}
       <div style={{ marginBottom: 28 }}>
-        <h1 style={{ fontSize: 28, fontWeight: 800, color: '#0f172a', marginBottom: 6 }}>My Earnings</h1>
-        <p style={{ fontSize: 14, color: '#64748b' }}>Your earnings overview</p>
+        <h1 style={{ fontSize: 28, fontWeight: 800, color: '#1A1A1A', marginBottom: 6, fontFamily: 'Georgia, "Times New Roman", serif' }}>My Earnings</h1>
+        <p style={{ fontSize: 14, color: '#6B7280' }}>Your earnings overview</p>
       </div>
 
       {/* Payout timing notice */}
       <div style={{
-        background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)',
-        border: '1.5px solid #bae6fd',
+        background: 'linear-gradient(135deg, #FDF8EE 0%, #F7F4EF 100%)',
+        border: '1.5px solid #E8D9A0',
         borderRadius: 12,
         padding: '16px 20px',
         marginBottom: 32,
@@ -129,11 +130,11 @@ export default function EarningsPage() {
         gap: 12,
       }}>
         <span style={{ fontSize: 20, flexShrink: 0, marginTop: 1 }}>💡</span>
-        <div style={{ fontSize: 14, color: '#0369a1', lineHeight: 1.7 }}>
+        <div style={{ fontSize: 14, color: '#A07830', lineHeight: 1.7 }}>
           <strong>How does payout work?</strong><br />
           Payouts are processed automatically by the admin, typically <strong>every 2 months</strong> after your registration.
           You'll receive an email when your payout is ready.
-          <span style={{ display: 'block', marginTop: 4, color: '#0ea5e9', fontSize: 13 }}>
+          <span style={{ display: 'block', marginTop: 4, color: '#C9A84C', fontSize: 13 }}>
             Note: your first payout may take longer depending on the number of active creators.
           </span>
         </div>
@@ -152,14 +153,14 @@ export default function EarningsPage() {
           icon="✅"
           label="Paid Out"
           value={`€${Number(totalPaid).toFixed(2)}`}
-          color="#0ea5e9"
+          color="#C9A84C"
           highlight={false}
         />
         <SummaryCard
           icon="🏦"
           label="Available to Withdraw"
           value={`€${Number(pendingPayout).toFixed(2)}`}
-          color="#0ea5e9"
+          color="#C9A84C"
           highlight={pendingPayout > 0}
         />
       </div>
@@ -170,10 +171,11 @@ export default function EarningsPage() {
           background: '#fff',
           borderRadius: 12,
           padding: '28px',
-          boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+          border: '1px solid #EAE4D9',
+          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
           marginBottom: 36,
         }}>
-          <h2 style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 24 }}>
+          <h2 style={{ fontSize: 16, fontWeight: 700, color: '#1A1A1A', marginBottom: 24, fontFamily: 'Georgia, "Times New Roman", serif' }}>
             📊 Earnings by Campaign
           </h2>
           <ResponsiveContainer width="100%" height={260}>
@@ -193,7 +195,7 @@ export default function EarningsPage() {
               </Pie>
               <Tooltip
                 contentStyle={{
-                  background: '#0f172a',
+                  background: '#1A2744',
                   border: 'none',
                   borderRadius: 8,
                   color: '#fff',
@@ -215,12 +217,13 @@ export default function EarningsPage() {
       <div style={{
         background: '#fff',
         borderRadius: 12,
-        boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+        border: '1px solid #EAE4D9',
+        boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
         overflow: 'hidden',
         marginBottom: 36,
       }}>
-        <div style={{ padding: '20px 28px', borderBottom: '1px solid #f1f5f9' }}>
-          <h2 style={{ fontSize: 16, fontWeight: 700, color: '#0f172a' }}>Earnings Breakdown</h2>
+        <div style={{ padding: '20px 28px', borderBottom: '1px solid #EAE4D9' }}>
+          <h2 style={{ fontSize: 16, fontWeight: 700, color: '#1A1A1A', fontFamily: 'Georgia, "Times New Roman", serif' }}>Earnings Breakdown</h2>
         </div>
         {breakdown.length === 0 ? (
           <div style={{ padding: '48px 28px', textAlign: 'center', color: '#94a3b8', fontSize: 14 }}>
@@ -229,14 +232,14 @@ export default function EarningsPage() {
         ) : (
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
-              <tr style={{ background: '#f8fafc' }}>
+              <tr style={{ background: '#FDFAF5' }}>
                 {['Campaign', 'Views', 'Earned'].map(h => (
                   <th key={h} style={{
                     textAlign: 'left',
                     padding: '12px 24px',
                     fontSize: 12,
                     fontWeight: 700,
-                    color: '#64748b',
+                    color: '#6B7280',
                     letterSpacing: 0.5,
                     textTransform: 'uppercase',
                   }}>{h}</th>
@@ -247,11 +250,11 @@ export default function EarningsPage() {
               {breakdown.map(row => (
                 <tr
                   key={row.campaignId}
-                  style={{ borderTop: '1px solid #f1f5f9' }}
-                  onMouseEnter={e => e.currentTarget.style.background = '#f8fafc'}
+                  style={{ borderTop: '1px solid #EAE4D9' }}
+                  onMouseEnter={e => e.currentTarget.style.background = '#FDFAF5'}
                   onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                 >
-                  <td style={{ padding: '14px 24px', fontWeight: 600, fontSize: 14, color: '#0f172a' }}>
+                  <td style={{ padding: '14px 24px', fontWeight: 600, fontSize: 14, color: '#1A1A1A' }}>
                     {row.campaignTitle ?? `Campaign ${row.campaignId}`}
                   </td>
                   <td style={{ padding: '14px 24px', fontSize: 14, color: '#374151' }}>
@@ -272,11 +275,12 @@ export default function EarningsPage() {
         background: '#fff',
         borderRadius: 12,
         padding: '28px 32px',
-        boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+        border: '1px solid #EAE4D9',
+        boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
         maxWidth: 640,
       }}>
-        <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0f172a', marginBottom: 6 }}>Request Payout</h2>
-        <p style={{ fontSize: 13, color: '#64748b', marginBottom: 4 }}>
+        <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1A1A1A', marginBottom: 6, fontFamily: 'Georgia, "Times New Roman", serif' }}>Request Payout</h2>
+        <p style={{ fontSize: 13, color: '#6B7280', marginBottom: 4 }}>
           Payouts are normally processed automatically. Have a question about your payout? Get in touch.
         </p>
         <p style={{ fontSize: 12, color: '#94a3b8', marginBottom: 24 }}>
@@ -324,10 +328,10 @@ export default function EarningsPage() {
                 padding: '10px 14px',
                 fontSize: 14,
                 borderRadius: 8,
-                border: detailFocus ? '2px solid #0ea5e9' : '1.5px solid #e2e8f0',
+                border: detailFocus ? '2px solid #C9A84C' : '1.5px solid #EAE4D9',
                 outline: 'none',
-                background: '#f8fafc',
-                color: '#0f172a',
+                background: '#FDFAF5',
+                color: '#1A1A1A',
                 transition: 'border 0.15s ease',
               }}
             />
@@ -339,7 +343,7 @@ export default function EarningsPage() {
               border: '1px solid #fecaca',
               borderRadius: 8,
               padding: '10px 14px',
-              color: '#dc2626',
+              color: '#B91C1C',
               fontSize: 14,
             }}>{payoutError}</div>
           )}
@@ -361,14 +365,14 @@ export default function EarningsPage() {
               disabled={submitting}
               style={{
                 padding: '11px 28px',
-                background: submitting ? '#7dd3fc' : 'linear-gradient(135deg, #0ea5e9, #0891b2)',
+                background: submitting ? '#D4AF37' : 'linear-gradient(135deg, #C9A84C, #A07830)',
                 color: '#fff',
                 border: 'none',
                 borderRadius: 8,
                 cursor: submitting ? 'not-allowed' : 'pointer',
                 fontSize: 14,
                 fontWeight: 700,
-                boxShadow: '0 2px 10px rgba(14,165,233,0.3)',
+                boxShadow: '0 2px 10px rgba(201,168,76,0.35)',
                 transition: 'all 0.2s ease',
               }}
             >{submitting ? 'Submitting...' : '💳 Request Payout'}</button>

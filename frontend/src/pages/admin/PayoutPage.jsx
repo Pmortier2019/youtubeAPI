@@ -5,10 +5,10 @@ const inputStyle = {
   padding: '10px 14px',
   fontSize: 14,
   borderRadius: 8,
-  border: '1.5px solid #e2e8f0',
+  border: '1.5px solid #EAE4D9',
   outline: 'none',
-  background: '#f8fafc',
-  color: '#0f172a',
+  background: '#FDFAF5',
+  color: '#1A1A1A',
   minWidth: 160,
 }
 
@@ -16,7 +16,8 @@ const cardStyle = {
   background: '#fff',
   borderRadius: 12,
   padding: '28px 32px',
-  boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+  border: '1px solid #EAE4D9',
+  boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
   marginBottom: 32,
   maxWidth: 760,
 }
@@ -26,7 +27,7 @@ const thStyle = {
   padding: '12px 20px',
   fontSize: 12,
   fontWeight: 700,
-  color: '#64748b',
+  color: '#6B7280',
   letterSpacing: 0.5,
   textTransform: 'uppercase',
 }
@@ -35,7 +36,7 @@ const tdStyle = {
   padding: '14px 20px',
   fontSize: 14,
   color: '#374151',
-  borderTop: '1px solid #f1f5f9',
+  borderTop: '1px solid #EAE4D9',
 }
 
 export default function PayoutPage() {
@@ -114,17 +115,17 @@ export default function PayoutPage() {
     <div style={{ padding: '40px 40px 60px' }}>
       {/* Section 1: Header */}
       <div style={{ marginBottom: 36 }}>
-        <h1 style={{ fontSize: 28, fontWeight: 800, color: '#0f172a', marginBottom: 6 }}>
+        <h1 style={{ fontSize: 28, fontWeight: 800, color: '#1A1A1A', marginBottom: 6, fontFamily: 'Georgia, "Times New Roman", serif' }}>
           Payout Calculator
         </h1>
-        <p style={{ fontSize: 14, color: '#64748b' }}>
+        <p style={{ fontSize: 14, color: '#6B7280' }}>
           Proportionally distribute a pot among creators based on new views
         </p>
       </div>
 
       {/* Section 2: Calculate form card */}
       <div style={cardStyle}>
-        <h2 style={{ fontSize: 16, fontWeight: 700, color: '#0f172a', marginBottom: 20 }}>
+        <h2 style={{ fontSize: 16, fontWeight: 700, color: '#1A1A1A', marginBottom: 20, fontFamily: 'Georgia, "Times New Roman", serif' }}>
           Calculate Payout
         </h2>
 
@@ -149,7 +150,7 @@ export default function PayoutPage() {
             disabled={previewLoading}
             style={{
               padding: '10px 24px',
-              background: previewLoading ? '#7dd3fc' : 'linear-gradient(135deg, #0ea5e9, #0891b2)',
+              background: previewLoading ? '#D4AF37' : 'linear-gradient(135deg, #C9A84C, #A07830)',
               color: '#fff',
               border: 'none',
               borderRadius: 8,
@@ -157,7 +158,7 @@ export default function PayoutPage() {
               fontSize: 14,
               fontWeight: 700,
               height: 42,
-              boxShadow: '0 2px 8px rgba(14,165,233,0.3)',
+              boxShadow: '0 2px 10px rgba(201,168,76,0.35)',
             }}
           >
             {previewLoading ? 'Loading...' : 'Preview'}
@@ -171,7 +172,7 @@ export default function PayoutPage() {
             border: '1px solid #fecaca',
             borderRadius: 8,
             padding: '10px 14px',
-            color: '#dc2626',
+            color: '#B91C1C',
             fontSize: 14,
           }}>{error}</div>
         )}
@@ -193,10 +194,10 @@ export default function PayoutPage() {
         {preview && preview.length === 0 && (
           <div style={{
             marginTop: 20,
-            background: '#f8fafc',
+            background: '#FDFAF5',
             borderRadius: 8,
             padding: '16px 20px',
-            color: '#64748b',
+            color: '#6B7280',
             fontSize: 14,
           }}>
             No new views to pay out. All views may already have been paid, or no videos with sound used exist.
@@ -208,13 +209,13 @@ export default function PayoutPage() {
             <div style={{
               background: '#fff',
               borderRadius: 10,
-              border: '1px solid #e2e8f0',
+              border: '1px solid #EAE4D9',
               overflow: 'hidden',
               marginBottom: 16,
             }}>
               <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead>
-                  <tr style={{ background: '#f8fafc' }}>
+                  <tr style={{ background: '#FDFAF5' }}>
                     <th style={thStyle}>Creator</th>
                     <th style={thStyle}>New Views</th>
                     <th style={thStyle}>Share %</th>
@@ -227,15 +228,16 @@ export default function PayoutPage() {
                   {preview.map(line => (
                     <tr
                       key={line.creator}
-                      onMouseEnter={e => e.currentTarget.style.background = '#f8fafc'}
+                      onMouseEnter={e => e.currentTarget.style.background = '#FDFAF5'}
                       onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                     >
-                      <td style={{ ...tdStyle, fontWeight: 600, color: '#0f172a' }}>{line.creator}</td>
+                      <td style={{ ...tdStyle, fontWeight: 600, color: '#1A1A1A' }}>{line.creator}</td>
                       <td style={tdStyle}>{line.newViews.toLocaleString()}</td>
                       <td style={tdStyle}>
                         <span style={{
-                          background: '#f0f9ff',
-                          color: '#0ea5e9',
+                          background: '#FDF8EE',
+                          color: '#A07830',
+                          border: '1px solid #E8D9A0',
                           fontSize: 12,
                           fontWeight: 700,
                           padding: '3px 9px',
@@ -275,11 +277,11 @@ export default function PayoutPage() {
                     </tr>
                   ))}
                   {/* Total row */}
-                  <tr style={{ background: '#f8fafc', borderTop: '2px solid #e2e8f0' }}>
-                    <td style={{ ...tdStyle, fontWeight: 700, color: '#0f172a' }}>Total</td>
-                    <td style={{ ...tdStyle, fontWeight: 700, color: '#0f172a' }}>{totalNewViews.toLocaleString()}</td>
+                  <tr style={{ background: '#FDFAF5', borderTop: '2px solid #EAE4D9' }}>
+                    <td style={{ ...tdStyle, fontWeight: 700, color: '#1A1A1A' }}>Total</td>
+                    <td style={{ ...tdStyle, fontWeight: 700, color: '#1A1A1A' }}>{totalNewViews.toLocaleString()}</td>
                     <td style={tdStyle}></td>
-                    <td style={{ ...tdStyle, fontSize: 15, fontWeight: 800, color: '#0f172a' }}>
+                    <td style={{ ...tdStyle, fontSize: 15, fontWeight: 800, color: '#1A1A1A' }}>
                       € {totalPayout.toFixed(2)}
                     </td>
                     <td style={tdStyle}></td>
@@ -327,28 +329,29 @@ export default function PayoutPage() {
 
       {/* Section 3: Payout History */}
       <div style={{ maxWidth: 760 }}>
-        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#0f172a', marginBottom: 16 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#1A1A1A', marginBottom: 16, fontFamily: 'Georgia, "Times New Roman", serif' }}>
           Payout History
         </h2>
 
         <div style={{
           background: '#fff',
           borderRadius: 12,
-          boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+          border: '1px solid #EAE4D9',
+          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
           overflow: 'hidden',
         }}>
           {historyLoading ? (
-            <div style={{ padding: '32px 20px', textAlign: 'center', color: '#64748b', fontSize: 14 }}>
+            <div style={{ padding: '32px 20px', textAlign: 'center', color: '#6B7280', fontSize: 14 }}>
               Loading history...
             </div>
           ) : history.length === 0 ? (
-            <div style={{ padding: '32px 20px', textAlign: 'center', color: '#64748b', fontSize: 14 }}>
+            <div style={{ padding: '32px 20px', textAlign: 'center', color: '#6B7280', fontSize: 14 }}>
               No payout records yet.
             </div>
           ) : (
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
-                <tr style={{ background: '#f8fafc' }}>
+                <tr style={{ background: '#FDFAF5' }}>
                   <th style={thStyle}>Creator</th>
                   <th style={thStyle}>Amount</th>
                   <th style={thStyle}>Date</th>
@@ -362,10 +365,10 @@ export default function PayoutPage() {
                 {history.map(p => (
                   <tr
                     key={p.id}
-                    onMouseEnter={e => e.currentTarget.style.background = '#f8fafc'}
+                    onMouseEnter={e => e.currentTarget.style.background = '#FDFAF5'}
                     onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                   >
-                    <td style={{ ...tdStyle, fontWeight: 600, color: '#0f172a' }}>{p.creatorName}</td>
+                    <td style={{ ...tdStyle, fontWeight: 600, color: '#1A1A1A' }}>{p.creatorName}</td>
                     <td style={{ ...tdStyle, fontWeight: 700, color: '#22c55e' }}>
                       € {Number(p.amount).toFixed(2)}
                     </td>
