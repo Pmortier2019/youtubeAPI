@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { login } from '../api'
 import { useAuth } from '../AuthContext'
+import { Music, TrendingUp, ShieldCheck } from 'lucide-react'
 
 const inputBase = {
   width: '100%',
@@ -44,17 +45,17 @@ export default function LoginPage() {
 
   const features = [
     {
-      symbol: '♪',
+      Icon: Music,
       title: 'License your sound',
       text: 'Upload once, earn every time a creator uses your track in a Short.',
     },
     {
-      symbol: '📈',
+      Icon: TrendingUp,
       title: 'Real-time analytics',
       text: 'Track views, earnings, and campaign performance across all Shorts.',
     },
     {
-      symbol: '💎',
+      Icon: ShieldCheck,
       title: 'Transparent payouts',
       text: 'RPM-based earnings with full history and flexible payout options.',
     },
@@ -76,24 +77,11 @@ export default function LoginPage() {
       }}>
         {/* Brand */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 56 }}>
-          <div style={{
-            width: 48,
-            height: 48,
-            borderRadius: 12,
-            background: 'linear-gradient(135deg, #F0B429, #D97706)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: 26,
-            fontWeight: 900,
-            color: '#0B1120',
-            boxShadow: '0 4px 20px rgba(240,180,41,0.40)',
-            flexShrink: 0,
-          }}>♪</div>
+          <Music size={32} color="#F0B429" strokeWidth={1.5} />
           <span style={{
             color: '#F9FAFB',
             fontWeight: 700,
-            fontSize: 28,
+            fontSize: 26,
             letterSpacing: '-0.5px',
           }}>PierreMusic</span>
         </div>
@@ -131,14 +119,13 @@ export default function LoginPage() {
                 width: 42,
                 height: 42,
                 borderRadius: 10,
-                background: 'rgba(240,180,41,0.15)',
-                border: '1px solid rgba(240,180,41,0.30)',
+                background: 'rgba(240,180,41,0.12)',
+                border: '1px solid rgba(240,180,41,0.25)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontSize: 18,
                 flexShrink: 0,
-              }}>{f.symbol}</div>
+              }}><f.Icon size={18} color="#F0B429" strokeWidth={1.8} /></div>
               <div>
                 <div style={{ color: '#F9FAFB', fontSize: 14, fontWeight: 600, marginBottom: 3 }}>{f.title}</div>
                 <div style={{ color: '#6B7280', fontSize: 13, lineHeight: 1.55 }}>{f.text}</div>

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { register, resendVerification } from '../api'
+import { Music, TrendingUp, Wallet } from 'lucide-react'
 
 const inputBase = {
   width: '100%',
@@ -167,17 +168,17 @@ export default function RegisterPage() {
 
   const features = [
     {
-      symbol: '♪',
+      Icon: Music,
       title: 'Use our sounds',
       text: 'Browse the library and add trending tracks to your YouTube Shorts.',
     },
     {
-      symbol: '📈',
+      Icon: TrendingUp,
       title: 'Automatic tracking',
       text: 'We track views across all your participating Shorts automatically.',
     },
     {
-      symbol: '💎',
+      Icon: Wallet,
       title: 'Flexible payouts',
       text: 'Request payouts directly to PayPal or bank whenever you want.',
     },
@@ -199,24 +200,11 @@ export default function RegisterPage() {
       }}>
         {/* Brand */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 56 }}>
-          <div style={{
-            width: 48,
-            height: 48,
-            borderRadius: 12,
-            background: 'linear-gradient(135deg, #F0B429, #D97706)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: 26,
-            fontWeight: 900,
-            color: '#0B1120',
-            boxShadow: '0 4px 20px rgba(240,180,41,0.40)',
-            flexShrink: 0,
-          }}>♪</div>
+          <Music size={32} color="#F0B429" strokeWidth={1.5} />
           <span style={{
             color: '#F9FAFB',
             fontWeight: 700,
-            fontSize: 28,
+            fontSize: 26,
             letterSpacing: '-0.5px',
           }}>PierreMusic</span>
         </div>
@@ -249,19 +237,18 @@ export default function RegisterPage() {
         {/* Feature list */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
           {features.map(f => (
-            <div key={f.symbol} style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
+            <div key={f.title} style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
               <div style={{
                 width: 42,
                 height: 42,
                 borderRadius: 10,
-                background: 'rgba(240,180,41,0.15)',
-                border: '1px solid rgba(240,180,41,0.30)',
+                background: 'rgba(240,180,41,0.12)',
+                border: '1px solid rgba(240,180,41,0.25)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontSize: 18,
                 flexShrink: 0,
-              }}>{f.symbol}</div>
+              }}><f.Icon size={18} color="#F0B429" strokeWidth={1.8} /></div>
               <div>
                 <div style={{ color: '#F9FAFB', fontSize: 14, fontWeight: 600, marginBottom: 3 }}>{f.title}</div>
                 <div style={{ color: '#6B7280', fontSize: 13, lineHeight: 1.55 }}>{f.text}</div>

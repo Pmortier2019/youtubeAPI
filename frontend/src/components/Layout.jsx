@@ -54,25 +54,12 @@ export default function Layout({ children }) {
         {/* Brand */}
         <div style={{ padding: '24px 24px 0' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
-            <div style={{
-              width: 38,
-              height: 38,
-              borderRadius: 10,
-              background: 'linear-gradient(135deg, #F0B429, #D97706)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: 20,
-              boxShadow: '0 2px 12px rgba(240,180,41,0.35)',
-              flexShrink: 0,
-              color: '#0B1120',
-              fontWeight: 900,
-            }}>♪</div>
+            <Music size={26} color="#F0B429" strokeWidth={2} />
             <div>
               <div style={{
                 color: '#F9FAFB',
                 fontWeight: 700,
-                fontSize: 20,
+                fontSize: 18,
                 lineHeight: 1.2,
                 letterSpacing: '-0.3px',
               }}>PierreMusic</div>
