@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react'
 import { getCampaigns, getCampaignParticipations, updateParticipationStatus } from '../../api'
 
 const STATUS_CONFIG = {
-  PENDING_REVIEW: { bg: 'rgba(240,180,41,0.15)',  color: '#F0B429', dot: '#F0B429', border: 'rgba(240,180,41,0.30)',  label: 'Pending Review' },
-  APPROVED:       { bg: 'rgba(16,185,129,0.15)',  color: '#10B981', dot: '#10B981', border: 'rgba(16,185,129,0.30)', label: 'Approved'       },
-  REJECTED:       { bg: 'rgba(239,68,68,0.15)',   color: '#EF4444', dot: '#EF4444', border: 'rgba(239,68,68,0.30)', label: 'Rejected'        },
+  PENDING_REVIEW: { bg: '#FEF3C7',  color: '#92400E', dot: '#92400E', border: '#FDE68A',  label: 'Pending Review' },
+  APPROVED:       { bg: '#D1FAE5',  color: '#065F46', dot: '#065F46', border: '#A7F3D0', label: 'Approved'       },
+  REJECTED:       { bg: '#FEE2E2',  color: '#991B1B', dot: '#991B1B', border: '#FECACA', label: 'Rejected'        },
 }
 
 function StatusBadge({ status }) {
-  const s = STATUS_CONFIG[status] || { bg: 'rgba(107,114,128,0.15)', color: '#9CA3AF', dot: '#6B7280', border: 'rgba(107,114,128,0.30)', label: status }
+  const s = STATUS_CONFIG[status] || { bg: '#F3F4F6', color: '#6B7280', dot: '#6B7280', border: '#D1D5DB', label: status }
   return (
     <span style={{
       display: 'inline-flex',
@@ -67,32 +67,32 @@ export default function ParticipationsPage() {
   }
 
   if (loadingCampaigns) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300, background: '#0B1120' }}>
-      <div style={{ color: '#F0B429', fontSize: 16, fontWeight: 600 }}>Loading...</div>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300, background: '#F8F9FA' }}>
+      <div style={{ color: '#D97706', fontSize: 16, fontWeight: 600 }}>Loading...</div>
     </div>
   )
 
   return (
-    <div style={{ padding: '40px 48px 60px', background: '#0B1120', minHeight: '100vh' }}>
+    <div style={{ padding: '40px 48px 60px', background: '#F8F9FA', minHeight: '100vh' }}>
       {/* Page header */}
       <div style={{ marginBottom: 36 }}>
-        <h1 style={{ fontSize: 26, fontWeight: 700, color: '#F9FAFB', marginBottom: 6 }}>Participations</h1>
-        <p style={{ fontSize: 14, color: '#9CA3AF' }}>Review creator submissions for each campaign</p>
+        <h1 style={{ fontSize: 26, fontWeight: 700, color: '#111827', marginBottom: 6 }}>Participations</h1>
+        <p style={{ fontSize: 14, color: '#6B7280' }}>Review creator submissions for each campaign</p>
       </div>
 
       {/* Campaign selector */}
       <div style={{
-        background: '#141E2E',
+        background: '#FFFFFF',
         borderRadius: 16,
         padding: '20px 24px',
-        border: '1px solid rgba(255,255,255,0.08)',
-        boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
+        border: '1px solid #E5E7EB',
+        boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
         marginBottom: 28,
         display: 'flex',
         alignItems: 'center',
         gap: 16,
       }}>
-        <label style={{ fontSize: 14, fontWeight: 600, color: '#9CA3AF', whiteSpace: 'nowrap' }}>Campaign:</label>
+        <label style={{ fontSize: 14, fontWeight: 600, color: '#6B7280', whiteSpace: 'nowrap' }}>Campaign:</label>
         <select
           value={selectedId}
           onChange={handleCampaignChange}
@@ -102,23 +102,23 @@ export default function ParticipationsPage() {
             padding: '12px 16px',
             fontSize: 14,
             borderRadius: 10,
-            border: '1px solid rgba(255,255,255,0.10)',
-            background: 'rgba(255,255,255,0.04)',
-            color: '#F9FAFB',
+            border: '1px solid #D1D5DB',
+            background: '#FFFFFF',
+            color: '#111827',
             outline: 'none',
             cursor: 'pointer',
           }}
         >
-          <option value="" style={{ background: '#141E2E' }}>— Select a campaign —</option>
+          <option value="" style={{ background: '#FFFFFF' }}>— Select a campaign —</option>
           {campaigns.map(c => (
-            <option key={c.id} value={c.id} style={{ background: '#141E2E' }}>{c.title}</option>
+            <option key={c.id} value={c.id} style={{ background: '#FFFFFF' }}>{c.title}</option>
           ))}
         </select>
         {selectedId && participations.length > 0 && (
           <span style={{
-            background: 'rgba(240,180,41,0.15)',
-            color: '#F0B429',
-            border: '1px solid rgba(240,180,41,0.30)',
+            background: '#FEF3C7',
+            color: '#92400E',
+            border: '1px solid #FDE68A',
             fontSize: 12,
             fontWeight: 700,
             padding: '4px 12px',
@@ -128,19 +128,19 @@ export default function ParticipationsPage() {
       </div>
 
       {loadingParts && (
-        <div style={{ textAlign: 'center', padding: '48px', color: '#F0B429', fontWeight: 600 }}>
+        <div style={{ textAlign: 'center', padding: '48px', color: '#D97706', fontWeight: 600 }}>
           Loading participations...
         </div>
       )}
 
       {!loadingParts && selectedId && participations.length === 0 && (
         <div style={{
-          background: '#141E2E',
+          background: '#FFFFFF',
           borderRadius: 16,
           padding: '60px 40px',
           textAlign: 'center',
-          border: '1px solid rgba(255,255,255,0.08)',
-          boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
+          border: '1px solid #E5E7EB',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
         }}>
           <span style={{ fontSize: 40, display: 'block', marginBottom: 12 }}>👥</span>
           <p style={{ color: '#6B7280', fontSize: 15 }}>No participations for this campaign yet.</p>
@@ -149,15 +149,15 @@ export default function ParticipationsPage() {
 
       {!loadingParts && participations.length > 0 && (
         <div style={{
-          background: '#141E2E',
+          background: '#FFFFFF',
           borderRadius: 16,
-          border: '1px solid rgba(255,255,255,0.08)',
-          boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
+          border: '1px solid #E5E7EB',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
           overflow: 'hidden',
         }}>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
-              <tr style={{ background: 'rgba(255,255,255,0.03)' }}>
+              <tr style={{ background: '#F9FAFB' }}>
                 {['Video', 'Creator', 'Status', 'Joined', 'Actions'].map(h => (
                   <th key={h} style={{
                     textAlign: 'left',
@@ -177,8 +177,8 @@ export default function ParticipationsPage() {
                 return (
                   <tr
                     key={p.id}
-                    style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
-                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.03)'}
+                    style={{ borderTop: '1px solid #E5E7EB' }}
+                    onMouseEnter={e => e.currentTarget.style.background = '#F9FAFB'}
                     onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                   >
                     <td style={{ padding: '14px 20px' }}>
@@ -191,15 +191,15 @@ export default function ParticipationsPage() {
                           />
                         </a>
                       ) : p.url ? (
-                        <a href={p.url} target="_blank" rel="noreferrer" style={{ color: '#F0B429', fontSize: 13 }}>{p.url}</a>
+                        <a href={p.url} target="_blank" rel="noreferrer" style={{ color: '#D97706', fontSize: 13 }}>{p.url}</a>
                       ) : <span style={{ color: '#6B7280' }}>—</span>}
                     </td>
                     <td style={{ padding: '14px 20px' }}>
                       <span style={{
                         display: 'inline-block',
-                        background: 'rgba(240,180,41,0.10)',
-                        color: '#F0B429',
-                        border: '1px solid rgba(240,180,41,0.25)',
+                        background: '#FEF3C7',
+                        color: '#92400E',
+                        border: '1px solid #FDE68A',
                         fontSize: 13,
                         fontWeight: 600,
                         padding: '3px 10px',

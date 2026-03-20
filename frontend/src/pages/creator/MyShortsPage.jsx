@@ -5,9 +5,9 @@ function StatusBadge({ soundUsed }) {
   if (soundUsed === null || soundUsed === undefined) {
     return (
       <span style={{
-        background: 'rgba(240,180,41,0.15)',
-        color: '#F0B429',
-        border: '1px solid rgba(240,180,41,0.30)',
+        background: '#FEF3C7',
+        color: '#92400E',
+        border: '1px solid #FDE68A',
         borderRadius: 999,
         padding: '3px 10px',
         fontSize: 12,
@@ -18,9 +18,9 @@ function StatusBadge({ soundUsed }) {
   if (soundUsed === true) {
     return (
       <span style={{
-        background: 'rgba(16,185,129,0.15)',
-        color: '#10B981',
-        border: '1px solid rgba(16,185,129,0.30)',
+        background: '#D1FAE5',
+        color: '#065F46',
+        border: '1px solid #A7F3D0',
         borderRadius: 999,
         padding: '3px 10px',
         fontSize: 12,
@@ -30,9 +30,9 @@ function StatusBadge({ soundUsed }) {
   }
   return (
     <span style={{
-      background: 'rgba(239,68,68,0.12)',
-      color: '#EF4444',
-      border: '1px solid rgba(239,68,68,0.30)',
+      background: '#FEE2E2',
+      color: '#991B1B',
+      border: '1px solid #FECACA',
       borderRadius: 999,
       padding: '3px 10px',
       fontSize: 12,
@@ -54,17 +54,17 @@ export default function MyShortsPage() {
   }, [])
 
   return (
-    <div style={{ padding: '40px 48px 60px', background: '#0B1120', minHeight: '100vh' }}>
+    <div style={{ padding: '40px 48px 60px', background: '#F8F9FA', minHeight: '100vh' }}>
       {/* Page header */}
       <div style={{ marginBottom: 28 }}>
-        <h1 style={{ fontSize: 26, fontWeight: 700, color: '#F9FAFB', marginBottom: 6 }}>My Shorts</h1>
-        <p style={{ fontSize: 14, color: '#9CA3AF' }}>Review status of your submitted YouTube Shorts</p>
+        <h1 style={{ fontSize: 26, fontWeight: 700, color: '#111827', marginBottom: 6 }}>My Shorts</h1>
+        <p style={{ fontSize: 14, color: '#6B7280' }}>Review status of your submitted YouTube Shorts</p>
       </div>
 
       {/* Review notice */}
       <div style={{
-        background: 'linear-gradient(135deg, #1A2540, #141E2E)',
-        border: '1px solid rgba(240,180,41,0.20)',
+        background: '#FFFBEB',
+        border: '1px solid #FDE68A',
         borderRadius: 16,
         padding: '16px 20px',
         marginBottom: 32,
@@ -73,10 +73,10 @@ export default function MyShortsPage() {
         gap: 12,
       }}>
         <span style={{ fontSize: 20, flexShrink: 0, marginTop: 1 }}>ℹ️</span>
-        <div style={{ fontSize: 14, color: '#9CA3AF', lineHeight: 1.7 }}>
-          Your Shorts are <strong style={{ color: '#F9FAFB' }}>reviewed manually</strong> by the admin. This may take a few days.
+        <div style={{ fontSize: 14, color: '#92400E', lineHeight: 1.7 }}>
+          Your Shorts are <strong style={{ color: '#92400E' }}>reviewed manually</strong> by the admin. This may take a few days.
           Approved Shorts count towards your earnings.
-          <span style={{ display: 'block', marginTop: 4, color: '#F0B429', fontSize: 13 }}>
+          <span style={{ display: 'block', marginTop: 4, color: '#92400E', fontSize: 13 }}>
             Make sure your Shorts clearly feature the sponsored sound.
           </span>
         </div>
@@ -88,11 +88,11 @@ export default function MyShortsPage() {
 
       {error && (
         <div style={{
-          background: 'rgba(239,68,68,0.10)',
-          border: '1px solid rgba(239,68,68,0.30)',
+          background: '#FEE2E2',
+          border: '1px solid #FECACA',
           borderRadius: 10,
           padding: '10px 14px',
-          color: '#EF4444',
+          color: '#991B1B',
           fontSize: 14,
           marginBottom: 20,
         }}>{error}</div>
@@ -100,12 +100,12 @@ export default function MyShortsPage() {
 
       {!loading && !error && shorts.length === 0 && (
         <div style={{
-          background: '#141E2E',
+          background: '#FFFFFF',
           borderRadius: 16,
           padding: '48px 40px',
           textAlign: 'center',
-          border: '1px solid rgba(255,255,255,0.08)',
-          boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
+          border: '1px solid #E5E7EB',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
           color: '#6B7280',
           fontSize: 15,
         }}>
@@ -115,15 +115,15 @@ export default function MyShortsPage() {
 
       {!loading && shorts.length > 0 && (
         <div style={{
-          background: '#141E2E',
+          background: '#FFFFFF',
           borderRadius: 16,
-          border: '1px solid rgba(255,255,255,0.08)',
-          boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
+          border: '1px solid #E5E7EB',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
           overflow: 'hidden',
         }}>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
-              <tr style={{ background: 'rgba(255,255,255,0.03)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+              <tr style={{ background: '#F9FAFB', borderBottom: '1px solid #E5E7EB' }}>
                 <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: 12, fontWeight: 700, color: '#6B7280', letterSpacing: 0.5 }}>THUMBNAIL</th>
                 <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: 12, fontWeight: 700, color: '#6B7280', letterSpacing: 0.5 }}>VIDEO</th>
                 <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: 12, fontWeight: 700, color: '#6B7280', letterSpacing: 0.5 }}>STATUS</th>
@@ -135,9 +135,9 @@ export default function MyShortsPage() {
                 <tr
                   key={short.videoId}
                   style={{
-                    borderBottom: i < shorts.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none',
+                    borderBottom: i < shorts.length - 1 ? '1px solid #E5E7EB' : 'none',
                   }}
-                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.03)'}
+                  onMouseEnter={e => e.currentTarget.style.background = '#F9FAFB'}
                   onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                 >
                   <td style={{ padding: '12px 20px' }}>
@@ -152,7 +152,7 @@ export default function MyShortsPage() {
                       href={short.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{ color: '#F0B429', fontWeight: 600, fontSize: 14, textDecoration: 'none' }}
+                      style={{ color: '#D97706', fontWeight: 600, fontSize: 14, textDecoration: 'none' }}
                     >
                       {short.videoId}
                     </a>

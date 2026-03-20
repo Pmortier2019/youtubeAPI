@@ -27,11 +27,11 @@ function ChannelCard({ channel, onRemove }) {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       style={{
-        background: '#141E2E',
+        background: '#FFFFFF',
         borderRadius: 16,
         padding: '20px 24px',
-        border: '1px solid rgba(255,255,255,0.08)',
-        boxShadow: hover ? '0 8px 32px rgba(0,0,0,0.45)' : '0 4px 24px rgba(0,0,0,0.3)',
+        border: '1px solid #E5E7EB',
+        boxShadow: hover ? '0 8px 32px rgba(0,0,0,0.10)' : '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
         transition: 'all 0.2s ease',
         display: 'flex',
         alignItems: 'flex-start',
@@ -56,11 +56,11 @@ function ChannelCard({ channel, onRemove }) {
 
       {/* Info */}
       <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ fontWeight: 700, fontSize: 16, color: '#F9FAFB', marginBottom: 2 }}>
+        <div style={{ fontWeight: 700, fontSize: 16, color: '#111827', marginBottom: 2 }}>
           {channel.channelName || 'Unknown Channel'}
         </div>
         {channel.channelHandle && (
-          <div style={{ fontSize: 14, color: '#F0B429', fontWeight: 600, marginBottom: 4 }}>
+          <div style={{ fontSize: 14, color: '#D97706', fontWeight: 600, marginBottom: 4 }}>
             {channel.channelHandle.startsWith('@') ? channel.channelHandle : `@${channel.channelHandle}`}
           </div>
         )}
@@ -143,19 +143,19 @@ export default function MyChannelsPage() {
   }
 
   return (
-    <div style={{ padding: '40px 48px 60px', background: '#0B1120', minHeight: '100vh' }}>
+    <div style={{ padding: '40px 48px 60px', background: '#F8F9FA', minHeight: '100vh' }}>
       {/* Page header */}
       <div style={{ marginBottom: 32 }}>
-        <h1 style={{ fontSize: 26, fontWeight: 700, color: '#F9FAFB', marginBottom: 6 }}>My Channels</h1>
-        <p style={{ fontSize: 14, color: '#9CA3AF' }}>
+        <h1 style={{ fontSize: 26, fontWeight: 700, color: '#111827', marginBottom: 6 }}>My Channels</h1>
+        <p style={{ fontSize: 14, color: '#6B7280' }}>
           Link your YouTube channels to automatically submit your Shorts for review
         </p>
       </div>
 
-      {/* Info banner — dark with gold border */}
+      {/* Info banner */}
       <div style={{
-        background: 'linear-gradient(135deg, #1A2540, #141E2E)',
-        border: '1px solid rgba(240,180,41,0.20)',
+        background: '#FFFBEB',
+        border: '1px solid #FDE68A',
         borderRadius: 16,
         padding: '16px 20px',
         marginBottom: 32,
@@ -164,10 +164,10 @@ export default function MyChannelsPage() {
         gap: 12,
       }}>
         <span style={{ fontSize: 20, flexShrink: 0, marginTop: 1 }}>ℹ️</span>
-        <div style={{ fontSize: 14, color: '#9CA3AF', lineHeight: 1.7, margin: 0 }}>
-          <strong style={{ color: '#F9FAFB' }}>How it works:</strong> Add your channel and we'll automatically fetch your Shorts for review.
+        <div style={{ fontSize: 14, color: '#92400E', lineHeight: 1.7, margin: 0 }}>
+          <strong style={{ color: '#92400E' }}>How it works:</strong> Add your channel and we'll automatically fetch your Shorts for review.
           Approved Shorts count towards your earnings.
-          <span style={{ display: 'block', marginTop: 6, color: '#F0B429', fontSize: 13 }}>
+          <span style={{ display: 'block', marginTop: 6, color: '#92400E', fontSize: 13 }}>
             Review may take a few days. Payouts happen approximately every 2 months — the first one may take longer.
           </span>
         </div>
@@ -175,22 +175,22 @@ export default function MyChannelsPage() {
 
       {/* Add channel form */}
       <div style={{
-        background: '#141E2E',
+        background: '#FFFFFF',
         borderRadius: 16,
         padding: '28px 32px',
-        border: '1px solid rgba(255,255,255,0.08)',
-        boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
+        border: '1px solid #E5E7EB',
+        boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
         marginBottom: 32,
         maxWidth: 680,
       }}>
-        <h2 style={{ fontSize: 17, fontWeight: 700, color: '#F9FAFB', marginBottom: 6 }}>Add a Channel</h2>
-        <p style={{ fontSize: 13, color: '#9CA3AF', marginBottom: 20 }}>
+        <h2 style={{ fontSize: 17, fontWeight: 700, color: '#111827', marginBottom: 6 }}>Add a Channel</h2>
+        <p style={{ fontSize: 13, color: '#374151', marginBottom: 20 }}>
           Enter your YouTube channel URL or handle (e.g.{' '}
-          <code style={{ background: 'rgba(255,255,255,0.06)', color: '#F0B429', padding: '1px 6px', borderRadius: 4, fontSize: 12 }}>
+          <code style={{ background: '#F3F4F6', color: '#D97706', padding: '1px 6px', borderRadius: 4, fontSize: 12 }}>
             https://youtube.com/@yourchannel
           </code>{' '}
           or{' '}
-          <code style={{ background: 'rgba(255,255,255,0.06)', color: '#F0B429', padding: '1px 6px', borderRadius: 4, fontSize: 12 }}>
+          <code style={{ background: '#F3F4F6', color: '#D97706', padding: '1px 6px', borderRadius: 4, fontSize: 12 }}>
             @yourchannel
           </code>)
         </p>
@@ -210,10 +210,10 @@ export default function MyChannelsPage() {
                 padding: '12px 16px',
                 fontSize: 14,
                 borderRadius: 10,
-                border: inputFocus ? '2px solid #F0B429' : '1px solid rgba(255,255,255,0.10)',
+                border: inputFocus ? '2px solid #F0B429' : '1px solid #D1D5DB',
                 outline: 'none',
-                background: 'rgba(255,255,255,0.04)',
-                color: '#F9FAFB',
+                background: '#FFFFFF',
+                color: '#111827',
                 transition: 'border 0.15s ease',
               }}
             />
@@ -225,7 +225,7 @@ export default function MyChannelsPage() {
                 background: adding || !channelInput.trim()
                   ? 'rgba(240,180,41,0.4)'
                   : 'linear-gradient(135deg, #F0B429, #D97706)',
-                color: '#0B1120',
+                color: '#111827',
                 border: 'none',
                 borderRadius: 10,
                 cursor: adding || !channelInput.trim() ? 'not-allowed' : 'pointer',
@@ -243,11 +243,11 @@ export default function MyChannelsPage() {
           {addError && (
             <div style={{
               marginTop: 12,
-              background: 'rgba(239,68,68,0.10)',
-              border: '1px solid rgba(239,68,68,0.30)',
+              background: '#FEE2E2',
+              border: '1px solid #FECACA',
               borderRadius: 10,
               padding: '10px 14px',
-              color: '#EF4444',
+              color: '#991B1B',
               fontSize: 14,
             }}>
               {addError}
@@ -258,14 +258,14 @@ export default function MyChannelsPage() {
 
       {/* Channel list */}
       <div>
-        <h2 style={{ fontSize: 17, fontWeight: 700, color: '#F9FAFB', marginBottom: 16 }}>
+        <h2 style={{ fontSize: 17, fontWeight: 700, color: '#111827', marginBottom: 16 }}>
           Linked Channels
           {!loading && (
             <span style={{
               marginLeft: 10,
-              background: 'rgba(240,180,41,0.15)',
-              color: '#F0B429',
-              border: '1px solid rgba(240,180,41,0.30)',
+              background: '#FEF3C7',
+              color: '#92400E',
+              border: '1px solid #FDE68A',
               fontSize: 12,
               fontWeight: 600,
               padding: '2px 8px',
@@ -278,19 +278,19 @@ export default function MyChannelsPage() {
 
         {loading ? (
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 160 }}>
-            <div style={{ color: '#F0B429', fontSize: 15, fontWeight: 600 }}>Loading channels...</div>
+            <div style={{ color: '#D97706', fontSize: 15, fontWeight: 600 }}>Loading channels...</div>
           </div>
         ) : channels.length === 0 ? (
           <div style={{
-            background: '#141E2E',
+            background: '#FFFFFF',
             borderRadius: 16,
             padding: '60px 32px',
-            border: '1px solid rgba(255,255,255,0.08)',
-            boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
+            border: '1px solid #E5E7EB',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
             textAlign: 'center',
           }}>
             <div style={{ fontSize: 48, marginBottom: 16 }}>🎬</div>
-            <div style={{ fontSize: 16, fontWeight: 700, color: '#F9FAFB', marginBottom: 8 }}>
+            <div style={{ fontSize: 16, fontWeight: 700, color: '#111827', marginBottom: 8 }}>
               No channels linked yet
             </div>
             <div style={{ fontSize: 14, color: '#6B7280' }}>

@@ -12,11 +12,11 @@ function StatCard({ icon, label, value }) {
       onMouseLeave={() => setHover(false)}
       style={{
         flex: '1 1 200px',
-        background: '#141E2E',
+        background: '#FFFFFF',
         borderRadius: 16,
         padding: '28px',
-        border: '1px solid rgba(255,255,255,0.08)',
-        boxShadow: hover ? '0 8px 32px rgba(0,0,0,0.4)' : '0 4px 24px rgba(0,0,0,0.3)',
+        border: '1px solid #E5E7EB',
+        boxShadow: hover ? '0 8px 32px rgba(0,0,0,0.12)' : '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
         transition: 'all 0.2s ease',
         cursor: 'default',
       }}
@@ -26,16 +26,16 @@ function StatCard({ icon, label, value }) {
           width: 40,
           height: 40,
           borderRadius: 10,
-          background: 'rgba(240,180,41,0.15)',
+          background: '#FEF3C7',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           fontSize: 20,
         }}>{icon}</div>
         <span style={{
-          background: 'rgba(240,180,41,0.15)',
-          color: '#F0B429',
-          border: '1px solid rgba(240,180,41,0.30)',
+          background: '#FEF3C7',
+          color: '#92400E',
+          border: '1px solid #FDE68A',
           fontSize: 11,
           fontWeight: 700,
           padding: '3px 9px',
@@ -43,10 +43,10 @@ function StatCard({ icon, label, value }) {
           letterSpacing: 0.5,
         }}>TOTAL</span>
       </div>
-      <div style={{ fontSize: 36, fontWeight: 800, color: '#F0B429', letterSpacing: '-1px', marginBottom: 4 }}>
+      <div style={{ fontSize: 36, fontWeight: 800, color: '#D97706', letterSpacing: '-1px', marginBottom: 4 }}>
         {typeof value === 'number' ? value.toLocaleString() : value}
       </div>
-      <div style={{ fontSize: 13, color: '#9CA3AF', fontWeight: 500 }}>{label}</div>
+      <div style={{ fontSize: 13, color: '#6B7280', fontWeight: 500 }}>{label}</div>
     </div>
   )
 }
@@ -65,8 +65,8 @@ export default function StatsPage() {
   }, [])
 
   if (loading) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300, background: '#0B1120' }}>
-      <div style={{ color: '#F0B429', fontSize: 16, fontWeight: 600 }}>Loading statistics...</div>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300, background: '#F8F9FA' }}>
+      <div style={{ color: '#D97706', fontSize: 16, fontWeight: 600 }}>Loading statistics...</div>
     </div>
   )
 
@@ -84,11 +84,11 @@ export default function StatsPage() {
     }))
 
   return (
-    <div style={{ padding: '40px 48px 60px', background: '#0B1120', minHeight: '100vh' }}>
+    <div style={{ padding: '40px 48px 60px', background: '#F8F9FA', minHeight: '100vh' }}>
       {/* Page header */}
       <div style={{ marginBottom: 36 }}>
-        <h1 style={{ fontSize: 26, fontWeight: 700, color: '#F9FAFB' }}>Statistics</h1>
-        <p style={{ fontSize: 14, color: '#6B7280', marginTop: 4 }}>Track performance across all Shorts using your sound</p>
+        <h1 style={{ fontSize: 26, fontWeight: 700, color: '#111827' }}>Statistics</h1>
+        <p style={{ fontSize: 14, color: '#9CA3AF', marginTop: 4 }}>Track performance across all Shorts using your sound</p>
       </div>
 
       {/* Stat cards */}
@@ -102,34 +102,34 @@ export default function StatsPage() {
       {/* Bar chart */}
       {top10.length > 0 && (
         <div style={{
-          background: '#141E2E',
+          background: '#FFFFFF',
           borderRadius: 16,
           padding: '28px 28px 20px',
-          border: '1px solid rgba(255,255,255,0.08)',
-          boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
+          border: '1px solid #E5E7EB',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
           marginBottom: 36,
         }}>
-          <h2 style={{ fontSize: 16, fontWeight: 700, color: '#F9FAFB', marginBottom: 24 }}>
+          <h2 style={{ fontSize: 16, fontWeight: 700, color: '#111827', marginBottom: 24 }}>
             Top 10 Videos by Views
           </h2>
           <ResponsiveContainer width="100%" height={260}>
             <BarChart data={top10} margin={{ top: 0, right: 20, left: 0, bottom: 0 }}>
               <XAxis
                 dataKey="name"
-                tick={{ fontSize: 11, fill: '#6B7280' }}
+                tick={{ fontSize: 11, fill: '#9CA3AF' }}
                 axisLine={false}
                 tickLine={false}
               />
               <YAxis
-                tick={{ fontSize: 11, fill: '#6B7280' }}
+                tick={{ fontSize: 11, fill: '#9CA3AF' }}
                 axisLine={false}
                 tickLine={false}
                 tickFormatter={v => v >= 1000 ? (v / 1000).toFixed(0) + 'K' : v}
               />
               <Tooltip
                 contentStyle={{
-                  background: '#0B1120',
-                  border: '1px solid rgba(255,255,255,0.1)',
+                  background: '#111827',
+                  border: '1px solid #374151',
                   borderRadius: 8,
                   color: '#F9FAFB',
                   fontSize: 13,
@@ -148,19 +148,19 @@ export default function StatsPage() {
 
       {/* Table */}
       <div style={{
-        background: '#141E2E',
+        background: '#FFFFFF',
         borderRadius: 16,
-        border: '1px solid rgba(255,255,255,0.08)',
-        boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
+        border: '1px solid #E5E7EB',
+        boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
         overflow: 'hidden',
       }}>
-        <div style={{ padding: '20px 28px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-          <h2 style={{ fontSize: 16, fontWeight: 700, color: '#F9FAFB' }}>All Videos</h2>
+        <div style={{ padding: '20px 28px', borderBottom: '1px solid #E5E7EB' }}>
+          <h2 style={{ fontSize: 16, fontWeight: 700, color: '#111827' }}>All Videos</h2>
         </div>
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
-              <tr style={{ background: 'rgba(255,255,255,0.03)' }}>
+              <tr style={{ background: '#F9FAFB' }}>
                 {['Video', 'Link', 'Creator', 'Views', 'Likes', 'Comments', 'Date'].map(h => (
                   <th key={h} style={{
                     textAlign: 'left',
@@ -178,8 +178,8 @@ export default function StatsPage() {
             <tbody>
               {videos.map((v, idx) => (
                 <tr key={v.videoId || idx}
-                  style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
-                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.03)'}
+                  style={{ borderTop: '1px solid #E5E7EB' }}
+                  onMouseEnter={e => e.currentTarget.style.background = '#F9FAFB'}
                   onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                 >
                   <td style={{ padding: '14px 20px' }}>
@@ -196,15 +196,15 @@ export default function StatsPage() {
                       href={v.url}
                       target="_blank"
                       rel="noreferrer"
-                      style={{ color: '#F0B429', fontSize: 13, fontWeight: 500 }}
+                      style={{ color: '#D97706', fontSize: 13, fontWeight: 500 }}
                     >
                       {v.videoId || 'link'}
                     </a>
                   </td>
-                  <td style={{ padding: '14px 20px', fontSize: 14, color: '#D1D5DB', fontWeight: 500 }}>{v.creator}</td>
-                  <td style={{ padding: '14px 20px', fontSize: 14, fontWeight: 600, color: '#D1D5DB' }}>{(v.views || 0).toLocaleString()}</td>
-                  <td style={{ padding: '14px 20px', fontSize: 14, color: '#D1D5DB' }}>{(v.likes || 0).toLocaleString()}</td>
-                  <td style={{ padding: '14px 20px', fontSize: 14, color: '#D1D5DB' }}>{(v.comments || 0).toLocaleString()}</td>
+                  <td style={{ padding: '14px 20px', fontSize: 14, color: '#374151', fontWeight: 500 }}>{v.creator}</td>
+                  <td style={{ padding: '14px 20px', fontSize: 14, fontWeight: 600, color: '#374151' }}>{(v.views || 0).toLocaleString()}</td>
+                  <td style={{ padding: '14px 20px', fontSize: 14, color: '#374151' }}>{(v.likes || 0).toLocaleString()}</td>
+                  <td style={{ padding: '14px 20px', fontSize: 14, color: '#374151' }}>{(v.comments || 0).toLocaleString()}</td>
                   <td style={{ padding: '14px 20px', fontSize: 13, color: '#6B7280' }}>{v.snapshotDate}</td>
                 </tr>
               ))}

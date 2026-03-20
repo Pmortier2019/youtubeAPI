@@ -188,7 +188,7 @@ export default function Layout({ children }) {
       <main style={{
         marginLeft: 260,
         flex: 1,
-        background: '#0B1120',
+        background: '#F8F9FA',
         minHeight: '100vh',
       }}>
         {children}

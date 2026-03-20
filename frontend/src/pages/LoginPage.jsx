@@ -10,8 +10,8 @@ const inputBase = {
   fontSize: 15,
   borderRadius: 10,
   outline: 'none',
-  background: 'rgba(255,255,255,0.04)',
-  color: '#F9FAFB',
+  background: '#FFFFFF',
+  color: '#111827',
   transition: 'border 0.15s ease',
   boxSizing: 'border-box',
 }
@@ -64,7 +64,7 @@ export default function LoginPage() {
   return (
     <div style={{ display: 'flex', minHeight: '100vh', fontFamily: 'Inter, sans-serif' }}>
 
-      {/* Left panel */}
+      {/* Left panel — keep dark */}
       <div style={{
         flex: '0 0 45%',
         background: '#070E1A',
@@ -135,43 +135,43 @@ export default function LoginPage() {
         </div>
       </div>
 
-      {/* Right panel */}
+      {/* Right panel — light */}
       <div style={{
         flex: 1,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: '#0B1120',
+        background: '#F8F9FA',
         padding: 40,
       }}>
         <div style={{
           width: '100%',
           maxWidth: 420,
-          background: '#141E2E',
+          background: '#FFFFFF',
           borderRadius: 20,
           padding: '48px 44px',
-          border: '1px solid rgba(255,255,255,0.08)',
-          boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
+          border: '1px solid #E5E7EB',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
         }}>
           <h2 style={{
             fontSize: 28,
             fontWeight: 700,
             marginBottom: 6,
-            color: '#F9FAFB',
+            color: '#111827',
             letterSpacing: '-0.4px',
           }}>Welcome back</h2>
-          <p style={{ color: '#9CA3AF', fontSize: 14, marginBottom: 32 }}>
+          <p style={{ color: '#6B7280', fontSize: 14, marginBottom: 32 }}>
             Sign in to your PierreMusic account
           </p>
 
           {error && (
             <div style={{
-              background: 'rgba(239,68,68,0.15)',
-              border: '1px solid rgba(239,68,68,0.35)',
+              background: '#FEE2E2',
+              border: '1px solid #FECACA',
               borderRadius: 10,
               padding: '11px 16px',
               marginBottom: 22,
-              color: '#FCA5A5',
+              color: '#991B1B',
               fontSize: 14,
             }}>{error}</div>
           )}
@@ -182,7 +182,7 @@ export default function LoginPage() {
                 display: 'block',
                 fontSize: 13,
                 fontWeight: 600,
-                color: '#9CA3AF',
+                color: '#374151',
                 marginBottom: 7,
                 letterSpacing: '0.2px',
               }}>Email address</label>
@@ -198,7 +198,7 @@ export default function LoginPage() {
                   ...inputBase,
                   border: emailFocus
                     ? '2px solid #F0B429'
-                    : '1px solid rgba(255,255,255,0.10)',
+                    : '1px solid #D1D5DB',
                 }}
               />
             </div>
@@ -208,7 +208,7 @@ export default function LoginPage() {
                 display: 'block',
                 fontSize: 13,
                 fontWeight: 600,
-                color: '#9CA3AF',
+                color: '#374151',
                 marginBottom: 7,
                 letterSpacing: '0.2px',
               }}>Password</label>
@@ -224,7 +224,7 @@ export default function LoginPage() {
                   ...inputBase,
                   border: passFocus
                     ? '2px solid #F0B429'
-                    : '1px solid rgba(255,255,255,0.10)',
+                    : '1px solid #D1D5DB',
                 }}
               />
             </div>
@@ -238,7 +238,7 @@ export default function LoginPage() {
                 background: loading
                   ? 'rgba(240,180,41,0.5)'
                   : 'linear-gradient(135deg, #F0B429, #D97706)',
-                color: '#0B1120',
+                color: '#111827',
                 border: 'none',
                 borderRadius: 10,
                 fontSize: 15,
@@ -256,7 +256,7 @@ export default function LoginPage() {
 
           <p style={{ textAlign: 'center', marginTop: 28, fontSize: 14, color: '#6B7280' }}>
             No account yet?{' '}
-            <Link to="/register" style={{ color: '#F0B429', fontWeight: 600, textDecoration: 'none' }}>
+            <Link to="/register" style={{ color: '#D97706', fontWeight: 600, textDecoration: 'none' }}>
               Create one
             </Link>
           </p>

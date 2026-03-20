@@ -12,54 +12,54 @@ export default function PaymentMethodsPage() {
   }, [])
 
   if (loading) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300, background: '#0B1120' }}>
-      <div style={{ color: '#F0B429', fontSize: 16, fontWeight: 600 }}>Loading...</div>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300, background: '#F8F9FA' }}>
+      <div style={{ color: '#D97706', fontSize: 16, fontWeight: 600 }}>Loading...</div>
     </div>
   )
 
   return (
-    <div style={{ padding: '40px 48px 60px', background: '#0B1120', minHeight: '100vh' }}>
+    <div style={{ padding: '40px 48px 60px', background: '#F8F9FA', minHeight: '100vh' }}>
       <div style={{ marginBottom: 32 }}>
-        <h1 style={{ fontSize: 26, fontWeight: 700, color: '#F9FAFB' }}>Payment Methods</h1>
-        <p style={{ fontSize: 14, color: '#6B7280', marginTop: 4 }}>Creator payment details for processing payouts</p>
+        <h1 style={{ fontSize: 26, fontWeight: 700, color: '#111827' }}>Payment Methods</h1>
+        <p style={{ fontSize: 14, color: '#9CA3AF', marginTop: 4 }}>Creator payment details for processing payouts</p>
       </div>
 
       {methods.length === 0 && (
         <div style={{
-          background: '#141E2E',
+          background: '#FFFFFF',
           borderRadius: 16,
           padding: '80px 40px',
           textAlign: 'center',
-          border: '1px solid rgba(255,255,255,0.08)',
-          boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
+          border: '1px solid #E5E7EB',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
         }}>
           <div style={{
             width: 56,
             height: 56,
             borderRadius: '50%',
-            background: 'rgba(240,180,41,0.15)',
+            background: '#FEF3C7',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             fontSize: 28,
             margin: '0 auto 16px',
           }}>🏦</div>
-          <h3 style={{ fontSize: 18, fontWeight: 700, color: '#F9FAFB', marginBottom: 8 }}>No payment methods</h3>
-          <p style={{ color: '#6B7280', fontSize: 14 }}>No payment methods added by creators yet.</p>
+          <h3 style={{ fontSize: 18, fontWeight: 700, color: '#111827', marginBottom: 8 }}>No payment methods</h3>
+          <p style={{ color: '#9CA3AF', fontSize: 14 }}>No payment methods added by creators yet.</p>
         </div>
       )}
 
       {methods.length > 0 && (
         <div style={{
-          background: '#141E2E',
+          background: '#FFFFFF',
           borderRadius: 16,
-          border: '1px solid rgba(255,255,255,0.08)',
-          boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
+          border: '1px solid #E5E7EB',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
           overflow: 'hidden',
         }}>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
-              <tr style={{ background: 'rgba(255,255,255,0.03)' }}>
+              <tr style={{ background: '#F9FAFB' }}>
                 {['Creator', 'Email', 'Type', 'Details', 'Default', 'Added'].map(h => (
                   <th key={h} style={{
                     textAlign: 'left',
@@ -77,14 +77,14 @@ export default function PaymentMethodsPage() {
               {methods.map(m => (
                 <tr
                   key={m.id}
-                  style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
-                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.03)'}
+                  style={{ borderTop: '1px solid #E5E7EB' }}
+                  onMouseEnter={e => e.currentTarget.style.background = '#F9FAFB'}
                   onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                 >
-                  <td style={{ padding: '14px 20px', fontSize: 14, fontWeight: 600, color: '#F9FAFB' }}>
+                  <td style={{ padding: '14px 20px', fontSize: 14, fontWeight: 600, color: '#111827' }}>
                     {m.creatorName}
                   </td>
-                  <td style={{ padding: '14px 20px', fontSize: 13, color: '#9CA3AF' }}>
+                  <td style={{ padding: '14px 20px', fontSize: 13, color: '#6B7280' }}>
                     {m.email}
                   </td>
                   <td style={{ padding: '14px 20px' }}>
@@ -92,9 +92,9 @@ export default function PaymentMethodsPage() {
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: 5,
-                      background: 'rgba(240,180,41,0.15)',
-                      color: '#F0B429',
-                      border: '1px solid rgba(240,180,41,0.30)',
+                      background: '#FEF3C7',
+                      color: '#92400E',
+                      border: '1px solid #FDE68A',
                       fontSize: 12,
                       fontWeight: 600,
                       padding: '3px 10px',
@@ -103,7 +103,7 @@ export default function PaymentMethodsPage() {
                       {m.type === 'PayPal' ? '💳' : '🏦'} {m.type}
                     </span>
                   </td>
-                  <td style={{ padding: '14px 20px', fontSize: 13, color: '#D1D5DB', fontFamily: 'monospace' }}>
+                  <td style={{ padding: '14px 20px', fontSize: 13, color: '#374151', fontFamily: 'monospace' }}>
                     {m.details}
                   </td>
                   <td style={{ padding: '14px 20px', fontSize: 13, color: m.isDefault ? '#10B981' : '#6B7280', fontWeight: 600 }}>

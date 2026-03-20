@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import { getActiveCampaigns, joinCampaign, getMyParticipations } from '../../api'
 
 const PARTICIPATION_STATUS = {
-  PENDING_REVIEW: { label: 'Pending Review', bg: 'rgba(240,180,41,0.15)', color: '#F0B429', border: 'rgba(240,180,41,0.30)' },
-  APPROVED:       { label: 'Approved',       bg: 'rgba(16,185,129,0.15)', color: '#10B981', border: 'rgba(16,185,129,0.30)' },
-  REJECTED:       { label: 'Rejected',       bg: 'rgba(239,68,68,0.12)', color: '#EF4444', border: 'rgba(239,68,68,0.30)' },
+  PENDING_REVIEW: { label: 'Pending Review', bg: '#FEF3C7', color: '#92400E', border: '#FDE68A' },
+  APPROVED:       { label: 'Approved',       bg: '#D1FAE5', color: '#065F46', border: '#A7F3D0' },
+  REJECTED:       { label: 'Rejected',       bg: '#FEE2E2', color: '#991B1B', border: '#FECACA' },
 }
 
 function ParticipationBadge({ status }) {
@@ -58,33 +58,33 @@ export default function CampaignsBrowsePage() {
   }
 
   if (loading) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300, background: '#0B1120' }}>
-      <div style={{ color: '#F0B429', fontSize: 16, fontWeight: 600 }}>Loading campaigns...</div>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300, background: '#F8F9FA' }}>
+      <div style={{ color: '#D97706', fontSize: 16, fontWeight: 600 }}>Loading campaigns...</div>
     </div>
   )
 
   return (
-    <div style={{ padding: '40px 48px 60px', background: '#0B1120', minHeight: '100vh' }}>
+    <div style={{ padding: '40px 48px 60px', background: '#F8F9FA', minHeight: '100vh' }}>
       {/* Page header */}
       <div style={{ marginBottom: 36 }}>
-        <h1 style={{ fontSize: 26, fontWeight: 700, color: '#F9FAFB', marginBottom: 6 }}>Campaigns</h1>
-        <p style={{ fontSize: 14, color: '#9CA3AF' }}>Join a campaign and earn money with your Shorts</p>
+        <h1 style={{ fontSize: 26, fontWeight: 700, color: '#111827', marginBottom: 6 }}>Campaigns</h1>
+        <p style={{ fontSize: 14, color: '#6B7280' }}>Join a campaign and earn money with your Shorts</p>
       </div>
 
       {/* My participations */}
       {participations.length > 0 && (
         <div style={{ marginBottom: 48 }}>
-          <h2 style={{ fontSize: 18, fontWeight: 700, color: '#F9FAFB', marginBottom: 16 }}>My Participations</h2>
+          <h2 style={{ fontSize: 18, fontWeight: 700, color: '#111827', marginBottom: 16 }}>My Participations</h2>
           <div style={{
-            background: '#141E2E',
+            background: '#FFFFFF',
             borderRadius: 16,
-            border: '1px solid rgba(255,255,255,0.08)',
-            boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
+            border: '1px solid #E5E7EB',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
             overflow: 'hidden',
           }}>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
-                <tr style={{ background: 'rgba(255,255,255,0.03)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                <tr style={{ background: '#F9FAFB', borderBottom: '1px solid #E5E7EB' }}>
                   <th style={thStyle}>Campaign</th>
                   <th style={thStyle}>Short</th>
                   <th style={thStyle}>Status</th>
@@ -95,19 +95,19 @@ export default function CampaignsBrowsePage() {
                 {participations.map((p, i) => (
                   <tr
                     key={p.participationId}
-                    style={{ borderBottom: i < participations.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none' }}
-                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.03)'}
+                    style={{ borderBottom: i < participations.length - 1 ? '1px solid #E5E7EB' : 'none' }}
+                    onMouseEnter={e => e.currentTarget.style.background = '#F9FAFB'}
                     onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                   >
                     <td style={tdStyle}>
-                      <span style={{ fontWeight: 600, color: '#F9FAFB', fontSize: 14 }}>{p.campaignTitle}</span>
+                      <span style={{ fontWeight: 600, color: '#111827', fontSize: 14 }}>{p.campaignTitle}</span>
                     </td>
                     <td style={tdStyle}>
                       <a
                         href={p.shortUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        style={{ color: '#F0B429', fontWeight: 600, fontSize: 13, textDecoration: 'none' }}
+                        style={{ color: '#D97706', fontWeight: 600, fontSize: 13, textDecoration: 'none' }}
                       >
                         {p.videoId} ↗
                       </a>
@@ -151,16 +151,16 @@ export default function CampaignsBrowsePage() {
         </div>
       ) : (
         <div style={{
-          background: '#141E2E',
+          background: '#FFFFFF',
           borderRadius: 16,
           padding: '64px 40px',
           textAlign: 'center',
-          border: '1px solid rgba(255,255,255,0.08)',
-          boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
+          border: '1px solid #E5E7EB',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
         }}>
           <span style={{ fontSize: 52, display: 'block', marginBottom: 16 }}>🚀</span>
-          <h3 style={{ fontSize: 20, fontWeight: 800, color: '#F9FAFB', marginBottom: 10 }}>Coming soon</h3>
-          <p style={{ color: '#9CA3AF', fontSize: 14, maxWidth: 420, margin: '0 auto' }}>
+          <h3 style={{ fontSize: 20, fontWeight: 800, color: '#111827', marginBottom: 10 }}>Coming soon</h3>
+          <p style={{ color: '#6B7280', fontSize: 14, maxWidth: 420, margin: '0 auto' }}>
             Campaigns are coming soon. In the meantime, link your channel — your Shorts will be automatically submitted for review.
           </p>
         </div>
@@ -204,11 +204,11 @@ function CampaignCard({
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       style={{
-        background: '#141E2E',
+        background: '#FFFFFF',
         borderRadius: 16,
         overflow: 'hidden',
-        border: '1px solid rgba(255,255,255,0.08)',
-        boxShadow: hover ? '0 8px 32px rgba(0,0,0,0.50)' : '0 4px 24px rgba(0,0,0,0.3)',
+        border: '1px solid #E5E7EB',
+        boxShadow: hover ? '0 8px 32px rgba(0,0,0,0.10)' : '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
         transition: 'all 0.2s ease',
         display: 'flex',
         flexDirection: 'column',
@@ -247,7 +247,7 @@ function CampaignCard({
                 top: 12,
                 right: 12,
                 background: 'rgba(240,180,41,0.90)',
-                color: '#0B1120',
+                color: '#111827',
                 fontSize: 11,
                 fontWeight: 700,
                 padding: '4px 10px',
@@ -268,14 +268,14 @@ function CampaignCard({
           alignItems: 'flex-end',
           padding: '16px 20px',
         }}>
-          <h3 style={{ color: '#0B1120', fontSize: 18, fontWeight: 800, margin: 0 }}>{c.title}</h3>
+          <h3 style={{ color: '#111827', fontSize: 18, fontWeight: 800, margin: 0 }}>{c.title}</h3>
         </div>
       )}
 
       {/* Card body */}
       <div style={{ padding: '20px', flex: 1, display: 'flex', flexDirection: 'column', gap: 14 }}>
         {c.description && (
-          <p style={{ fontSize: 13, color: '#9CA3AF', lineHeight: 1.6, margin: 0 }}>{c.description}</p>
+          <p style={{ fontSize: 13, color: '#374151', lineHeight: 1.6, margin: 0 }}>{c.description}</p>
         )}
 
         {/* RPM rate highlight */}
@@ -283,13 +283,13 @@ function CampaignCard({
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          background: 'rgba(240,180,41,0.10)',
+          background: '#FEF3C7',
           borderRadius: 10,
           padding: '10px 14px',
-          border: '1px solid rgba(240,180,41,0.20)',
+          border: '1px solid #FDE68A',
         }}>
-          <span style={{ fontSize: 13, color: '#9CA3AF', fontWeight: 600 }}>RPM Rate</span>
-          <span style={{ fontSize: 20, fontWeight: 900, color: '#F0B429' }}>
+          <span style={{ fontSize: 13, color: '#92400E', fontWeight: 600 }}>RPM Rate</span>
+          <span style={{ fontSize: 20, fontWeight: 900, color: '#D97706' }}>
             €{Number(c.rpmRate).toFixed(4)}<span style={{ fontSize: 11, fontWeight: 500, color: '#6B7280' }}>/1K views</span>
           </span>
         </div>
@@ -297,9 +297,9 @@ function CampaignCard({
         {/* Rules */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
           <span style={{
-            background: 'rgba(240,180,41,0.12)',
-            color: '#F0B429',
-            border: '1px solid rgba(240,180,41,0.25)',
+            background: '#FEF3C7',
+            color: '#92400E',
+            border: '1px solid #FDE68A',
             fontSize: 11,
             fontWeight: 700,
             padding: '3px 10px',
@@ -308,9 +308,9 @@ function CampaignCard({
             ⏱ {c.minDurationSeconds}–{c.maxDurationSeconds}s
           </span>
           <span style={{
-            background: 'rgba(240,180,41,0.12)',
-            color: '#F0B429',
-            border: '1px solid rgba(240,180,41,0.25)',
+            background: '#FEF3C7',
+            color: '#92400E',
+            border: '1px solid #FDE68A',
             fontSize: 11,
             fontWeight: 700,
             padding: '3px 10px',
@@ -324,9 +324,9 @@ function CampaignCard({
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: '#6B7280', marginBottom: 5 }}>
             <span>Budget remaining</span>
-            <span style={{ fontWeight: 700, color: '#F0B429' }}>€{budgetRemaining.toFixed(2)}</span>
+            <span style={{ fontWeight: 700, color: '#D97706' }}>€{budgetRemaining.toFixed(2)}</span>
           </div>
-          <div style={{ background: 'rgba(255,255,255,0.08)', borderRadius: 4, height: 6 }}>
+          <div style={{ background: '#E5E7EB', borderRadius: 4, height: 6 }}>
             <div style={{
               background: 'linear-gradient(90deg, #F0B429, #D97706)',
               borderRadius: 4,
@@ -344,11 +344,11 @@ function CampaignCard({
         {/* Success message */}
         {status && status.success && (
           <div style={{
-            background: 'rgba(16,185,129,0.12)',
-            border: '1px solid rgba(16,185,129,0.30)',
+            background: '#D1FAE5',
+            border: '1px solid #A7F3D0',
             borderRadius: 10,
             padding: '10px 14px',
-            color: '#10B981',
+            color: '#065F46',
             fontSize: 13,
             fontWeight: 600,
           }}>✅ {status.success}</div>
@@ -361,7 +361,7 @@ function CampaignCard({
             style={{
               padding: '10px 20px',
               background: 'linear-gradient(135deg, #F0B429, #D97706)',
-              color: '#0B1120',
+              color: '#111827',
               border: 'none',
               borderRadius: 10,
               cursor: 'pointer',
@@ -379,8 +379,8 @@ function CampaignCard({
           <form
             onSubmit={e => onSubmit(e, c.id)}
             style={{
-              background: '#1A2540',
-              border: '1px solid rgba(255,255,255,0.08)',
+              background: '#F3F4F6',
+              border: '1px solid #E5E7EB',
               borderRadius: 12,
               padding: '16px',
               display: 'flex',
@@ -388,7 +388,7 @@ function CampaignCard({
               gap: 10,
             }}
           >
-            <label style={{ fontSize: 13, fontWeight: 600, color: '#9CA3AF' }}>
+            <label style={{ fontSize: 13, fontWeight: 600, color: '#374151' }}>
               Your Short URL
             </label>
             <input
@@ -403,20 +403,20 @@ function CampaignCard({
                 padding: '12px 16px',
                 fontSize: 14,
                 borderRadius: 10,
-                border: urlFocus ? '2px solid #F0B429' : '1px solid rgba(255,255,255,0.10)',
+                border: urlFocus ? '2px solid #F0B429' : '1px solid #D1D5DB',
                 outline: 'none',
-                background: 'rgba(255,255,255,0.04)',
-                color: '#F9FAFB',
+                background: '#FFFFFF',
+                color: '#111827',
                 transition: 'border 0.15s ease',
               }}
             />
             {status && status.error && (
               <div style={{
-                background: 'rgba(239,68,68,0.10)',
-                border: '1px solid rgba(239,68,68,0.30)',
+                background: '#FEE2E2',
+                border: '1px solid #FECACA',
                 borderRadius: 8,
                 padding: '8px 12px',
-                color: '#EF4444',
+                color: '#991B1B',
                 fontSize: 13,
               }}>{status.error}</div>
             )}
@@ -427,7 +427,7 @@ function CampaignCard({
                   flex: 1,
                   padding: '10px 0',
                   background: 'linear-gradient(135deg, #F0B429, #D97706)',
-                  color: '#0B1120',
+                  color: '#111827',
                   border: 'none',
                   borderRadius: 10,
                   cursor: 'pointer',
@@ -441,9 +441,9 @@ function CampaignCard({
                 onClick={onCancel}
                 style={{
                   padding: '10px 16px',
-                  background: 'rgba(255,255,255,0.06)',
-                  color: '#D1D5DB',
-                  border: '1px solid rgba(255,255,255,0.12)',
+                  background: '#FFFFFF',
+                  color: '#374151',
+                  border: '1px solid #D1D5DB',
                   borderRadius: 10,
                   cursor: 'pointer',
                   fontSize: 13,

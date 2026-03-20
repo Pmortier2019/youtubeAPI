@@ -5,19 +5,19 @@ const inputStyle = {
   padding: '12px 16px',
   fontSize: 14,
   borderRadius: 10,
-  border: '1px solid rgba(255,255,255,0.10)',
+  border: '1px solid #D1D5DB',
   outline: 'none',
-  background: 'rgba(255,255,255,0.04)',
-  color: '#F9FAFB',
+  background: '#FFFFFF',
+  color: '#111827',
   minWidth: 160,
 }
 
 const cardStyle = {
-  background: '#141E2E',
+  background: '#FFFFFF',
   borderRadius: 16,
   padding: '28px 32px',
-  border: '1px solid rgba(255,255,255,0.08)',
-  boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
+  border: '1px solid #E5E7EB',
+  boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
   marginBottom: 32,
   maxWidth: 860,
 }
@@ -35,8 +35,8 @@ const thStyle = {
 const tdStyle = {
   padding: '14px 20px',
   fontSize: 14,
-  color: '#9CA3AF',
-  borderTop: '1px solid rgba(255,255,255,0.05)',
+  color: '#6B7280',
+  borderTop: '1px solid #E5E7EB',
 }
 
 export default function PayoutPage() {
@@ -112,26 +112,26 @@ export default function PayoutPage() {
   const totalPayout = preview ? preview.reduce((s, l) => s + l.payout, 0) : 0
 
   return (
-    <div style={{ padding: '40px 48px 60px', background: '#0B1120', minHeight: '100vh' }}>
+    <div style={{ padding: '40px 48px 60px', background: '#F8F9FA', minHeight: '100vh' }}>
       {/* Header */}
       <div style={{ marginBottom: 36 }}>
-        <h1 style={{ fontSize: 26, fontWeight: 700, color: '#F9FAFB', marginBottom: 6 }}>
+        <h1 style={{ fontSize: 26, fontWeight: 700, color: '#111827', marginBottom: 6 }}>
           Payout Calculator
         </h1>
-        <p style={{ fontSize: 14, color: '#9CA3AF' }}>
+        <p style={{ fontSize: 14, color: '#6B7280' }}>
           Proportionally distribute a pot among creators based on new views
         </p>
       </div>
 
       {/* Calculate form card */}
       <div style={cardStyle}>
-        <h2 style={{ fontSize: 16, fontWeight: 700, color: '#F9FAFB', marginBottom: 20 }}>
+        <h2 style={{ fontSize: 16, fontWeight: 700, color: '#111827', marginBottom: 20 }}>
           Calculate Payout
         </h2>
 
         <form onSubmit={handlePreview} style={{ display: 'flex', gap: 16, alignItems: 'flex-end', flexWrap: 'wrap' }}>
           <div>
-            <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#9CA3AF', marginBottom: 6 }}>
+            <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#6B7280', marginBottom: 6 }}>
               Total pot (€)
             </label>
             <input
@@ -151,7 +151,7 @@ export default function PayoutPage() {
             style={{
               padding: '10px 24px',
               background: previewLoading ? 'rgba(240,180,41,0.40)' : 'linear-gradient(135deg, #F0B429, #D97706)',
-              color: '#0B1120',
+              color: '#111827',
               border: 'none',
               borderRadius: 10,
               cursor: previewLoading ? 'not-allowed' : 'pointer',
@@ -168,11 +168,11 @@ export default function PayoutPage() {
         {error && (
           <div style={{
             marginTop: 16,
-            background: 'rgba(239,68,68,0.10)',
-            border: '1px solid rgba(239,68,68,0.30)',
+            background: '#FEE2E2',
+            border: '1px solid #FECACA',
             borderRadius: 8,
             padding: '10px 14px',
-            color: '#EF4444',
+            color: '#991B1B',
             fontSize: 14,
           }}>{error}</div>
         )}
@@ -180,11 +180,11 @@ export default function PayoutPage() {
         {success && (
           <div style={{
             marginTop: 16,
-            background: 'rgba(16,185,129,0.10)',
-            border: '1px solid rgba(16,185,129,0.30)',
+            background: '#D1FAE5',
+            border: '1px solid #A7F3D0',
             borderRadius: 8,
             padding: '10px 14px',
-            color: '#10B981',
+            color: '#065F46',
             fontSize: 14,
             fontWeight: 600,
           }}>{success}</div>
@@ -194,7 +194,7 @@ export default function PayoutPage() {
         {preview && preview.length === 0 && (
           <div style={{
             marginTop: 20,
-            background: 'rgba(255,255,255,0.03)',
+            background: '#F9FAFB',
             borderRadius: 8,
             padding: '16px 20px',
             color: '#6B7280',
@@ -208,15 +208,15 @@ export default function PayoutPage() {
         {preview && preview.length > 0 && (
           <div style={{ marginTop: 24 }}>
             <div style={{
-              background: '#1A2540',
+              background: '#F3F4F6',
               borderRadius: 12,
-              border: '1px solid rgba(255,255,255,0.08)',
+              border: '1px solid #E5E7EB',
               overflow: 'hidden',
               marginBottom: 16,
             }}>
               <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead>
-                  <tr style={{ background: 'rgba(255,255,255,0.03)' }}>
+                  <tr style={{ background: '#F9FAFB' }}>
                     <th style={thStyle}>Creator</th>
                     <th style={thStyle}>New Views</th>
                     <th style={thStyle}>Share %</th>
@@ -229,16 +229,16 @@ export default function PayoutPage() {
                   {preview.map(line => (
                     <tr
                       key={line.creator}
-                      onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.03)'}
+                      onMouseEnter={e => e.currentTarget.style.background = '#F9FAFB'}
                       onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                     >
-                      <td style={{ ...tdStyle, fontWeight: 600, color: '#F9FAFB' }}>{line.creator}</td>
+                      <td style={{ ...tdStyle, fontWeight: 600, color: '#111827' }}>{line.creator}</td>
                       <td style={tdStyle}>{line.newViews.toLocaleString()}</td>
                       <td style={tdStyle}>
                         <span style={{
-                          background: 'rgba(240,180,41,0.15)',
-                          color: '#F0B429',
-                          border: '1px solid rgba(240,180,41,0.30)',
+                          background: '#FEF3C7',
+                          color: '#92400E',
+                          border: '1px solid #FDE68A',
                           fontSize: 12,
                           fontWeight: 700,
                           padding: '3px 9px',
@@ -247,7 +247,7 @@ export default function PayoutPage() {
                           {(line.sharePercent * 100).toFixed(1)}%
                         </span>
                       </td>
-                      <td style={{ ...tdStyle, fontSize: 16, fontWeight: 800, color: '#F0B429' }}>
+                      <td style={{ ...tdStyle, fontSize: 16, fontWeight: 800, color: '#D97706' }}>
                         €{line.payout.toFixed(2)}
                       </td>
                       <td style={tdStyle}>
@@ -258,9 +258,9 @@ export default function PayoutPage() {
                             borderRadius: 999,
                             fontSize: 12,
                             fontWeight: 700,
-                            background: line.paymentMethod === 'PAYPAL' ? 'rgba(37,99,235,0.15)' : 'rgba(16,185,129,0.15)',
-                            color: line.paymentMethod === 'PAYPAL' ? '#60a5fa' : '#10B981',
-                            border: line.paymentMethod === 'PAYPAL' ? '1px solid rgba(37,99,235,0.30)' : '1px solid rgba(16,185,129,0.30)',
+                            background: line.paymentMethod === 'PAYPAL' ? 'rgba(37,99,235,0.15)' : '#D1FAE5',
+                            color: line.paymentMethod === 'PAYPAL' ? '#60a5fa' : '#065F46',
+                            border: line.paymentMethod === 'PAYPAL' ? '1px solid rgba(37,99,235,0.30)' : '1px solid #A7F3D0',
                           }}>
                             {line.paymentMethod === 'PAYPAL' ? 'PayPal' : 'IBAN'}
                           </span>
@@ -270,7 +270,7 @@ export default function PayoutPage() {
                       </td>
                       <td style={tdStyle}>
                         {line.paymentDetails ? (
-                          <span style={{ fontSize: 13, color: '#9CA3AF' }}>{line.paymentDetails}</span>
+                          <span style={{ fontSize: 13, color: '#374151' }}>{line.paymentDetails}</span>
                         ) : (
                           <span style={{ color: '#f97316', fontSize: 13, fontWeight: 600 }}>⚠️ Not set</span>
                         )}
@@ -278,11 +278,11 @@ export default function PayoutPage() {
                     </tr>
                   ))}
                   {/* Total row */}
-                  <tr style={{ background: 'rgba(255,255,255,0.03)', borderTop: '1px solid rgba(255,255,255,0.10)' }}>
-                    <td style={{ ...tdStyle, fontWeight: 700, color: '#F9FAFB' }}>Total</td>
-                    <td style={{ ...tdStyle, fontWeight: 700, color: '#F9FAFB' }}>{totalNewViews.toLocaleString()}</td>
+                  <tr style={{ background: '#F9FAFB', borderTop: '1px solid #E5E7EB' }}>
+                    <td style={{ ...tdStyle, fontWeight: 700, color: '#111827' }}>Total</td>
+                    <td style={{ ...tdStyle, fontWeight: 700, color: '#111827' }}>{totalNewViews.toLocaleString()}</td>
                     <td style={tdStyle}></td>
-                    <td style={{ ...tdStyle, fontSize: 16, fontWeight: 800, color: '#F0B429' }}>
+                    <td style={{ ...tdStyle, fontSize: 16, fontWeight: 800, color: '#D97706' }}>
                       €{totalPayout.toFixed(2)}
                     </td>
                     <td style={tdStyle}></td>
@@ -313,7 +313,7 @@ export default function PayoutPage() {
                 background: processLoading
                   ? 'rgba(240,180,41,0.40)'
                   : 'linear-gradient(135deg, #F0B429, #D97706)',
-                color: '#0B1120',
+                color: '#111827',
                 border: 'none',
                 borderRadius: 10,
                 cursor: processLoading ? 'not-allowed' : 'pointer',
@@ -330,15 +330,15 @@ export default function PayoutPage() {
 
       {/* Payout History */}
       <div style={{ maxWidth: 860 }}>
-        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#F9FAFB', marginBottom: 16 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#111827', marginBottom: 16 }}>
           Payout History
         </h2>
 
         <div style={{
-          background: '#141E2E',
+          background: '#FFFFFF',
           borderRadius: 16,
-          border: '1px solid rgba(255,255,255,0.08)',
-          boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
+          border: '1px solid #E5E7EB',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
           overflow: 'hidden',
         }}>
           {historyLoading ? (
@@ -352,7 +352,7 @@ export default function PayoutPage() {
           ) : (
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
-                <tr style={{ background: 'rgba(255,255,255,0.03)' }}>
+                <tr style={{ background: '#F9FAFB' }}>
                   <th style={thStyle}>Creator</th>
                   <th style={thStyle}>Amount</th>
                   <th style={thStyle}>Date</th>
@@ -366,11 +366,11 @@ export default function PayoutPage() {
                 {history.map(p => (
                   <tr
                     key={p.id}
-                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.03)'}
+                    onMouseEnter={e => e.currentTarget.style.background = '#F9FAFB'}
                     onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                   >
-                    <td style={{ ...tdStyle, fontWeight: 600, color: '#F9FAFB' }}>{p.creatorName}</td>
-                    <td style={{ ...tdStyle, fontWeight: 800, color: '#F0B429', fontSize: 16 }}>
+                    <td style={{ ...tdStyle, fontWeight: 600, color: '#111827' }}>{p.creatorName}</td>
+                    <td style={{ ...tdStyle, fontWeight: 800, color: '#D97706', fontSize: 16 }}>
                       €{Number(p.amount).toFixed(2)}
                     </td>
                     <td style={tdStyle}>
@@ -383,9 +383,9 @@ export default function PayoutPage() {
                         borderRadius: 999,
                         fontSize: 12,
                         fontWeight: 700,
-                        background: p.status === 'PAID' ? 'rgba(16,185,129,0.15)' : 'rgba(240,180,41,0.15)',
-                        color: p.status === 'PAID' ? '#10B981' : '#F0B429',
-                        border: p.status === 'PAID' ? '1px solid rgba(16,185,129,0.30)' : '1px solid rgba(240,180,41,0.30)',
+                        background: p.status === 'PAID' ? '#D1FAE5' : '#FEF3C7',
+                        color: p.status === 'PAID' ? '#065F46' : '#92400E',
+                        border: p.status === 'PAID' ? '1px solid #A7F3D0' : '1px solid #FDE68A',
                       }}>
                         {p.status}
                       </span>
@@ -398,9 +398,9 @@ export default function PayoutPage() {
                           borderRadius: 999,
                           fontSize: 12,
                           fontWeight: 700,
-                          background: p.paymentMethod === 'PAYPAL' ? 'rgba(37,99,235,0.15)' : 'rgba(16,185,129,0.15)',
-                          color: p.paymentMethod === 'PAYPAL' ? '#60a5fa' : '#10B981',
-                          border: p.paymentMethod === 'PAYPAL' ? '1px solid rgba(37,99,235,0.30)' : '1px solid rgba(16,185,129,0.30)',
+                          background: p.paymentMethod === 'PAYPAL' ? 'rgba(37,99,235,0.15)' : '#D1FAE5',
+                          color: p.paymentMethod === 'PAYPAL' ? '#60a5fa' : '#065F46',
+                          border: p.paymentMethod === 'PAYPAL' ? '1px solid rgba(37,99,235,0.30)' : '1px solid #A7F3D0',
                         }}>
                           {p.paymentMethod === 'PAYPAL' ? 'PayPal' : 'IBAN'}
                         </span>
@@ -410,7 +410,7 @@ export default function PayoutPage() {
                     </td>
                     <td style={tdStyle}>
                       {p.paymentDetails ? (
-                        <span style={{ fontSize: 13, color: '#9CA3AF' }}>{p.paymentDetails}</span>
+                        <span style={{ fontSize: 13, color: '#374151' }}>{p.paymentDetails}</span>
                       ) : (
                         <span style={{ color: '#6B7280', fontSize: 13 }}>—</span>
                       )}

@@ -22,23 +22,23 @@ export default function ReviewPage() {
   }
 
   if (loading) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300, background: '#0B1120' }}>
-      <div style={{ color: '#F0B429', fontSize: 16, fontWeight: 600 }}>Loading...</div>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300, background: '#F8F9FA' }}>
+      <div style={{ color: '#D97706', fontSize: 16, fontWeight: 600 }}>Loading...</div>
     </div>
   )
 
   return (
-    <div style={{ padding: '40px 48px 60px', background: '#0B1120', minHeight: '100vh' }}>
+    <div style={{ padding: '40px 48px 60px', background: '#F8F9FA', minHeight: '100vh' }}>
       {/* Page header */}
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 36, flexWrap: 'wrap', gap: 16 }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
-            <h1 style={{ fontSize: 26, fontWeight: 700, color: '#F9FAFB' }}>Review Shorts</h1>
+            <h1 style={{ fontSize: 26, fontWeight: 700, color: '#111827' }}>Review Shorts</h1>
             {shorts.length > 0 && (
               <span style={{
-                background: 'rgba(240,180,41,0.15)',
-                color: '#F0B429',
-                border: '1px solid rgba(240,180,41,0.30)',
+                background: '#FEF3C7',
+                color: '#92400E',
+                border: '1px solid #FDE68A',
                 fontSize: 12,
                 fontWeight: 600,
                 padding: '3px 10px',
@@ -46,7 +46,7 @@ export default function ReviewPage() {
               }}>{shorts.length} pending</span>
             )}
           </div>
-          <p style={{ fontSize: 14, color: '#6B7280', marginTop: 4 }}>Review Shorts to confirm they use your sound</p>
+          <p style={{ fontSize: 14, color: '#9CA3AF', marginTop: 4 }}>Review Shorts to confirm they use your sound</p>
         </div>
       </div>
 
@@ -58,10 +58,10 @@ export default function ReviewPage() {
           alignItems: 'center',
           justifyContent: 'center',
           padding: '80px 40px',
-          background: '#141E2E',
+          background: '#FFFFFF',
           borderRadius: 16,
-          border: '1px solid rgba(255,255,255,0.08)',
-          boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
+          border: '1px solid #E5E7EB',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
         }}>
           <div style={{
             width: 64,
@@ -75,8 +75,8 @@ export default function ReviewPage() {
           }}>
             <span style={{ fontSize: 32, color: '#10B981', lineHeight: 1 }}>✓</span>
           </div>
-          <h3 style={{ fontSize: 18, fontWeight: 700, color: '#F9FAFB', marginBottom: 8 }}>All caught up!</h3>
-          <p style={{ fontSize: 14, color: '#6B7280' }}>No pending reviews at the moment.</p>
+          <h3 style={{ fontSize: 18, fontWeight: 700, color: '#111827', marginBottom: 8 }}>All caught up!</h3>
+          <p style={{ fontSize: 14, color: '#9CA3AF' }}>No pending reviews at the moment.</p>
         </div>
       )}
 
@@ -102,11 +102,11 @@ function ShortCard({ short, onMark }) {
         display: 'flex',
         alignItems: 'center',
         gap: 20,
-        background: '#141E2E',
+        background: '#FFFFFF',
         borderRadius: 16,
         padding: '20px 24px',
-        border: '1px solid rgba(255,255,255,0.08)',
-        boxShadow: hover ? '0 8px 32px rgba(0,0,0,0.4)' : '0 4px 24px rgba(0,0,0,0.3)',
+        border: '1px solid #E5E7EB',
+        boxShadow: hover ? '0 8px 32px rgba(0,0,0,0.12)' : '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
         transition: 'all 0.2s ease',
       }}
     >
@@ -122,7 +122,7 @@ function ShortCard({ short, onMark }) {
           width: 120,
           height: 68,
           borderRadius: 8,
-          background: 'rgba(240,180,41,0.15)',
+          background: '#FEF3C7',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -135,9 +135,9 @@ function ShortCard({ short, onMark }) {
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
           <span style={{
-            background: 'rgba(240,180,41,0.15)',
-            color: '#F0B429',
-            border: '1px solid rgba(240,180,41,0.30)',
+            background: '#FEF3C7',
+            color: '#92400E',
+            border: '1px solid #FDE68A',
             fontSize: 12,
             fontWeight: 600,
             padding: '3px 10px',
@@ -149,7 +149,7 @@ function ShortCard({ short, onMark }) {
           target="_blank"
           rel="noreferrer"
           style={{
-            color: '#F0B429',
+            color: '#D97706',
             fontSize: 14,
             fontWeight: 500,
             display: 'block',
@@ -157,7 +157,7 @@ function ShortCard({ short, onMark }) {
             textOverflow: 'ellipsis',
             whiteSpace: 'nowrap',
             textDecoration: 'underline',
-            textDecorationColor: 'rgba(240,180,41,0.35)',
+            textDecorationColor: 'rgba(217,119,6,0.35)',
           }}
         >
           {short.url}

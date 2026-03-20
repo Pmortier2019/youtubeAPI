@@ -18,17 +18,17 @@ const inputStyle = {
   padding: '12px 16px',
   fontSize: 14,
   borderRadius: 10,
-  border: '1px solid rgba(255,255,255,0.10)',
+  border: '1px solid #D1D5DB',
   outline: 'none',
-  background: 'rgba(255,255,255,0.04)',
-  color: '#F9FAFB',
+  background: '#FFFFFF',
+  color: '#111827',
   marginTop: 2,
   transition: 'border-color 0.15s ease',
 }
 
 function FormField({ label, children }) {
   return (
-    <label style={{ display: 'flex', flexDirection: 'column', gap: 5, fontSize: 13, fontWeight: 600, color: '#9CA3AF' }}>
+    <label style={{ display: 'flex', flexDirection: 'column', gap: 5, fontSize: 13, fontWeight: 600, color: '#6B7280' }}>
       {label}
       {children}
     </label>
@@ -136,28 +136,28 @@ export default function SoundLibraryPage() {
   )
 
   if (loading) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300, background: '#0B1120' }}>
-      <div style={{ color: '#F0B429', fontSize: 16, fontWeight: 600 }}>Loading library...</div>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300, background: '#F8F9FA' }}>
+      <div style={{ color: '#D97706', fontSize: 16, fontWeight: 600 }}>Loading library...</div>
     </div>
   )
 
   return (
-    <div style={{ padding: '40px 48px 60px', background: '#0B1120', minHeight: '100vh' }}>
+    <div style={{ padding: '40px 48px 60px', background: '#F8F9FA', minHeight: '100vh' }}>
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 36, flexWrap: 'wrap', gap: 16 }}>
         <div>
-          <h1 style={{ fontSize: 26, fontWeight: 700, color: '#F9FAFB' }}>Sound Library</h1>
-          <p style={{ fontSize: 14, color: '#6B7280', marginTop: 4 }}>Manage tracks that can be used in campaigns</p>
+          <h1 style={{ fontSize: 26, fontWeight: 700, color: '#111827' }}>Sound Library</h1>
+          <p style={{ fontSize: 14, color: '#9CA3AF', marginTop: 4 }}>Manage tracks that can be used in campaigns</p>
         </div>
         <button
           onClick={showForm ? closeForm : openForm}
           style={{
             padding: '10px 20px',
             background: showForm
-              ? 'rgba(255,255,255,0.06)'
+              ? '#FFFFFF'
               : 'linear-gradient(135deg, #F0B429, #D97706)',
-            color: showForm ? '#D1D5DB' : '#0B1120',
-            border: showForm ? '1px solid rgba(255,255,255,0.12)' : 'none',
+            color: showForm ? '#374151' : '#111827',
+            border: showForm ? '1px solid #D1D5DB' : 'none',
             borderRadius: 10,
             cursor: 'pointer',
             fontSize: 14,
@@ -173,18 +173,18 @@ export default function SoundLibraryPage() {
       {/* Add form */}
       {showForm && (
         <div style={{
-          background: '#141E2E',
+          background: '#FFFFFF',
           borderRadius: 16,
           padding: '28px 32px',
-          border: '1px solid rgba(255,255,255,0.08)',
-          boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
+          border: '1px solid #E5E7EB',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
           marginBottom: 32,
         }}>
-          <h2 style={{ fontSize: 18, fontWeight: 700, color: '#F9FAFB', marginBottom: 20 }}>New Track</h2>
+          <h2 style={{ fontSize: 18, fontWeight: 700, color: '#111827', marginBottom: 20 }}>New Track</h2>
 
           {/* URL input + preview */}
           <div style={{ marginBottom: 24 }}>
-            <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#9CA3AF', marginBottom: 6 }}>
+            <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#6B7280', marginBottom: 6 }}>
               YouTube URL *
             </label>
             <input
@@ -194,7 +194,7 @@ export default function SoundLibraryPage() {
               onChange={handleUrlChange}
             />
             {previewing && (
-              <div style={{ marginTop: 8, fontSize: 13, color: '#F0B429' }}>Ophalen...</div>
+              <div style={{ marginTop: 8, fontSize: 13, color: '#D97706' }}>Ophalen...</div>
             )}
             {previewError && (
               <div style={{ marginTop: 8, fontSize: 13, color: '#EF4444' }}>{previewError}</div>
@@ -207,8 +207,8 @@ export default function SoundLibraryPage() {
               display: 'flex',
               alignItems: 'center',
               gap: 16,
-              background: 'rgba(240,180,41,0.08)',
-              border: '1px solid rgba(240,180,41,0.25)',
+              background: '#FEF3C7',
+              border: '1px solid #FDE68A',
               borderRadius: 10,
               padding: '12px 16px',
               marginBottom: 24,
@@ -219,7 +219,7 @@ export default function SoundLibraryPage() {
                 style={{ width: 120, height: 68, objectFit: 'cover', borderRadius: 8, flexShrink: 0 }}
               />
               <div>
-                <div style={{ fontSize: 14, fontWeight: 700, color: '#F9FAFB', marginBottom: 2 }}>{previewData.title}</div>
+                <div style={{ fontSize: 14, fontWeight: 700, color: '#111827', marginBottom: 2 }}>{previewData.title}</div>
                 <div style={{ fontSize: 12, color: '#6B7280', fontFamily: 'monospace' }}>{previewData.videoId}</div>
               </div>
             </div>
@@ -244,11 +244,11 @@ export default function SoundLibraryPage() {
             </div>
             {formError && (
               <div style={{
-                background: 'rgba(239,68,68,0.10)',
-                border: '1px solid rgba(239,68,68,0.25)',
+                background: '#FEE2E2',
+                border: '1px solid #FECACA',
                 borderRadius: 10,
                 padding: '10px 14px',
-                color: '#EF4444',
+                color: '#991B1B',
                 fontSize: 14,
                 marginBottom: 16,
               }}>{formError}</div>
@@ -262,7 +262,7 @@ export default function SoundLibraryPage() {
                   background: saving || !form.soundVideoId
                     ? 'rgba(240,180,41,0.4)'
                     : 'linear-gradient(135deg, #F0B429, #D97706)',
-                  color: '#0B1120',
+                  color: '#111827',
                   border: 'none',
                   borderRadius: 10,
                   cursor: saving || !form.soundVideoId ? 'not-allowed' : 'pointer',
@@ -277,9 +277,9 @@ export default function SoundLibraryPage() {
                 onClick={closeForm}
                 style={{
                   padding: '10px 20px',
-                  background: 'rgba(255,255,255,0.06)',
-                  color: '#D1D5DB',
-                  border: '1px solid rgba(255,255,255,0.12)',
+                  background: '#FFFFFF',
+                  color: '#374151',
+                  border: '1px solid #D1D5DB',
                   borderRadius: 10,
                   cursor: 'pointer',
                   fontSize: 14,
@@ -306,26 +306,26 @@ export default function SoundLibraryPage() {
       {/* Empty state */}
       {sounds.length === 0 && !showForm && (
         <div style={{
-          background: '#141E2E',
+          background: '#FFFFFF',
           borderRadius: 16,
           padding: '60px 40px',
           textAlign: 'center',
-          border: '1px solid rgba(255,255,255,0.08)',
-          boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
+          border: '1px solid #E5E7EB',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
         }}>
           <div style={{
             width: 56,
             height: 56,
             borderRadius: '50%',
-            background: 'rgba(240,180,41,0.15)',
+            background: '#FEF3C7',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             fontSize: 28,
             margin: '0 auto 16px',
           }}>🎵</div>
-          <h3 style={{ fontSize: 18, fontWeight: 700, color: '#F9FAFB', marginBottom: 8 }}>No tracks yet</h3>
-          <p style={{ color: '#6B7280', fontSize: 14 }}>No tracks in the library yet. Add one to get started!</p>
+          <h3 style={{ fontSize: 18, fontWeight: 700, color: '#111827', marginBottom: 8 }}>No tracks yet</h3>
+          <p style={{ color: '#9CA3AF', fontSize: 14 }}>No tracks in the library yet. Add one to get started!</p>
         </div>
       )}
 
@@ -357,11 +357,11 @@ function SoundCard({ sound, onDelete }) {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       style={{
-        background: '#141E2E',
+        background: '#FFFFFF',
         borderRadius: 16,
         overflow: 'hidden',
-        border: hover ? '1px solid rgba(240,180,41,0.25)' : '1px solid rgba(255,255,255,0.08)',
-        boxShadow: hover ? '0 8px 32px rgba(0,0,0,0.4)' : '0 4px 24px rgba(0,0,0,0.3)',
+        border: hover ? '1px solid #FDE68A' : '1px solid #E5E7EB',
+        boxShadow: hover ? '0 8px 32px rgba(0,0,0,0.12)' : '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
         transition: 'all 0.2s ease',
         display: 'flex',
         flexDirection: 'column',
@@ -384,9 +384,9 @@ function SoundCard({ sound, onDelete }) {
             {sound.genre && (
               <span style={{
                 display: 'inline-block',
-                background: 'rgba(240,180,41,0.15)',
-                color: '#F0B429',
-                border: '1px solid rgba(240,180,41,0.30)',
+                background: '#FEF3C7',
+                color: '#92400E',
+                border: '1px solid #FDE68A',
                 fontSize: 10,
                 fontWeight: 700,
                 padding: '2px 8px',
@@ -404,8 +404,8 @@ function SoundCard({ sound, onDelete }) {
         </div>
       ) : (
         <div style={{
-          background: 'linear-gradient(135deg, rgba(240,180,41,0.20) 0%, rgba(217,119,6,0.20) 100%)',
-          borderBottom: '1px solid rgba(240,180,41,0.15)',
+          background: 'linear-gradient(135deg, rgba(240,180,41,0.12) 0%, rgba(217,119,6,0.12) 100%)',
+          borderBottom: '1px solid #FDE68A',
           padding: '16px 20px',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
@@ -413,7 +413,7 @@ function SoundCard({ sound, onDelete }) {
               width: 36,
               height: 36,
               borderRadius: 8,
-              background: 'rgba(240,180,41,0.20)',
+              background: '#FEF3C7',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -421,9 +421,9 @@ function SoundCard({ sound, onDelete }) {
             }}>🎵</div>
             {sound.genre && (
               <span style={{
-                background: 'rgba(240,180,41,0.15)',
-                color: '#F0B429',
-                border: '1px solid rgba(240,180,41,0.30)',
+                background: '#FEF3C7',
+                color: '#92400E',
+                border: '1px solid #FDE68A',
                 fontSize: 10,
                 fontWeight: 700,
                 padding: '2px 8px',
@@ -433,9 +433,9 @@ function SoundCard({ sound, onDelete }) {
               }}>{sound.genre}</span>
             )}
           </div>
-          <div style={{ color: '#F9FAFB', fontSize: 16, fontWeight: 800, lineHeight: 1.3 }}>{sound.title}</div>
+          <div style={{ color: '#111827', fontSize: 16, fontWeight: 800, lineHeight: 1.3 }}>{sound.title}</div>
           {sound.artistName && (
-            <div style={{ color: 'rgba(255,255,255,0.65)', fontSize: 13, marginTop: 3 }}>{sound.artistName}</div>
+            <div style={{ color: '#6B7280', fontSize: 13, marginTop: 3 }}>{sound.artistName}</div>
           )}
         </div>
       )}
@@ -446,23 +446,23 @@ function SoundCard({ sound, onDelete }) {
           href={sound.soundUrl}
           target="_blank"
           rel="noreferrer"
-          style={{ fontSize: 13, color: '#F0B429', fontWeight: 600, textDecoration: 'none' }}
+          style={{ fontSize: 13, color: '#D97706', fontWeight: 600, textDecoration: 'none' }}
         >
           Watch on YouTube ↗
         </a>
       </div>
 
       {/* Footer */}
-      <div style={{ padding: '12px 20px 16px', borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', justifyContent: 'flex-end' }}>
+      <div style={{ padding: '12px 20px 16px', borderTop: '1px solid #E5E7EB', display: 'flex', justifyContent: 'flex-end' }}>
         <button
           onClick={() => onDelete(sound.id)}
           onMouseEnter={() => setDelHover(true)}
           onMouseLeave={() => setDelHover(false)}
           style={{
             padding: '6px 14px',
-            background: delHover ? '#EF4444' : 'rgba(239,68,68,0.12)',
-            color: delHover ? '#fff' : '#EF4444',
-            border: '1px solid rgba(239,68,68,0.25)',
+            background: delHover ? '#EF4444' : '#FEE2E2',
+            color: delHover ? '#fff' : '#991B1B',
+            border: '1px solid #FECACA',
             borderRadius: 8,
             cursor: 'pointer',
             fontSize: 12,

@@ -10,9 +10,9 @@ function RoleBadge({ role }) {
       borderRadius: 999,
       fontSize: 12,
       fontWeight: 600,
-      background: isAdmin ? 'rgba(240,180,41,0.15)' : 'rgba(59,130,246,0.15)',
-      color: isAdmin ? '#F0B429' : '#60A5FA',
-      border: isAdmin ? '1px solid rgba(240,180,41,0.30)' : '1px solid rgba(59,130,246,0.30)',
+      background: isAdmin ? '#FEF3C7' : '#DBEAFE',
+      color: isAdmin ? '#92400E' : '#1E40AF',
+      border: isAdmin ? '1px solid #FDE68A' : '1px solid #BFDBFE',
     }}>{role}</span>
   )
 }
@@ -45,28 +45,28 @@ export default function UsersPage() {
   }
 
   if (loading) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300, background: '#0B1120' }}>
-      <div style={{ color: '#F0B429', fontSize: 16, fontWeight: 600 }}>Loading...</div>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300, background: '#F8F9FA' }}>
+      <div style={{ color: '#D97706', fontSize: 16, fontWeight: 600 }}>Loading...</div>
     </div>
   )
 
   return (
-    <div style={{ padding: '40px 48px 60px', background: '#0B1120', minHeight: '100vh' }}>
+    <div style={{ padding: '40px 48px 60px', background: '#F8F9FA', minHeight: '100vh' }}>
       <div style={{ marginBottom: 36 }}>
-        <h1 style={{ fontSize: 26, fontWeight: 700, color: '#F9FAFB' }}>Users</h1>
-        <p style={{ fontSize: 14, color: '#6B7280', marginTop: 4 }}>{users.length} registered accounts</p>
+        <h1 style={{ fontSize: 26, fontWeight: 700, color: '#111827' }}>Users</h1>
+        <p style={{ fontSize: 14, color: '#9CA3AF', marginTop: 4 }}>{users.length} registered accounts</p>
       </div>
 
       <div style={{
-        background: '#141E2E',
+        background: '#FFFFFF',
         borderRadius: 16,
-        border: '1px solid rgba(255,255,255,0.08)',
-        boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
+        border: '1px solid #E5E7EB',
+        boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
         overflow: 'hidden',
       }}>
         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
           <thead>
-            <tr style={{ background: 'rgba(255,255,255,0.03)' }}>
+            <tr style={{ background: '#F9FAFB' }}>
               {['Name', 'Email', 'Role', 'Verified', 'Actions'].map(h => (
                 <th key={h} style={{
                   textAlign: 'left',
@@ -84,14 +84,14 @@ export default function UsersPage() {
             {users.map(u => (
               <tr
                 key={u.id}
-                style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
-                onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.03)'}
+                style={{ borderTop: '1px solid #E5E7EB' }}
+                onMouseEnter={e => e.currentTarget.style.background = '#F9FAFB'}
                 onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
               >
-                <td style={{ padding: '14px 20px', fontWeight: 600, color: '#F9FAFB', fontSize: 14 }}>
+                <td style={{ padding: '14px 20px', fontWeight: 600, color: '#111827', fontSize: 14 }}>
                   {u.creatorName ?? '—'}
                 </td>
-                <td style={{ padding: '14px 20px', fontSize: 14, color: '#D1D5DB' }}>
+                <td style={{ padding: '14px 20px', fontSize: 14, color: '#374151' }}>
                   {u.email}
                 </td>
                 <td style={{ padding: '14px 20px' }}>
@@ -100,7 +100,7 @@ export default function UsersPage() {
                 <td style={{ padding: '14px 20px', fontSize: 14 }}>
                   {u.emailVerified
                     ? <span style={{ color: '#10B981', fontWeight: 600 }}>✓ Verified</span>
-                    : <span style={{ color: '#F0B429', fontWeight: 600 }}>⏳ Pending</span>}
+                    : <span style={{ color: '#D97706', fontWeight: 600 }}>⏳ Pending</span>}
                 </td>
                 <td style={{ padding: '14px 20px' }}>
                   <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
@@ -111,23 +111,23 @@ export default function UsersPage() {
                         padding: '6px 10px',
                         fontSize: 13,
                         borderRadius: 10,
-                        border: '1px solid rgba(255,255,255,0.10)',
-                        background: 'rgba(255,255,255,0.04)',
-                        color: '#F9FAFB',
+                        border: '1px solid #D1D5DB',
+                        background: '#FFFFFF',
+                        color: '#111827',
                         cursor: 'pointer',
                         outline: 'none',
                       }}
                     >
-                      <option value="CREATOR" style={{ background: '#141E2E' }}>CREATOR</option>
-                      <option value="ADMIN" style={{ background: '#141E2E' }}>ADMIN</option>
+                      <option value="CREATOR" style={{ background: '#FFFFFF' }}>CREATOR</option>
+                      <option value="ADMIN" style={{ background: '#FFFFFF' }}>ADMIN</option>
                     </select>
                     <button
                       onClick={() => handleDelete(u.id, u.email)}
                       style={{
                         padding: '6px 14px',
-                        background: 'rgba(239,68,68,0.15)',
-                        color: '#EF4444',
-                        border: '1px solid rgba(239,68,68,0.30)',
+                        background: '#FEE2E2',
+                        color: '#991B1B',
+                        border: '1px solid #FECACA',
                         borderRadius: 10,
                         cursor: 'pointer',
                         fontSize: 13,
@@ -135,7 +135,7 @@ export default function UsersPage() {
                         transition: 'all 0.15s ease',
                       }}
                       onMouseEnter={e => { e.currentTarget.style.background = '#EF4444'; e.currentTarget.style.color = '#fff' }}
-                      onMouseLeave={e => { e.currentTarget.style.background = 'rgba(239,68,68,0.15)'; e.currentTarget.style.color = '#EF4444' }}
+                      onMouseLeave={e => { e.currentTarget.style.background = '#FEE2E2'; e.currentTarget.style.color = '#991B1B' }}
                     >Delete</button>
                   </div>
                 </td>

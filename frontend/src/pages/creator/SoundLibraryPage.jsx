@@ -19,23 +19,23 @@ export default function SoundLibraryPage() {
   )
 
   if (loading) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300, background: '#0B1120' }}>
-      <div style={{ color: '#F0B429', fontSize: 16, fontWeight: 600 }}>Loading sounds...</div>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300, background: '#F8F9FA' }}>
+      <div style={{ color: '#D97706', fontSize: 16, fontWeight: 600 }}>Loading sounds...</div>
     </div>
   )
 
   return (
-    <div style={{ padding: '40px 48px 60px', background: '#0B1120', minHeight: '100vh' }}>
+    <div style={{ padding: '40px 48px 60px', background: '#F8F9FA', minHeight: '100vh' }}>
       {/* Page header */}
       <div style={{ marginBottom: 32 }}>
-        <h1 style={{ fontSize: 26, fontWeight: 700, color: '#F9FAFB', marginBottom: 6 }}>Sound Library</h1>
-        <p style={{ fontSize: 14, color: '#9CA3AF' }}>Use these sounds in your YouTube Shorts to earn money</p>
+        <h1 style={{ fontSize: 26, fontWeight: 700, color: '#111827', marginBottom: 6 }}>Sound Library</h1>
+        <p style={{ fontSize: 14, color: '#6B7280' }}>Use these sounds in your YouTube Shorts to earn money</p>
       </div>
 
       {/* Info banner */}
       <div style={{
-        background: 'linear-gradient(135deg, #1A2540, #141E2E)',
-        border: '1px solid rgba(240,180,41,0.20)',
+        background: '#FFFBEB',
+        border: '1px solid #FDE68A',
         borderRadius: 16,
         padding: '16px 20px',
         marginBottom: 32,
@@ -44,22 +44,22 @@ export default function SoundLibraryPage() {
         gap: 12,
       }}>
         <span style={{ fontSize: 20, flexShrink: 0, marginTop: 1 }}>ℹ️</span>
-        <div style={{ fontSize: 14, color: '#9CA3AF', lineHeight: 1.7 }}>
-          <strong style={{ color: '#F9FAFB' }}>How it works:</strong> Use one of these tracks in your YouTube Short, link your channel and scrape your Shorts. We check whether the sound was used and count your views towards your earnings.
+        <div style={{ fontSize: 14, color: '#92400E', lineHeight: 1.7 }}>
+          <strong style={{ color: '#92400E' }}>How it works:</strong> Use one of these tracks in your YouTube Short, link your channel and scrape your Shorts. We check whether the sound was used and count your views towards your earnings.
         </div>
       </div>
 
       {sounds.length === 0 ? (
         <div style={{
-          background: '#141E2E',
+          background: '#FFFFFF',
           borderRadius: 16,
           padding: '60px 40px',
           textAlign: 'center',
-          border: '1px solid rgba(255,255,255,0.08)',
-          boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
+          border: '1px solid #E5E7EB',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
         }}>
           <span style={{ fontSize: 48, display: 'block', marginBottom: 16 }}>🎵</span>
-          <div style={{ fontSize: 16, fontWeight: 700, color: '#F9FAFB', marginBottom: 8 }}>No sounds available</div>
+          <div style={{ fontSize: 16, fontWeight: 700, color: '#111827', marginBottom: 8 }}>No sounds available</div>
           <div style={{ fontSize: 14, color: '#6B7280' }}>No tracks have been added to the library yet.</div>
         </div>
       ) : (
@@ -70,10 +70,10 @@ export default function SoundLibraryPage() {
                 padding: '12px 16px',
                 fontSize: 14,
                 borderRadius: 10,
-                border: searchFocus ? '2px solid #F0B429' : '1px solid rgba(255,255,255,0.10)',
+                border: searchFocus ? '2px solid #F0B429' : '1px solid #D1D5DB',
                 outline: 'none',
-                background: 'rgba(255,255,255,0.04)',
-                color: '#F9FAFB',
+                background: '#FFFFFF',
+                color: '#111827',
                 width: '100%',
                 maxWidth: 360,
                 boxSizing: 'border-box',
@@ -115,11 +115,11 @@ function SoundCard({ sound }) {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       style={{
-        background: '#141E2E',
+        background: '#FFFFFF',
         borderRadius: 16,
         overflow: 'hidden',
-        border: '1px solid rgba(255,255,255,0.08)',
-        boxShadow: hover ? '0 8px 32px rgba(0,0,0,0.50)' : '0 4px 24px rgba(0,0,0,0.3)',
+        border: '1px solid #E5E7EB',
+        boxShadow: hover ? '0 8px 32px rgba(0,0,0,0.10)' : '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
         transition: 'all 0.2s ease',
         display: 'flex',
         flexDirection: 'column',
@@ -144,7 +144,7 @@ function SoundCard({ sound }) {
               top: 10,
               left: 12,
               background: 'rgba(240,180,41,0.90)',
-              color: '#0B1120',
+              color: '#111827',
               fontSize: 10,
               fontWeight: 700,
               letterSpacing: 0.5,
@@ -170,14 +170,14 @@ function SoundCard({ sound }) {
           flexDirection: 'column',
           justifyContent: 'flex-end',
         }}>
-          <div style={{ color: '#0B1120', fontSize: 16, fontWeight: 800 }}>{sound.title}</div>
+          <div style={{ color: '#111827', fontSize: 16, fontWeight: 800 }}>{sound.title}</div>
           {sound.artistName && <div style={{ color: 'rgba(11,17,32,0.70)', fontSize: 13 }}>{sound.artistName}</div>}
         </div>
       )}
 
       {/* Footer */}
-      <div style={{ padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-        <span style={{ fontSize: 13, color: '#9CA3AF' }}>
+      <div style={{ padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid #E5E7EB' }}>
+        <span style={{ fontSize: 13, color: '#6B7280' }}>
           {sound.artistName || '—'}
         </span>
         <a
@@ -190,7 +190,7 @@ function SoundCard({ sound }) {
             gap: 5,
             padding: '7px 14px',
             background: 'linear-gradient(135deg, #F0B429, #D97706)',
-            color: '#0B1120',
+            color: '#111827',
             borderRadius: 8,
             fontSize: 12,
             fontWeight: 700,
