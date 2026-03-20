@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react'
 import { getCampaigns, getCampaignParticipations, updateParticipationStatus } from '../../api'
 
 const STATUS_CONFIG = {
-  PENDING_REVIEW: { bg: '#fef9c3', color: '#a16207', dot: '#f59e0b', label: 'Pending Review' },
-  APPROVED: { bg: '#dcfce7', color: '#15803d', dot: '#22c55e', label: 'Approved' },
-  REJECTED: { bg: '#fee2e2', color: '#b91c1c', dot: '#ef4444', label: 'Rejected' },
+  PENDING_REVIEW: { bg: 'rgba(240,180,41,0.15)',  color: '#F0B429', dot: '#F0B429', border: 'rgba(240,180,41,0.30)',  label: 'Pending Review' },
+  APPROVED:       { bg: 'rgba(16,185,129,0.15)',  color: '#10B981', dot: '#10B981', border: 'rgba(16,185,129,0.30)', label: 'Approved'       },
+  REJECTED:       { bg: 'rgba(239,68,68,0.15)',   color: '#EF4444', dot: '#EF4444', border: 'rgba(239,68,68,0.30)', label: 'Rejected'        },
 }
 
 function StatusBadge({ status }) {
-  const s = STATUS_CONFIG[status] || { bg: '#f3f4f6', color: '#6b7280', dot: '#9ca3af', label: status }
+  const s = STATUS_CONFIG[status] || { bg: 'rgba(107,114,128,0.15)', color: '#9CA3AF', dot: '#6B7280', border: 'rgba(107,114,128,0.30)', label: status }
   return (
     <span style={{
       display: 'inline-flex',
@@ -17,9 +17,10 @@ function StatusBadge({ status }) {
       background: s.bg,
       color: s.color,
       fontSize: 12,
-      fontWeight: 700,
+      fontWeight: 600,
       padding: '3px 10px',
       borderRadius: 999,
+      border: `1px solid ${s.border}`,
     }}>
       <span style={{ width: 6, height: 6, borderRadius: '50%', background: s.dot, display: 'inline-block' }} />
       {s.label}
@@ -66,58 +67,58 @@ export default function ParticipationsPage() {
   }
 
   if (loadingCampaigns) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300 }}>
-      <div style={{ color: '#C9A84C', fontSize: 16, fontWeight: 600 }}>Loading...</div>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300, background: '#0B1120' }}>
+      <div style={{ color: '#F0B429', fontSize: 16, fontWeight: 600 }}>Loading...</div>
     </div>
   )
 
   return (
-    <div style={{ padding: '40px 40px 60px' }}>
+    <div style={{ padding: '40px 48px 60px', background: '#0B1120', minHeight: '100vh' }}>
       {/* Page header */}
       <div style={{ marginBottom: 36 }}>
-        <h1 style={{ fontSize: 28, fontWeight: 800, color: '#1A1A1A', marginBottom: 6, fontFamily: 'Georgia, "Times New Roman", serif' }}>Participations</h1>
-        <p style={{ fontSize: 14, color: '#6B7280' }}>Review creator submissions for each campaign</p>
+        <h1 style={{ fontSize: 26, fontWeight: 700, color: '#F9FAFB', marginBottom: 6 }}>Participations</h1>
+        <p style={{ fontSize: 14, color: '#9CA3AF' }}>Review creator submissions for each campaign</p>
       </div>
 
       {/* Campaign selector */}
       <div style={{
-        background: '#fff',
-        borderRadius: 12,
+        background: '#141E2E',
+        borderRadius: 16,
         padding: '20px 24px',
-        border: '1px solid #EAE4D9',
-        boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
+        border: '1px solid rgba(255,255,255,0.08)',
+        boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
         marginBottom: 28,
         display: 'flex',
         alignItems: 'center',
         gap: 16,
       }}>
-        <label style={{ fontSize: 14, fontWeight: 600, color: '#374151', whiteSpace: 'nowrap' }}>Campaign:</label>
+        <label style={{ fontSize: 14, fontWeight: 600, color: '#9CA3AF', whiteSpace: 'nowrap' }}>Campaign:</label>
         <select
           value={selectedId}
           onChange={handleCampaignChange}
           style={{
             flex: 1,
             maxWidth: 360,
-            padding: '10px 14px',
+            padding: '12px 16px',
             fontSize: 14,
-            borderRadius: 8,
-            border: '1.5px solid #EAE4D9',
-            background: '#FDFAF5',
-            color: '#1A1A1A',
+            borderRadius: 10,
+            border: '1px solid rgba(255,255,255,0.10)',
+            background: 'rgba(255,255,255,0.04)',
+            color: '#F9FAFB',
             outline: 'none',
             cursor: 'pointer',
           }}
         >
-          <option value="">— Select a campaign —</option>
+          <option value="" style={{ background: '#141E2E' }}>— Select a campaign —</option>
           {campaigns.map(c => (
-            <option key={c.id} value={c.id}>{c.title}</option>
+            <option key={c.id} value={c.id} style={{ background: '#141E2E' }}>{c.title}</option>
           ))}
         </select>
         {selectedId && participations.length > 0 && (
           <span style={{
-            background: '#FDF8EE',
-            color: '#A07830',
-            border: '1px solid #E8D9A0',
+            background: 'rgba(240,180,41,0.15)',
+            color: '#F0B429',
+            border: '1px solid rgba(240,180,41,0.30)',
             fontSize: 12,
             fontWeight: 700,
             padding: '4px 12px',
@@ -127,19 +128,19 @@ export default function ParticipationsPage() {
       </div>
 
       {loadingParts && (
-        <div style={{ textAlign: 'center', padding: '48px', color: '#C9A84C', fontWeight: 600 }}>
+        <div style={{ textAlign: 'center', padding: '48px', color: '#F0B429', fontWeight: 600 }}>
           Loading participations...
         </div>
       )}
 
       {!loadingParts && selectedId && participations.length === 0 && (
         <div style={{
-          background: '#fff',
-          borderRadius: 12,
+          background: '#141E2E',
+          borderRadius: 16,
           padding: '60px 40px',
           textAlign: 'center',
-          border: '1px solid #EAE4D9',
-          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
         }}>
           <span style={{ fontSize: 40, display: 'block', marginBottom: 12 }}>👥</span>
           <p style={{ color: '#6B7280', fontSize: 15 }}>No participations for this campaign yet.</p>
@@ -148,23 +149,23 @@ export default function ParticipationsPage() {
 
       {!loadingParts && participations.length > 0 && (
         <div style={{
-          background: '#fff',
-          borderRadius: 12,
-          border: '1px solid #EAE4D9',
-          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
+          background: '#141E2E',
+          borderRadius: 16,
+          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
           overflow: 'hidden',
         }}>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
-              <tr style={{ background: '#FDFAF5' }}>
+              <tr style={{ background: 'rgba(255,255,255,0.03)' }}>
                 {['Video', 'Creator', 'Status', 'Joined', 'Actions'].map(h => (
                   <th key={h} style={{
                     textAlign: 'left',
                     padding: '12px 20px',
-                    fontSize: 12,
+                    fontSize: 11,
                     fontWeight: 700,
                     color: '#6B7280',
-                    letterSpacing: 0.5,
+                    letterSpacing: 0.8,
                     textTransform: 'uppercase',
                   }}>{h}</th>
                 ))}
@@ -176,8 +177,8 @@ export default function ParticipationsPage() {
                 return (
                   <tr
                     key={p.id}
-                    style={{ borderTop: '1px solid #EAE4D9' }}
-                    onMouseEnter={e => e.currentTarget.style.background = '#FDFAF5'}
+                    style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
+                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.03)'}
                     onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                   >
                     <td style={{ padding: '14px 20px' }}>
@@ -190,16 +191,27 @@ export default function ParticipationsPage() {
                           />
                         </a>
                       ) : p.url ? (
-                        <a href={p.url} target="_blank" rel="noreferrer" style={{ color: '#A07830', fontSize: 13 }}>{p.url}</a>
-                      ) : <span style={{ color: '#cbd5e1' }}>—</span>}
+                        <a href={p.url} target="_blank" rel="noreferrer" style={{ color: '#F0B429', fontSize: 13 }}>{p.url}</a>
+                      ) : <span style={{ color: '#6B7280' }}>—</span>}
                     </td>
-                    <td style={{ padding: '14px 20px', fontSize: 14, fontWeight: 600, color: '#1A1A1A' }}>
-                      {p.creatorName ?? p.creatorId ?? '—'}
+                    <td style={{ padding: '14px 20px' }}>
+                      <span style={{
+                        display: 'inline-block',
+                        background: 'rgba(240,180,41,0.10)',
+                        color: '#F0B429',
+                        border: '1px solid rgba(240,180,41,0.25)',
+                        fontSize: 13,
+                        fontWeight: 600,
+                        padding: '3px 10px',
+                        borderRadius: 999,
+                      }}>
+                        {p.creatorName ?? p.creatorId ?? '—'}
+                      </span>
                     </td>
                     <td style={{ padding: '14px 20px' }}>
                       <StatusBadge status={p.status} />
                     </td>
-                    <td style={{ padding: '14px 20px', fontSize: 13, color: '#94a3b8' }}>
+                    <td style={{ padding: '14px 20px', fontSize: 13, color: '#6B7280' }}>
                       {p.joinedAt ? new Date(p.joinedAt).toLocaleDateString() : '—'}
                     </td>
                     <td style={{ padding: '14px 20px' }}>
@@ -209,21 +221,21 @@ export default function ParticipationsPage() {
                             onClick={() => handleStatus(p.id, 'APPROVED')}
                             style={{
                               padding: '6px 14px',
-                              background: '#22c55e',
+                              background: '#10B981',
                               color: '#fff',
                               border: 'none',
                               borderRadius: 7,
                               cursor: 'pointer',
                               fontSize: 13,
                               fontWeight: 700,
-                              boxShadow: '0 2px 6px rgba(34,197,94,0.25)',
+                              boxShadow: '0 2px 6px rgba(16,185,129,0.30)',
                             }}
                           >Approve</button>
                           <button
                             onClick={() => handleStatus(p.id, 'REJECTED')}
                             style={{
                               padding: '6px 14px',
-                              background: '#ef4444',
+                              background: '#EF4444',
                               color: '#fff',
                               border: 'none',
                               borderRadius: 7,

@@ -22,31 +22,31 @@ export default function ReviewPage() {
   }
 
   if (loading) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300 }}>
-      <div style={{ color: '#C9A84C', fontSize: 16, fontWeight: 600 }}>Loading...</div>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300, background: '#0B1120' }}>
+      <div style={{ color: '#F0B429', fontSize: 16, fontWeight: 600 }}>Loading...</div>
     </div>
   )
 
   return (
-    <div style={{ padding: '40px 40px 60px' }}>
+    <div style={{ padding: '40px 48px 60px', background: '#0B1120', minHeight: '100vh' }}>
       {/* Page header */}
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 36, flexWrap: 'wrap', gap: 16 }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
-            <h1 style={{ fontSize: 28, fontWeight: 800, color: '#1A1A1A', fontFamily: 'Georgia, "Times New Roman", serif' }}>Review Shorts</h1>
+            <h1 style={{ fontSize: 26, fontWeight: 700, color: '#F9FAFB' }}>Review Shorts</h1>
             {shorts.length > 0 && (
               <span style={{
-                background: '#FDF8EE',
-                color: '#A07830',
-                border: '1px solid #E8D9A0',
-                fontSize: 13,
-                fontWeight: 700,
-                padding: '3px 12px',
+                background: 'rgba(240,180,41,0.15)',
+                color: '#F0B429',
+                border: '1px solid rgba(240,180,41,0.30)',
+                fontSize: 12,
+                fontWeight: 600,
+                padding: '3px 10px',
                 borderRadius: 999,
               }}>{shorts.length} pending</span>
             )}
           </div>
-          <p style={{ fontSize: 14, color: '#6B7280' }}>Review Shorts to confirm they use your sound</p>
+          <p style={{ fontSize: 14, color: '#6B7280', marginTop: 4 }}>Review Shorts to confirm they use your sound</p>
         </div>
       </div>
 
@@ -58,13 +58,24 @@ export default function ReviewPage() {
           alignItems: 'center',
           justifyContent: 'center',
           padding: '80px 40px',
-          background: '#fff',
+          background: '#141E2E',
           borderRadius: 16,
-          border: '1px solid #EAE4D9',
-          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
         }}>
-          <span style={{ fontSize: 64, marginBottom: 16 }}>🎉</span>
-          <h3 style={{ fontSize: 20, fontWeight: 700, color: '#1A1A1A', marginBottom: 8, fontFamily: 'Georgia, "Times New Roman", serif' }}>All caught up!</h3>
+          <div style={{
+            width: 64,
+            height: 64,
+            borderRadius: '50%',
+            border: '3px solid #10B981',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginBottom: 20,
+          }}>
+            <span style={{ fontSize: 32, color: '#10B981', lineHeight: 1 }}>✓</span>
+          </div>
+          <h3 style={{ fontSize: 18, fontWeight: 700, color: '#F9FAFB', marginBottom: 8 }}>All caught up!</h3>
           <p style={{ fontSize: 14, color: '#6B7280' }}>No pending reviews at the moment.</p>
         </div>
       )}
@@ -91,11 +102,11 @@ function ShortCard({ short, onMark }) {
         display: 'flex',
         alignItems: 'center',
         gap: 20,
-        background: '#fff',
-        borderRadius: 12,
+        background: '#141E2E',
+        borderRadius: 16,
         padding: '20px 24px',
-        border: '1px solid #EAE4D9',
-        boxShadow: hover ? '0 6px 24px rgba(0,0,0,0.09)' : '0 1px 4px rgba(0,0,0,0.06)',
+        border: '1px solid rgba(255,255,255,0.08)',
+        boxShadow: hover ? '0 8px 32px rgba(0,0,0,0.4)' : '0 4px 24px rgba(0,0,0,0.3)',
         transition: 'all 0.2s ease',
       }}
     >
@@ -111,7 +122,7 @@ function ShortCard({ short, onMark }) {
           width: 120,
           height: 68,
           borderRadius: 8,
-          background: '#FDFAF5',
+          background: 'rgba(240,180,41,0.15)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -124,12 +135,12 @@ function ShortCard({ short, onMark }) {
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
           <span style={{
-            background: '#FDF8EE',
-            color: '#A07830',
-            border: '1px solid #E8D9A0',
+            background: 'rgba(240,180,41,0.15)',
+            color: '#F0B429',
+            border: '1px solid rgba(240,180,41,0.30)',
             fontSize: 12,
-            fontWeight: 700,
-            padding: '2px 10px',
+            fontWeight: 600,
+            padding: '3px 10px',
             borderRadius: 999,
           }}>{short.creator}</span>
         </div>
@@ -138,7 +149,7 @@ function ShortCard({ short, onMark }) {
           target="_blank"
           rel="noreferrer"
           style={{
-            color: '#1e293b',
+            color: '#F0B429',
             fontSize: 14,
             fontWeight: 500,
             display: 'block',
@@ -146,7 +157,7 @@ function ShortCard({ short, onMark }) {
             textOverflow: 'ellipsis',
             whiteSpace: 'nowrap',
             textDecoration: 'underline',
-            textDecorationColor: '#EAE4D9',
+            textDecorationColor: 'rgba(240,180,41,0.35)',
           }}
         >
           {short.url}
@@ -159,18 +170,18 @@ function ShortCard({ short, onMark }) {
           onClick={() => onMark(short.id, true)}
           style={{
             padding: '10px 18px',
-            background: '#22c55e',
+            background: '#10B981',
             color: '#fff',
             border: 'none',
-            borderRadius: 8,
+            borderRadius: 10,
             cursor: 'pointer',
             fontSize: 14,
-            fontWeight: 600,
+            fontWeight: 700,
             transition: 'all 0.15s ease',
-            boxShadow: '0 2px 6px rgba(34,197,94,0.3)',
+            boxShadow: '0 2px 12px rgba(16,185,129,0.35)',
           }}
-          onMouseEnter={e => e.currentTarget.style.background = '#16a34a'}
-          onMouseLeave={e => e.currentTarget.style.background = '#22c55e'}
+          onMouseEnter={e => { e.currentTarget.style.background = '#059669'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(16,185,129,0.45)' }}
+          onMouseLeave={e => { e.currentTarget.style.background = '#10B981'; e.currentTarget.style.boxShadow = '0 2px 12px rgba(16,185,129,0.35)' }}
         >
           ✓ My Sound
         </button>
@@ -178,18 +189,18 @@ function ShortCard({ short, onMark }) {
           onClick={() => onMark(short.id, false)}
           style={{
             padding: '10px 18px',
-            background: '#ef4444',
+            background: '#EF4444',
             color: '#fff',
             border: 'none',
-            borderRadius: 8,
+            borderRadius: 10,
             cursor: 'pointer',
             fontSize: 14,
-            fontWeight: 600,
+            fontWeight: 700,
             transition: 'all 0.15s ease',
-            boxShadow: '0 2px 6px rgba(239,68,68,0.3)',
+            boxShadow: '0 2px 12px rgba(239,68,68,0.35)',
           }}
-          onMouseEnter={e => e.currentTarget.style.background = '#dc2626'}
-          onMouseLeave={e => e.currentTarget.style.background = '#ef4444'}
+          onMouseEnter={e => { e.currentTarget.style.background = '#DC2626'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(239,68,68,0.45)' }}
+          onMouseLeave={e => { e.currentTarget.style.background = '#EF4444'; e.currentTarget.style.boxShadow = '0 2px 12px rgba(239,68,68,0.35)' }}
         >
           ✗ Not My Sound
         </button>

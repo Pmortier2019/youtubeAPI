@@ -6,13 +6,13 @@ function RoleBadge({ role }) {
   return (
     <span style={{
       display: 'inline-block',
-      padding: '2px 10px',
+      padding: '3px 10px',
       borderRadius: 999,
       fontSize: 12,
-      fontWeight: 700,
-      background: isAdmin ? '#FDF8EE' : '#FDFAF5',
-      color: isAdmin ? '#A07830' : '#6B7280',
-      border: isAdmin ? '1px solid #E8D9A0' : '1px solid #EAE4D9',
+      fontWeight: 600,
+      background: isAdmin ? 'rgba(240,180,41,0.15)' : 'rgba(59,130,246,0.15)',
+      color: isAdmin ? '#F0B429' : '#60A5FA',
+      border: isAdmin ? '1px solid rgba(240,180,41,0.30)' : '1px solid rgba(59,130,246,0.30)',
     }}>{role}</span>
   )
 }
@@ -45,30 +45,36 @@ export default function UsersPage() {
   }
 
   if (loading) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300 }}>
-      <div style={{ color: '#C9A84C', fontSize: 16, fontWeight: 600 }}>Loading...</div>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300, background: '#0B1120' }}>
+      <div style={{ color: '#F0B429', fontSize: 16, fontWeight: 600 }}>Loading...</div>
     </div>
   )
 
   return (
-    <div style={{ padding: '40px 40px 60px' }}>
+    <div style={{ padding: '40px 48px 60px', background: '#0B1120', minHeight: '100vh' }}>
       <div style={{ marginBottom: 36 }}>
-        <h1 style={{ fontSize: 28, fontWeight: 800, color: '#1A1A1A', marginBottom: 6, fontFamily: 'Georgia, "Times New Roman", serif' }}>Users</h1>
-        <p style={{ fontSize: 14, color: '#6B7280' }}>{users.length} registered accounts</p>
+        <h1 style={{ fontSize: 26, fontWeight: 700, color: '#F9FAFB' }}>Users</h1>
+        <p style={{ fontSize: 14, color: '#6B7280', marginTop: 4 }}>{users.length} registered accounts</p>
       </div>
 
-      <div style={{ background: '#fff', borderRadius: 12, border: '1px solid #EAE4D9', boxShadow: '0 1px 4px rgba(0,0,0,0.06)', overflow: 'hidden' }}>
+      <div style={{
+        background: '#141E2E',
+        borderRadius: 16,
+        border: '1px solid rgba(255,255,255,0.08)',
+        boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
+        overflow: 'hidden',
+      }}>
         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
           <thead>
-            <tr style={{ background: '#FDFAF5' }}>
+            <tr style={{ background: 'rgba(255,255,255,0.03)' }}>
               {['Name', 'Email', 'Role', 'Verified', 'Actions'].map(h => (
                 <th key={h} style={{
                   textAlign: 'left',
                   padding: '12px 20px',
-                  fontSize: 12,
+                  fontSize: 11,
                   fontWeight: 700,
                   color: '#6B7280',
-                  letterSpacing: 0.5,
+                  letterSpacing: '0.8px',
                   textTransform: 'uppercase',
                 }}>{h}</th>
               ))}
@@ -78,14 +84,14 @@ export default function UsersPage() {
             {users.map(u => (
               <tr
                 key={u.id}
-                style={{ borderTop: '1px solid #EAE4D9' }}
-                onMouseEnter={e => e.currentTarget.style.background = '#FDFAF5'}
+                style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
+                onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.03)'}
                 onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
               >
-                <td style={{ padding: '14px 20px', fontWeight: 600, color: '#1A1A1A', fontSize: 14 }}>
+                <td style={{ padding: '14px 20px', fontWeight: 600, color: '#F9FAFB', fontSize: 14 }}>
                   {u.creatorName ?? '—'}
                 </td>
-                <td style={{ padding: '14px 20px', fontSize: 14, color: '#475569' }}>
+                <td style={{ padding: '14px 20px', fontSize: 14, color: '#D1D5DB' }}>
                   {u.email}
                 </td>
                 <td style={{ padding: '14px 20px' }}>
@@ -93,8 +99,8 @@ export default function UsersPage() {
                 </td>
                 <td style={{ padding: '14px 20px', fontSize: 14 }}>
                   {u.emailVerified
-                    ? <span style={{ color: '#16a34a', fontWeight: 600 }}>✓ Verified</span>
-                    : <span style={{ color: '#f59e0b', fontWeight: 600 }}>⏳ Pending</span>}
+                    ? <span style={{ color: '#10B981', fontWeight: 600 }}>✓ Verified</span>
+                    : <span style={{ color: '#F0B429', fontWeight: 600 }}>⏳ Pending</span>}
                 </td>
                 <td style={{ padding: '14px 20px' }}>
                   <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
@@ -102,29 +108,34 @@ export default function UsersPage() {
                       value={u.role}
                       onChange={e => handleRoleChange(u.id, e.target.value)}
                       style={{
-                        padding: '5px 10px',
+                        padding: '6px 10px',
                         fontSize: 13,
-                        borderRadius: 7,
-                        border: '1.5px solid #EAE4D9',
-                        background: '#FDFAF5',
+                        borderRadius: 10,
+                        border: '1px solid rgba(255,255,255,0.10)',
+                        background: 'rgba(255,255,255,0.04)',
+                        color: '#F9FAFB',
                         cursor: 'pointer',
+                        outline: 'none',
                       }}
                     >
-                      <option value="CREATOR">CREATOR</option>
-                      <option value="ADMIN">ADMIN</option>
+                      <option value="CREATOR" style={{ background: '#141E2E' }}>CREATOR</option>
+                      <option value="ADMIN" style={{ background: '#141E2E' }}>ADMIN</option>
                     </select>
                     <button
                       onClick={() => handleDelete(u.id, u.email)}
                       style={{
-                        padding: '5px 12px',
-                        background: '#fee2e2',
-                        color: '#B91C1C',
-                        border: 'none',
-                        borderRadius: 7,
+                        padding: '6px 14px',
+                        background: 'rgba(239,68,68,0.15)',
+                        color: '#EF4444',
+                        border: '1px solid rgba(239,68,68,0.30)',
+                        borderRadius: 10,
                         cursor: 'pointer',
                         fontSize: 13,
                         fontWeight: 600,
+                        transition: 'all 0.15s ease',
                       }}
+                      onMouseEnter={e => { e.currentTarget.style.background = '#EF4444'; e.currentTarget.style.color = '#fff' }}
+                      onMouseLeave={e => { e.currentTarget.style.background = 'rgba(239,68,68,0.15)'; e.currentTarget.style.color = '#EF4444' }}
                     >Delete</button>
                   </div>
                 </td>

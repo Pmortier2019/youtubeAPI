@@ -2,11 +2,30 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { register, resendVerification } from '../api'
 
+const inputBase = {
+  width: '100%',
+  padding: '12px 16px',
+  fontSize: 15,
+  borderRadius: 10,
+  outline: 'none',
+  background: 'rgba(255,255,255,0.04)',
+  color: '#F9FAFB',
+  transition: 'border 0.15s ease',
+  boxSizing: 'border-box',
+}
+
 function FormInput({ label, type, name, placeholder, value, onChange, required, minLength, hint }) {
   const [focused, setFocused] = useState(false)
   return (
     <div>
-      <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#374151', marginBottom: 6 }}>
+      <label style={{
+        display: 'block',
+        fontSize: 13,
+        fontWeight: 600,
+        color: '#9CA3AF',
+        marginBottom: 7,
+        letterSpacing: '0.2px',
+      }}>
         {label}
       </label>
       <input
@@ -20,19 +39,15 @@ function FormInput({ label, type, name, placeholder, value, onChange, required, 
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         style={{
-          width: '100%',
-          height: 48,
-          padding: '0 14px',
-          fontSize: 15,
-          borderRadius: 10,
-          border: focused ? '2px solid #C9A84C' : '1.5px solid #EAE4D9',
-          outline: 'none',
-          background: '#FDFAF5',
-          color: '#1A1A1A',
-          transition: 'border 0.15s ease',
+          ...inputBase,
+          border: focused
+            ? '2px solid #F0B429'
+            : '1px solid rgba(255,255,255,0.10)',
         }}
       />
-      {hint && <p style={{ fontSize: 12, color: '#94a3b8', marginTop: 5 }}>{hint}</p>}
+      {hint && (
+        <p style={{ fontSize: 12, color: '#6B7280', marginTop: 5 }}>{hint}</p>
+      )}
     </div>
   )
 }
@@ -70,83 +85,187 @@ export default function RegisterPage() {
 
   if (registered) {
     return (
-      <div style={{ display: 'flex', minHeight: '100vh', alignItems: 'center', justifyContent: 'center', background: '#F7F4EF' }}>
-        <div style={{ maxWidth: 440, width: '100%', background: '#fff', borderRadius: 16, padding: '48px 40px', boxShadow: '0 1px 4px rgba(0,0,0,0.06)', border: '1px solid #EAE4D9', textAlign: 'center' }}>
-          <div style={{ fontSize: 48, marginBottom: 16 }}>📬</div>
-          <h2 style={{ fontSize: 24, fontWeight: 800, color: '#1A1A1A', marginBottom: 12, fontFamily: 'Georgia, "Times New Roman", serif' }}>Check your email</h2>
-          <p style={{ color: '#6B7280', fontSize: 15, lineHeight: 1.6, marginBottom: 28 }}>
-            We've sent a verification link to <strong>{form.email}</strong>.<br />
+      <div style={{
+        display: 'flex',
+        minHeight: '100vh',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: '#0B1120',
+        fontFamily: 'Inter, sans-serif',
+      }}>
+        <div style={{
+          maxWidth: 460,
+          width: '100%',
+          background: '#141E2E',
+          borderRadius: 20,
+          padding: '52px 48px',
+          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
+          textAlign: 'center',
+        }}>
+          <div style={{
+            width: 64,
+            height: 64,
+            borderRadius: 16,
+            background: 'rgba(240,180,41,0.15)',
+            border: '1px solid rgba(240,180,41,0.30)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: 30,
+            margin: '0 auto 24px',
+          }}>📬</div>
+          <h2 style={{
+            fontSize: 26,
+            fontWeight: 700,
+            color: '#F9FAFB',
+            marginBottom: 14,
+            letterSpacing: '-0.3px',
+          }}>Check your email</h2>
+          <p style={{ color: '#9CA3AF', fontSize: 15, lineHeight: 1.7, marginBottom: 28 }}>
+            We've sent a verification link to{' '}
+            <strong style={{ color: '#F9FAFB' }}>{form.email}</strong>.<br />
             Click the link in the email to activate your account.
           </p>
           {resent && (
-            <p style={{ color: '#16a34a', fontSize: 13, marginBottom: 16 }}>A new link has been sent!</p>
+            <p style={{
+              color: '#10B981',
+              fontSize: 13,
+              marginBottom: 16,
+              background: 'rgba(16,185,129,0.15)',
+              border: '1px solid rgba(16,185,129,0.25)',
+              borderRadius: 8,
+              padding: '8px 14px',
+              display: 'inline-block',
+            }}>A new link has been sent!</p>
           )}
-          <button
-            onClick={handleResend}
-            style={{ background: 'none', border: 'none', color: '#A07830', fontWeight: 600, cursor: 'pointer', fontSize: 14 }}
-          >
-            Didn't receive it? Resend email
-          </button>
-          <p style={{ marginTop: 24, fontSize: 14, color: '#6B7280' }}>
-            Already verified? <Link to="/login" style={{ color: '#A07830', fontWeight: 600 }}>Sign in</Link>
+          <div style={{ marginBottom: 8 }}>
+            <button
+              onClick={handleResend}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#F0B429',
+                fontWeight: 600,
+                cursor: 'pointer',
+                fontSize: 14,
+              }}
+            >
+              Didn't receive it? Resend email
+            </button>
+          </div>
+          <p style={{ marginTop: 20, fontSize: 14, color: '#6B7280' }}>
+            Already verified?{' '}
+            <Link to="/login" style={{ color: '#F0B429', fontWeight: 600, textDecoration: 'none' }}>
+              Sign in
+            </Link>
           </p>
         </div>
       </div>
     )
   }
 
+  const features = [
+    {
+      symbol: '♪',
+      title: 'Use our sounds',
+      text: 'Browse the library and add trending tracks to your YouTube Shorts.',
+    },
+    {
+      symbol: '📈',
+      title: 'Automatic tracking',
+      text: 'We track views across all your participating Shorts automatically.',
+    },
+    {
+      symbol: '💎',
+      title: 'Flexible payouts',
+      text: 'Request payouts directly to PayPal or bank whenever you want.',
+    },
+  ]
+
   return (
-    <div style={{ display: 'flex', minHeight: '100vh' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', fontFamily: 'Inter, sans-serif' }}>
+
       {/* Left panel */}
       <div style={{
         flex: '0 0 45%',
-        background: '#1A2744',
+        background: '#070E1A',
+        borderRight: '1px solid rgba(255,255,255,0.08)',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'flex-start',
         padding: '60px 64px',
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 48 }}>
-          <span style={{ fontSize: 36 }}>🎵</span>
-          <span style={{ color: '#C9A84C', fontWeight: 800, fontSize: 26, letterSpacing: '-0.5px', fontFamily: 'Georgia, "Times New Roman", serif' }}>PierreMusic</span>
+        {/* Brand */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 56 }}>
+          <div style={{
+            width: 48,
+            height: 48,
+            borderRadius: 12,
+            background: 'linear-gradient(135deg, #F0B429, #D97706)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: 26,
+            fontWeight: 900,
+            color: '#0B1120',
+            boxShadow: '0 4px 20px rgba(240,180,41,0.40)',
+            flexShrink: 0,
+          }}>♪</div>
+          <span style={{
+            color: '#F9FAFB',
+            fontWeight: 700,
+            fontSize: 28,
+            letterSpacing: '-0.5px',
+          }}>PierreMusic</span>
         </div>
 
+        {/* Tagline */}
         <h1 style={{
-          color: '#fff',
-          fontSize: 38,
+          color: '#F9FAFB',
+          fontSize: 40,
           fontWeight: 800,
           lineHeight: 1.2,
           marginBottom: 20,
-          letterSpacing: '-0.5px',
-          fontFamily: 'Georgia, "Times New Roman", serif',
+          letterSpacing: '-0.8px',
         }}>
-          Start earning today
+          Join the{' '}
+          <span style={{
+            borderBottom: '3px solid #F0B429',
+            paddingBottom: 2,
+          }}>Creator Community</span>
         </h1>
-        <p style={{ color: '#94A3B8', fontSize: 16, marginBottom: 48, lineHeight: 1.6 }}>
+        <p style={{
+          color: '#9CA3AF',
+          fontSize: 16,
+          marginBottom: 52,
+          lineHeight: 1.7,
+          maxWidth: 380,
+        }}>
           Create your creator account and we'll automatically find your Shorts using your YouTube handle.
         </p>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-          {[
-            { icon: '🎵', text: 'Use our sound in your YouTube Shorts' },
-            { icon: '📊', text: 'We track views across all your participating Shorts' },
-            { icon: '💳', text: 'Request payouts directly to PayPal or bank' },
-          ].map(f => (
-            <div key={f.icon} style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+        {/* Feature list */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+          {features.map(f => (
+            <div key={f.symbol} style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
               <div style={{
-                width: 40,
-                height: 40,
+                width: 42,
+                height: 42,
                 borderRadius: 10,
-                background: 'rgba(201,168,76,0.15)',
-                border: '1px solid rgba(201,168,76,0.35)',
+                background: 'rgba(240,180,41,0.15)',
+                border: '1px solid rgba(240,180,41,0.30)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 fontSize: 18,
                 flexShrink: 0,
-              }}>{f.icon}</div>
-              <span style={{ color: '#cbd5e1', fontSize: 14, lineHeight: 1.5 }}>{f.text}</span>
+              }}>{f.symbol}</div>
+              <div>
+                <div style={{ color: '#F9FAFB', fontSize: 14, fontWeight: 600, marginBottom: 3 }}>{f.title}</div>
+                <div style={{ color: '#6B7280', fontSize: 13, lineHeight: 1.55 }}>{f.text}</div>
+              </div>
             </div>
           ))}
         </div>
@@ -158,40 +277,57 @@ export default function RegisterPage() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: '#F7F4EF',
+        background: '#0B1120',
         padding: 40,
       }}>
         <div style={{
           width: '100%',
-          maxWidth: 420,
-          background: '#fff',
-          borderRadius: 16,
-          padding: '48px 40px',
-          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
-          border: '1px solid #EAE4D9',
+          maxWidth: 440,
+          background: '#141E2E',
+          borderRadius: 20,
+          padding: '48px 44px',
+          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
         }}>
-          <h2 style={{ fontSize: 26, fontWeight: 800, marginBottom: 6, color: '#1A1A1A', fontFamily: 'Georgia, "Times New Roman", serif' }}>Create account</h2>
-          <p style={{ color: '#6B7280', fontSize: 14, marginBottom: 32 }}>Join as a YouTube Shorts creator</p>
+          <h2 style={{
+            fontSize: 28,
+            fontWeight: 700,
+            marginBottom: 6,
+            color: '#F9FAFB',
+            letterSpacing: '-0.4px',
+          }}>Create your account</h2>
+          <p style={{ color: '#9CA3AF', fontSize: 14, marginBottom: 32 }}>
+            Join as a YouTube Shorts creator
+          </p>
 
           {error && (
             <div style={{
-              background: '#fef2f2',
-              border: '1px solid #fecaca',
-              borderRadius: 8,
-              padding: '10px 14px',
-              marginBottom: 20,
-              color: '#B91C1C',
+              background: 'rgba(239,68,68,0.15)',
+              border: '1px solid rgba(239,68,68,0.35)',
+              borderRadius: 10,
+              padding: '11px 16px',
+              marginBottom: 22,
+              color: '#FCA5A5',
               fontSize: 14,
             }}>{error}</div>
           )}
 
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
             <FormInput
               label="Email address"
               type="email"
               name="email"
               placeholder="you@example.com"
               value={form.email}
+              onChange={handleChange}
+              required
+            />
+            <FormInput
+              label="Display name"
+              type="text"
+              name="creatorName"
+              placeholder="e.g. Pieter Vlog"
+              value={form.creatorName}
               onChange={handleChange}
               required
             />
@@ -205,40 +341,37 @@ export default function RegisterPage() {
               required
               minLength={8}
             />
-            <FormInput
-              label="Your name"
-              type="text"
-              name="creatorName"
-              placeholder="e.g. Pieter Vlog"
-              value={form.creatorName}
-              onChange={handleChange}
-              required
-            />
+
             <button
               type="submit"
               disabled={loading}
               style={{
                 width: '100%',
-                height: 48,
-                background: loading ? '#D4AF37' : 'linear-gradient(135deg, #C9A84C, #A07830)',
-                color: '#fff',
+                padding: '14px 0',
+                background: loading
+                  ? 'rgba(240,180,41,0.5)'
+                  : 'linear-gradient(135deg, #F0B429, #D97706)',
+                color: '#0B1120',
                 border: 'none',
                 borderRadius: 10,
                 fontSize: 15,
                 fontWeight: 700,
                 cursor: loading ? 'not-allowed' : 'pointer',
-                marginTop: 8,
+                marginTop: 6,
                 transition: 'opacity 0.15s ease',
-                boxShadow: '0 2px 10px rgba(201,168,76,0.35)',
+                boxShadow: loading ? 'none' : '0 2px 12px rgba(240,180,41,0.35)',
+                letterSpacing: '0.2px',
               }}
             >
-              {loading ? 'Fetching your Shorts...' : 'Create account'}
+              {loading ? 'Fetching your Shorts...' : 'Create Account →'}
             </button>
           </form>
 
-          <p style={{ textAlign: 'center', marginTop: 24, fontSize: 14, color: '#6B7280' }}>
+          <p style={{ textAlign: 'center', marginTop: 28, fontSize: 14, color: '#6B7280' }}>
             Already have an account?{' '}
-            <Link to="/login" style={{ color: '#A07830', fontWeight: 600 }}>Sign in</Link>
+            <Link to="/login" style={{ color: '#F0B429', fontWeight: 600, textDecoration: 'none' }}>
+              Sign in
+            </Link>
           </p>
         </div>
       </div>

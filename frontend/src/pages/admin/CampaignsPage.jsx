@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import { getCampaigns, createCampaign, updateCampaignStatus, getSounds } from '../../api'
 
 const STATUS_COLORS = {
-  ACTIVE: { bg: '#22c55e', light: '#f0fdf4', text: '#15803d' },
-  PAUSED: { bg: '#f59e0b', light: '#fffbeb', text: '#a16207' },
-  COMPLETED: { bg: '#94a3b8', light: '#FDFAF5', text: '#475569' },
+  ACTIVE:    { bg: 'rgba(16,185,129,0.15)',   color: '#10B981', border: 'rgba(16,185,129,0.30)',  dot: '#10B981'  },
+  PAUSED:    { bg: 'rgba(240,180,41,0.15)',   color: '#F0B429', border: 'rgba(240,180,41,0.30)',  dot: '#F0B429'  },
+  COMPLETED: { bg: 'rgba(107,114,128,0.15)',  color: '#9CA3AF', border: 'rgba(107,114,128,0.30)', dot: '#9CA3AF'  },
 }
 
 function StatusBadge({ status }) {
@@ -14,15 +14,15 @@ function StatusBadge({ status }) {
       display: 'inline-flex',
       alignItems: 'center',
       gap: 5,
-      background: s.light,
-      color: s.text,
+      background: s.bg,
+      color: s.color,
       fontSize: 12,
-      fontWeight: 700,
+      fontWeight: 600,
       padding: '3px 10px',
       borderRadius: 999,
-      border: `1px solid ${s.bg}40`,
+      border: `1px solid ${s.border}`,
     }}>
-      <span style={{ width: 6, height: 6, borderRadius: '50%', background: s.bg, display: 'inline-block' }} />
+      <span style={{ width: 6, height: 6, borderRadius: '50%', background: s.dot, display: 'inline-block' }} />
       {status}
     </span>
   )
@@ -32,17 +32,18 @@ function BudgetBar({ spent, total }) {
   const pct = total > 0 ? Math.min(100, (spent / total) * 100) : 0
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: '#94a3b8', marginBottom: 4 }}>
-        <span>€{Number(spent).toFixed(2)} spent</span>
-        <span>€{Number(total).toFixed(2)}</span>
+      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: '#9CA3AF', marginBottom: 6 }}>
+        <span style={{ color: '#F0B429', fontWeight: 600 }}>€{Number(spent).toFixed(2)} spent</span>
+        <span style={{ color: '#6B7280' }}>€{Number(total).toFixed(2)}</span>
       </div>
-      <div style={{ background: '#EAE4D9', borderRadius: 4, height: 6 }}>
+      <div style={{ background: 'rgba(255,255,255,0.06)', borderRadius: 4, height: 6 }}>
         <div style={{
-          background: 'linear-gradient(90deg, #C9A84C, #A07830)',
+          background: 'linear-gradient(90deg, #F0B429, #D97706)',
           borderRadius: 4,
           height: 6,
           width: `${pct}%`,
           transition: 'width 0.3s ease',
+          boxShadow: '0 0 8px rgba(240,180,41,0.4)',
         }} />
       </div>
     </div>
@@ -65,7 +66,7 @@ const emptyForm = {
 
 function FormField({ label, children }) {
   return (
-    <label style={{ display: 'flex', flexDirection: 'column', gap: 5, fontSize: 13, fontWeight: 600, color: '#374151' }}>
+    <label style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 13, fontWeight: 600, color: '#9CA3AF' }}>
       {label}
       {children}
     </label>
@@ -73,13 +74,13 @@ function FormField({ label, children }) {
 }
 
 const inputStyle = {
-  padding: '9px 12px',
+  padding: '12px 16px',
   fontSize: 14,
-  borderRadius: 8,
-  border: '1.5px solid #EAE4D9',
+  borderRadius: 10,
+  border: '1px solid rgba(255,255,255,0.10)',
   outline: 'none',
-  background: '#FDFAF5',
-  color: '#1A1A1A',
+  background: 'rgba(255,255,255,0.04)',
+  color: '#F9FAFB',
   marginTop: 2,
 }
 
@@ -140,31 +141,31 @@ export default function CampaignsPage() {
   }
 
   if (loading) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300 }}>
-      <div style={{ color: '#C9A84C', fontSize: 16, fontWeight: 600 }}>Loading campaigns...</div>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300, background: '#0B1120' }}>
+      <div style={{ color: '#F0B429', fontSize: 16, fontWeight: 600 }}>Loading campaigns...</div>
     </div>
   )
 
   return (
-    <div style={{ padding: '40px 40px 60px' }}>
+    <div style={{ padding: '40px 48px 60px', background: '#0B1120', minHeight: '100vh' }}>
       {/* Page header */}
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 36, flexWrap: 'wrap', gap: 16 }}>
         <div>
-          <h1 style={{ fontSize: 28, fontWeight: 800, color: '#1A1A1A', marginBottom: 6, fontFamily: 'Georgia, "Times New Roman", serif' }}>Campaigns</h1>
-          <p style={{ fontSize: 14, color: '#6B7280' }}>Manage your sound campaigns and track spending</p>
+          <h1 style={{ fontSize: 26, fontWeight: 700, color: '#F9FAFB', marginBottom: 6 }}>Campaigns</h1>
+          <p style={{ fontSize: 14, color: '#9CA3AF' }}>Manage your sound campaigns and track spending</p>
         </div>
         <button
           onClick={() => { setShowForm(s => !s); setFormError(null) }}
           style={{
-            padding: '11px 22px',
-            background: showForm ? '#fff' : 'linear-gradient(135deg, #C9A84C, #A07830)',
-            color: showForm ? '#374151' : '#fff',
-            border: showForm ? '1.5px solid #EAE4D9' : 'none',
+            padding: '10px 20px',
+            background: showForm ? 'rgba(255,255,255,0.06)' : 'linear-gradient(135deg, #F0B429, #D97706)',
+            color: showForm ? '#D1D5DB' : '#0B1120',
+            border: showForm ? '1px solid rgba(255,255,255,0.12)' : 'none',
             borderRadius: 10,
             cursor: 'pointer',
             fontSize: 14,
             fontWeight: 700,
-            boxShadow: showForm ? 'none' : '0 2px 10px rgba(201,168,76,0.35)',
+            boxShadow: showForm ? 'none' : '0 2px 12px rgba(240,180,41,0.35)',
             transition: 'all 0.2s ease',
           }}
         >
@@ -172,23 +173,22 @@ export default function CampaignsPage() {
         </button>
       </div>
 
-      {/* Create form — slide-down panel */}
+      {/* Create form */}
       {showForm && (
         <div style={{
-          background: '#fff',
-          borderRadius: 12,
+          background: '#141E2E',
+          borderRadius: 16,
           padding: '28px 32px',
-          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
+          boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
           marginBottom: 32,
-          border: '1px solid #EAE4D9',
+          border: '1px solid rgba(255,255,255,0.08)',
         }}>
-          <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1A1A1A', marginBottom: 24, fontFamily: 'Georgia, "Times New Roman", serif' }}>New Campaign</h2>
+          <h2 style={{ fontSize: 18, fontWeight: 700, color: '#F9FAFB', marginBottom: 24 }}>New Campaign</h2>
           <form onSubmit={handleCreate}>
-            {/* Sound picker from library */}
             {sounds.length > 0 && (
               <div style={{ marginBottom: 20 }}>
-                <div style={{ fontSize: 13, fontWeight: 600, color: '#374151', marginBottom: 8 }}>
-                  Pick from library <span style={{ color: '#94a3b8', fontWeight: 400 }}>(optional)</span>
+                <div style={{ fontSize: 13, fontWeight: 600, color: '#9CA3AF', marginBottom: 8 }}>
+                  Pick from library <span style={{ color: '#6B7280', fontWeight: 400 }}>(optional)</span>
                 </div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
                   {sounds.map(s => (
@@ -198,9 +198,9 @@ export default function CampaignsPage() {
                       onClick={() => setForm(f => ({ ...f, soundVideoId: s.soundVideoId, soundUrl: s.soundUrl }))}
                       style={{
                         padding: '6px 14px',
-                        background: form.soundVideoId === s.soundVideoId ? 'linear-gradient(135deg, #C9A84C, #A07830)' : '#FDF8EE',
-                        color: form.soundVideoId === s.soundVideoId ? '#fff' : '#A07830',
-                        border: form.soundVideoId === s.soundVideoId ? 'none' : '1px solid #E8D9A0',
+                        background: form.soundVideoId === s.soundVideoId ? 'linear-gradient(135deg, #F0B429, #D97706)' : 'rgba(240,180,41,0.10)',
+                        color: form.soundVideoId === s.soundVideoId ? '#0B1120' : '#F0B429',
+                        border: form.soundVideoId === s.soundVideoId ? 'none' : '1px solid rgba(240,180,41,0.30)',
                         borderRadius: 8,
                         cursor: 'pointer',
                         fontSize: 13,
@@ -213,16 +213,16 @@ export default function CampaignsPage() {
                   ))}
                 </div>
                 {form.soundVideoId && (
-                  <div style={{ marginTop: 8, fontSize: 12, color: '#A07830' }}>
-                    Selected: <code style={{ background: '#FDF8EE', padding: '2px 6px', borderRadius: 4 }}>{form.soundVideoId}</code>
+                  <div style={{ marginTop: 8, fontSize: 12, color: '#F0B429' }}>
+                    Selected: <code style={{ background: 'rgba(240,180,41,0.10)', padding: '2px 6px', borderRadius: 4, color: '#F0B429' }}>{form.soundVideoId}</code>
                     <button
                       type="button"
                       onClick={() => setForm(f => ({ ...f, soundVideoId: '', soundUrl: '' }))}
-                      style={{ marginLeft: 8, background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', fontSize: 12 }}
+                      style={{ marginLeft: 8, background: 'none', border: 'none', color: '#6B7280', cursor: 'pointer', fontSize: 12 }}
                     >✕ clear</button>
                   </div>
                 )}
-                <div style={{ borderTop: '1px solid #EAE4D9', marginTop: 16, paddingTop: 16, fontSize: 12, color: '#94a3b8' }}>
+                <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', marginTop: 16, paddingTop: 16, fontSize: 12, color: '#6B7280' }}>
                   Or fill in manually:
                 </div>
               </div>
@@ -269,11 +269,11 @@ export default function CampaignsPage() {
             </div>
             {formError && (
               <div style={{
-                background: '#fef2f2',
-                border: '1px solid #fecaca',
+                background: 'rgba(239,68,68,0.10)',
+                border: '1px solid rgba(239,68,68,0.30)',
                 borderRadius: 8,
                 padding: '10px 14px',
-                color: '#B91C1C',
+                color: '#EF4444',
                 fontSize: 14,
                 marginBottom: 16,
               }}>{formError}</div>
@@ -284,14 +284,14 @@ export default function CampaignsPage() {
                 disabled={saving}
                 style={{
                   padding: '10px 24px',
-                  background: saving ? '#D4AF37' : 'linear-gradient(135deg, #C9A84C, #A07830)',
-                  color: '#fff',
+                  background: saving ? 'rgba(240,180,41,0.5)' : 'linear-gradient(135deg, #F0B429, #D97706)',
+                  color: '#0B1120',
                   border: 'none',
-                  borderRadius: 8,
+                  borderRadius: 10,
                   cursor: saving ? 'not-allowed' : 'pointer',
                   fontSize: 14,
                   fontWeight: 700,
-                  boxShadow: '0 2px 10px rgba(201,168,76,0.35)',
+                  boxShadow: saving ? 'none' : '0 2px 12px rgba(240,180,41,0.35)',
                 }}
               >{saving ? 'Saving...' : 'Save Campaign'}</button>
               <button
@@ -299,10 +299,10 @@ export default function CampaignsPage() {
                 onClick={() => { setShowForm(false); setFormError(null); setForm(emptyForm) }}
                 style={{
                   padding: '10px 20px',
-                  background: '#fff',
-                  color: '#374151',
-                  border: '1.5px solid #EAE4D9',
-                  borderRadius: 8,
+                  background: 'rgba(255,255,255,0.06)',
+                  color: '#D1D5DB',
+                  border: '1px solid rgba(255,255,255,0.12)',
+                  borderRadius: 10,
                   cursor: 'pointer',
                   fontSize: 14,
                   fontWeight: 600,
@@ -313,21 +313,22 @@ export default function CampaignsPage() {
         </div>
       )}
 
-      {/* Campaign cards grid */}
+      {/* Empty state */}
       {campaigns.length === 0 && !showForm && (
         <div style={{
-          background: '#fff',
-          borderRadius: 12,
+          background: '#141E2E',
+          borderRadius: 16,
           padding: '60px 40px',
           textAlign: 'center',
-          border: '1px solid #EAE4D9',
-          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
         }}>
           <span style={{ fontSize: 48, display: 'block', marginBottom: 16 }}>🎵</span>
           <p style={{ color: '#6B7280', fontSize: 16 }}>No campaigns yet. Create your first one!</p>
         </div>
       )}
 
+      {/* Campaign cards grid */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 24 }}>
         {campaigns.map(c => (
           <CampaignCard key={c.id} campaign={c} onStatusChange={handleStatusChange} />
@@ -339,42 +340,35 @@ export default function CampaignsPage() {
 
 function CampaignCard({ campaign: c, onStatusChange }) {
   const [hover, setHover] = useState(false)
-  const gradients = [
-    'linear-gradient(135deg, #C9A84C 0%, #A07830 100%)',
-    'linear-gradient(135deg, #A07830 0%, #C9A84C 100%)',
-    'linear-gradient(135deg, #D4AF37 0%, #A07830 100%)',
-    'linear-gradient(135deg, #B8962E 0%, #C9A84C 100%)',
-  ]
-  const grad = gradients[c.id % gradients.length] || gradients[0]
 
   return (
     <div
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       style={{
-        background: '#fff',
-        borderRadius: 12,
+        background: '#141E2E',
+        borderRadius: 16,
         overflow: 'hidden',
-        border: '1px solid #EAE4D9',
-        boxShadow: hover ? '0 8px 32px rgba(0,0,0,0.12)' : '0 1px 4px rgba(0,0,0,0.06)',
+        border: hover ? '1px solid rgba(240,180,41,0.30)' : '1px solid rgba(255,255,255,0.08)',
+        boxShadow: hover ? '0 8px 32px rgba(0,0,0,0.4)' : '0 4px 24px rgba(0,0,0,0.3)',
         transition: 'all 0.2s ease',
         display: 'flex',
         flexDirection: 'column',
       }}
     >
-      {/* Gradient header */}
+      {/* Gold gradient header */}
       <div style={{
-        background: grad,
+        background: 'linear-gradient(135deg, #F0B429 0%, #D97706 100%)',
         padding: '20px 20px 16px',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'flex-start',
       }}>
         <div>
-          <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', fontWeight: 600, letterSpacing: 0.5, marginBottom: 4 }}>
-            CAMPAIGN
+          <div style={{ fontSize: 11, color: 'rgba(11,17,32,0.65)', fontWeight: 700, letterSpacing: 0.8, marginBottom: 4, textTransform: 'uppercase' }}>
+            Campaign
           </div>
-          <h3 style={{ color: '#fff', fontSize: 17, fontWeight: 800, margin: 0, lineHeight: 1.3, fontFamily: 'Georgia, "Times New Roman", serif' }}>{c.title}</h3>
+          <h3 style={{ color: '#0B1120', fontSize: 17, fontWeight: 800, margin: 0, lineHeight: 1.3 }}>{c.title}</h3>
         </div>
         <StatusBadge status={c.status} />
       </div>
@@ -382,7 +376,7 @@ function CampaignCard({ campaign: c, onStatusChange }) {
       {/* Body */}
       <div style={{ padding: '20px 20px 0', flex: 1 }}>
         {c.description && (
-          <p style={{ fontSize: 13, color: '#6B7280', marginBottom: 16, lineHeight: 1.6 }}>
+          <p style={{ fontSize: 13, color: '#9CA3AF', marginBottom: 16, lineHeight: 1.6 }}>
             {c.description}
           </p>
         )}
@@ -390,11 +384,9 @@ function CampaignCard({ campaign: c, onStatusChange }) {
         {/* RPM */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
           <span style={{ fontSize: 13, color: '#6B7280', fontWeight: 600 }}>RPM Rate</span>
-          <span style={{
-            fontSize: 22,
-            fontWeight: 800,
-            color: '#C9A84C',
-          }}>€{Number(c.rpmRate).toFixed(4)}<span style={{ fontSize: 12, fontWeight: 500, color: '#94a3b8' }}>/1K views</span></span>
+          <span style={{ fontSize: 22, fontWeight: 800, color: '#F0B429' }}>
+            €{Number(c.rpmRate).toFixed(4)}<span style={{ fontSize: 12, fontWeight: 500, color: '#6B7280' }}>/1K views</span>
+          </span>
         </div>
 
         {/* Budget progress */}
@@ -404,41 +396,58 @@ function CampaignCard({ campaign: c, onStatusChange }) {
 
         {/* Rules chips */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 16 }}>
-          <span style={{ background: '#FDF8EE', color: '#A07830', border: '1px solid #E8D9A0', fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 999 }}>
+          <span style={{
+            background: 'rgba(240,180,41,0.10)',
+            color: '#F0B429',
+            border: '1px solid rgba(240,180,41,0.25)',
+            fontSize: 11,
+            fontWeight: 700,
+            padding: '3px 10px',
+            borderRadius: 999,
+          }}>
             ⏱ {c.minDurationSeconds}–{c.maxDurationSeconds}s
           </span>
-          <span style={{ background: '#FDF8EE', color: '#A07830', border: '1px solid #E8D9A0', fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 999 }}>
+          <span style={{
+            background: 'rgba(240,180,41,0.10)',
+            color: '#F0B429',
+            border: '1px solid rgba(240,180,41,0.25)',
+            fontSize: 11,
+            fontWeight: 700,
+            padding: '3px 10px',
+            borderRadius: 999,
+          }}>
             🔊 min {c.minVolumePercent}% vol
           </span>
           {c.soundUrl && (
             <a href={c.soundUrl} target="_blank" rel="noreferrer" style={{
-              background: '#FDF8EE',
-              color: '#A07830',
-              border: '1px solid #E8D9A0',
+              background: 'rgba(240,180,41,0.10)',
+              color: '#F0B429',
+              border: '1px solid rgba(240,180,41,0.25)',
               fontSize: 11,
               fontWeight: 700,
               padding: '3px 10px',
               borderRadius: 999,
+              textDecoration: 'none',
             }}>🎵 Sound ↗</a>
           )}
         </div>
 
         {/* Dates */}
-        <div style={{ fontSize: 12, color: '#94a3b8', marginBottom: 20 }}>
+        <div style={{ fontSize: 12, color: '#6B7280', marginBottom: 20 }}>
           📅 {c.startDate ?? '—'}{c.endDate ? ` → ${c.endDate}` : ' (no end date)'}
         </div>
       </div>
 
       {/* Footer actions */}
-      <div style={{ padding: '12px 20px 20px', display: 'flex', gap: 8, flexWrap: 'wrap', borderTop: '1px solid #EAE4D9' }}>
+      <div style={{ padding: '12px 20px 20px', display: 'flex', gap: 8, flexWrap: 'wrap', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
         {c.status !== 'ACTIVE' && (
-          <ActionBtn color="#22c55e" onClick={() => onStatusChange(c.id, 'ACTIVE')}>Activate</ActionBtn>
+          <ActionBtn color="#10B981" onClick={() => onStatusChange(c.id, 'ACTIVE')}>Activate</ActionBtn>
         )}
         {c.status !== 'PAUSED' && (
-          <ActionBtn color="#f59e0b" onClick={() => onStatusChange(c.id, 'PAUSED')}>Pause</ActionBtn>
+          <ActionBtn color="#F0B429" onClick={() => onStatusChange(c.id, 'PAUSED')}>Pause</ActionBtn>
         )}
         {c.status !== 'COMPLETED' && (
-          <ActionBtn color="#94a3b8" onClick={() => onStatusChange(c.id, 'COMPLETED')}>Complete</ActionBtn>
+          <ActionBtn color="#6B7280" onClick={() => onStatusChange(c.id, 'COMPLETED')}>Complete</ActionBtn>
         )}
       </div>
     </div>
@@ -454,9 +463,9 @@ function ActionBtn({ color, onClick, children }) {
       onMouseLeave={() => setHover(false)}
       style={{
         padding: '6px 14px',
-        background: hover ? color : color + '18',
-        color: hover ? '#fff' : color,
-        border: `1px solid ${color}40`,
+        background: hover ? color : `${color}20`,
+        color: hover ? (color === '#F0B429' ? '#0B1120' : '#fff') : color,
+        border: `1px solid ${color}50`,
         borderRadius: 7,
         cursor: 'pointer',
         fontSize: 12,

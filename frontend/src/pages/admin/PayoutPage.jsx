@@ -2,41 +2,41 @@ import { useState, useEffect } from 'react'
 import { previewPayout, processPayout, getPayoutHistory, markPayoutPaid } from '../../api'
 
 const inputStyle = {
-  padding: '10px 14px',
+  padding: '12px 16px',
   fontSize: 14,
-  borderRadius: 8,
-  border: '1.5px solid #EAE4D9',
+  borderRadius: 10,
+  border: '1px solid rgba(255,255,255,0.10)',
   outline: 'none',
-  background: '#FDFAF5',
-  color: '#1A1A1A',
+  background: 'rgba(255,255,255,0.04)',
+  color: '#F9FAFB',
   minWidth: 160,
 }
 
 const cardStyle = {
-  background: '#fff',
-  borderRadius: 12,
+  background: '#141E2E',
+  borderRadius: 16,
   padding: '28px 32px',
-  border: '1px solid #EAE4D9',
-  boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
+  border: '1px solid rgba(255,255,255,0.08)',
+  boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
   marginBottom: 32,
-  maxWidth: 760,
+  maxWidth: 860,
 }
 
 const thStyle = {
   textAlign: 'left',
   padding: '12px 20px',
-  fontSize: 12,
+  fontSize: 11,
   fontWeight: 700,
   color: '#6B7280',
-  letterSpacing: 0.5,
+  letterSpacing: 0.8,
   textTransform: 'uppercase',
 }
 
 const tdStyle = {
   padding: '14px 20px',
   fontSize: 14,
-  color: '#374151',
-  borderTop: '1px solid #EAE4D9',
+  color: '#9CA3AF',
+  borderTop: '1px solid rgba(255,255,255,0.05)',
 }
 
 export default function PayoutPage() {
@@ -112,26 +112,26 @@ export default function PayoutPage() {
   const totalPayout = preview ? preview.reduce((s, l) => s + l.payout, 0) : 0
 
   return (
-    <div style={{ padding: '40px 40px 60px' }}>
-      {/* Section 1: Header */}
+    <div style={{ padding: '40px 48px 60px', background: '#0B1120', minHeight: '100vh' }}>
+      {/* Header */}
       <div style={{ marginBottom: 36 }}>
-        <h1 style={{ fontSize: 28, fontWeight: 800, color: '#1A1A1A', marginBottom: 6, fontFamily: 'Georgia, "Times New Roman", serif' }}>
+        <h1 style={{ fontSize: 26, fontWeight: 700, color: '#F9FAFB', marginBottom: 6 }}>
           Payout Calculator
         </h1>
-        <p style={{ fontSize: 14, color: '#6B7280' }}>
+        <p style={{ fontSize: 14, color: '#9CA3AF' }}>
           Proportionally distribute a pot among creators based on new views
         </p>
       </div>
 
-      {/* Section 2: Calculate form card */}
+      {/* Calculate form card */}
       <div style={cardStyle}>
-        <h2 style={{ fontSize: 16, fontWeight: 700, color: '#1A1A1A', marginBottom: 20, fontFamily: 'Georgia, "Times New Roman", serif' }}>
+        <h2 style={{ fontSize: 16, fontWeight: 700, color: '#F9FAFB', marginBottom: 20 }}>
           Calculate Payout
         </h2>
 
         <form onSubmit={handlePreview} style={{ display: 'flex', gap: 16, alignItems: 'flex-end', flexWrap: 'wrap' }}>
           <div>
-            <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#374151', marginBottom: 6 }}>
+            <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#9CA3AF', marginBottom: 6 }}>
               Total pot (€)
             </label>
             <input
@@ -150,15 +150,15 @@ export default function PayoutPage() {
             disabled={previewLoading}
             style={{
               padding: '10px 24px',
-              background: previewLoading ? '#D4AF37' : 'linear-gradient(135deg, #C9A84C, #A07830)',
-              color: '#fff',
+              background: previewLoading ? 'rgba(240,180,41,0.40)' : 'linear-gradient(135deg, #F0B429, #D97706)',
+              color: '#0B1120',
               border: 'none',
-              borderRadius: 8,
+              borderRadius: 10,
               cursor: previewLoading ? 'not-allowed' : 'pointer',
               fontSize: 14,
               fontWeight: 700,
-              height: 42,
-              boxShadow: '0 2px 10px rgba(201,168,76,0.35)',
+              height: 46,
+              boxShadow: previewLoading ? 'none' : '0 2px 12px rgba(240,180,41,0.35)',
             }}
           >
             {previewLoading ? 'Loading...' : 'Preview'}
@@ -168,11 +168,11 @@ export default function PayoutPage() {
         {error && (
           <div style={{
             marginTop: 16,
-            background: '#fef2f2',
-            border: '1px solid #fecaca',
+            background: 'rgba(239,68,68,0.10)',
+            border: '1px solid rgba(239,68,68,0.30)',
             borderRadius: 8,
             padding: '10px 14px',
-            color: '#B91C1C',
+            color: '#EF4444',
             fontSize: 14,
           }}>{error}</div>
         )}
@@ -180,21 +180,21 @@ export default function PayoutPage() {
         {success && (
           <div style={{
             marginTop: 16,
-            background: '#f0fdf4',
-            border: '1px solid #bbf7d0',
+            background: 'rgba(16,185,129,0.10)',
+            border: '1px solid rgba(16,185,129,0.30)',
             borderRadius: 8,
             padding: '10px 14px',
-            color: '#16a34a',
+            color: '#10B981',
             fontSize: 14,
             fontWeight: 600,
           }}>{success}</div>
         )}
 
-        {/* Preview results table */}
+        {/* Preview empty */}
         {preview && preview.length === 0 && (
           <div style={{
             marginTop: 20,
-            background: '#FDFAF5',
+            background: 'rgba(255,255,255,0.03)',
             borderRadius: 8,
             padding: '16px 20px',
             color: '#6B7280',
@@ -204,18 +204,19 @@ export default function PayoutPage() {
           </div>
         )}
 
+        {/* Preview table */}
         {preview && preview.length > 0 && (
           <div style={{ marginTop: 24 }}>
             <div style={{
-              background: '#fff',
-              borderRadius: 10,
-              border: '1px solid #EAE4D9',
+              background: '#1A2540',
+              borderRadius: 12,
+              border: '1px solid rgba(255,255,255,0.08)',
               overflow: 'hidden',
               marginBottom: 16,
             }}>
               <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead>
-                  <tr style={{ background: '#FDFAF5' }}>
+                  <tr style={{ background: 'rgba(255,255,255,0.03)' }}>
                     <th style={thStyle}>Creator</th>
                     <th style={thStyle}>New Views</th>
                     <th style={thStyle}>Share %</th>
@@ -228,16 +229,16 @@ export default function PayoutPage() {
                   {preview.map(line => (
                     <tr
                       key={line.creator}
-                      onMouseEnter={e => e.currentTarget.style.background = '#FDFAF5'}
+                      onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.03)'}
                       onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                     >
-                      <td style={{ ...tdStyle, fontWeight: 600, color: '#1A1A1A' }}>{line.creator}</td>
+                      <td style={{ ...tdStyle, fontWeight: 600, color: '#F9FAFB' }}>{line.creator}</td>
                       <td style={tdStyle}>{line.newViews.toLocaleString()}</td>
                       <td style={tdStyle}>
                         <span style={{
-                          background: '#FDF8EE',
-                          color: '#A07830',
-                          border: '1px solid #E8D9A0',
+                          background: 'rgba(240,180,41,0.15)',
+                          color: '#F0B429',
+                          border: '1px solid rgba(240,180,41,0.30)',
                           fontSize: 12,
                           fontWeight: 700,
                           padding: '3px 9px',
@@ -246,8 +247,8 @@ export default function PayoutPage() {
                           {(line.sharePercent * 100).toFixed(1)}%
                         </span>
                       </td>
-                      <td style={{ ...tdStyle, fontSize: 15, fontWeight: 800, color: '#22c55e' }}>
-                        € {line.payout.toFixed(2)}
+                      <td style={{ ...tdStyle, fontSize: 16, fontWeight: 800, color: '#F0B429' }}>
+                        €{line.payout.toFixed(2)}
                       </td>
                       <td style={tdStyle}>
                         {line.paymentMethod ? (
@@ -257,19 +258,19 @@ export default function PayoutPage() {
                             borderRadius: 999,
                             fontSize: 12,
                             fontWeight: 700,
-                            background: line.paymentMethod === 'PAYPAL' ? '#eff6ff' : '#f0fdf4',
-                            color: line.paymentMethod === 'PAYPAL' ? '#2563eb' : '#16a34a',
-                            border: line.paymentMethod === 'PAYPAL' ? '1px solid #bfdbfe' : '1px solid #bbf7d0',
+                            background: line.paymentMethod === 'PAYPAL' ? 'rgba(37,99,235,0.15)' : 'rgba(16,185,129,0.15)',
+                            color: line.paymentMethod === 'PAYPAL' ? '#60a5fa' : '#10B981',
+                            border: line.paymentMethod === 'PAYPAL' ? '1px solid rgba(37,99,235,0.30)' : '1px solid rgba(16,185,129,0.30)',
                           }}>
                             {line.paymentMethod === 'PAYPAL' ? 'PayPal' : 'IBAN'}
                           </span>
                         ) : (
-                          <span style={{ color: '#94a3b8', fontSize: 13 }}>—</span>
+                          <span style={{ color: '#6B7280', fontSize: 13 }}>—</span>
                         )}
                       </td>
                       <td style={tdStyle}>
                         {line.paymentDetails ? (
-                          <span style={{ fontSize: 13, color: '#374151' }}>{line.paymentDetails}</span>
+                          <span style={{ fontSize: 13, color: '#9CA3AF' }}>{line.paymentDetails}</span>
                         ) : (
                           <span style={{ color: '#f97316', fontSize: 13, fontWeight: 600 }}>⚠️ Not set</span>
                         )}
@@ -277,12 +278,12 @@ export default function PayoutPage() {
                     </tr>
                   ))}
                   {/* Total row */}
-                  <tr style={{ background: '#FDFAF5', borderTop: '2px solid #EAE4D9' }}>
-                    <td style={{ ...tdStyle, fontWeight: 700, color: '#1A1A1A' }}>Total</td>
-                    <td style={{ ...tdStyle, fontWeight: 700, color: '#1A1A1A' }}>{totalNewViews.toLocaleString()}</td>
+                  <tr style={{ background: 'rgba(255,255,255,0.03)', borderTop: '1px solid rgba(255,255,255,0.10)' }}>
+                    <td style={{ ...tdStyle, fontWeight: 700, color: '#F9FAFB' }}>Total</td>
+                    <td style={{ ...tdStyle, fontWeight: 700, color: '#F9FAFB' }}>{totalNewViews.toLocaleString()}</td>
                     <td style={tdStyle}></td>
-                    <td style={{ ...tdStyle, fontSize: 15, fontWeight: 800, color: '#1A1A1A' }}>
-                      € {totalPayout.toFixed(2)}
+                    <td style={{ ...tdStyle, fontSize: 16, fontWeight: 800, color: '#F0B429' }}>
+                      €{totalPayout.toFixed(2)}
                     </td>
                     <td style={tdStyle}></td>
                     <td style={tdStyle}></td>
@@ -291,13 +292,13 @@ export default function PayoutPage() {
               </table>
             </div>
 
-            {/* Warning + Process button */}
+            {/* Warning */}
             <div style={{
-              background: '#fff8f0',
-              border: '1px solid #fed7aa',
+              background: 'rgba(249,115,22,0.10)',
+              border: '1px solid rgba(249,115,22,0.25)',
               borderRadius: 8,
               padding: '12px 16px',
-              color: '#92400e',
+              color: '#fb923c',
               fontSize: 13,
               marginBottom: 16,
             }}>
@@ -308,17 +309,17 @@ export default function PayoutPage() {
               onClick={handleProcess}
               disabled={processLoading}
               style={{
-                padding: '11px 28px',
+                padding: '10px 28px',
                 background: processLoading
-                  ? '#d1d5db'
-                  : 'linear-gradient(135deg, #7c3aed, #dc2626)',
-                color: '#fff',
+                  ? 'rgba(240,180,41,0.40)'
+                  : 'linear-gradient(135deg, #F0B429, #D97706)',
+                color: '#0B1120',
                 border: 'none',
-                borderRadius: 8,
+                borderRadius: 10,
                 cursor: processLoading ? 'not-allowed' : 'pointer',
                 fontSize: 14,
                 fontWeight: 700,
-                boxShadow: processLoading ? 'none' : '0 2px 8px rgba(124,58,237,0.3)',
+                boxShadow: processLoading ? 'none' : '0 2px 12px rgba(240,180,41,0.35)',
               }}
             >
               {processLoading ? 'Processing...' : `Process & Pay €${Number(pot).toFixed(2)}`}
@@ -327,17 +328,17 @@ export default function PayoutPage() {
         )}
       </div>
 
-      {/* Section 3: Payout History */}
-      <div style={{ maxWidth: 760 }}>
-        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#1A1A1A', marginBottom: 16, fontFamily: 'Georgia, "Times New Roman", serif' }}>
+      {/* Payout History */}
+      <div style={{ maxWidth: 860 }}>
+        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#F9FAFB', marginBottom: 16 }}>
           Payout History
         </h2>
 
         <div style={{
-          background: '#fff',
-          borderRadius: 12,
-          border: '1px solid #EAE4D9',
-          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
+          background: '#141E2E',
+          borderRadius: 16,
+          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
           overflow: 'hidden',
         }}>
           {historyLoading ? (
@@ -351,7 +352,7 @@ export default function PayoutPage() {
           ) : (
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
-                <tr style={{ background: '#FDFAF5' }}>
+                <tr style={{ background: 'rgba(255,255,255,0.03)' }}>
                   <th style={thStyle}>Creator</th>
                   <th style={thStyle}>Amount</th>
                   <th style={thStyle}>Date</th>
@@ -365,12 +366,12 @@ export default function PayoutPage() {
                 {history.map(p => (
                   <tr
                     key={p.id}
-                    onMouseEnter={e => e.currentTarget.style.background = '#FDFAF5'}
+                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.03)'}
                     onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                   >
-                    <td style={{ ...tdStyle, fontWeight: 600, color: '#1A1A1A' }}>{p.creatorName}</td>
-                    <td style={{ ...tdStyle, fontWeight: 700, color: '#22c55e' }}>
-                      € {Number(p.amount).toFixed(2)}
+                    <td style={{ ...tdStyle, fontWeight: 600, color: '#F9FAFB' }}>{p.creatorName}</td>
+                    <td style={{ ...tdStyle, fontWeight: 800, color: '#F0B429', fontSize: 16 }}>
+                      €{Number(p.amount).toFixed(2)}
                     </td>
                     <td style={tdStyle}>
                       {p.year}-{String(p.month).padStart(2, '0')}
@@ -382,9 +383,9 @@ export default function PayoutPage() {
                         borderRadius: 999,
                         fontSize: 12,
                         fontWeight: 700,
-                        background: p.status === 'PAID' ? '#f0fdf4' : '#fefce8',
-                        color: p.status === 'PAID' ? '#16a34a' : '#a16207',
-                        border: p.status === 'PAID' ? '1px solid #bbf7d0' : '1px solid #fde68a',
+                        background: p.status === 'PAID' ? 'rgba(16,185,129,0.15)' : 'rgba(240,180,41,0.15)',
+                        color: p.status === 'PAID' ? '#10B981' : '#F0B429',
+                        border: p.status === 'PAID' ? '1px solid rgba(16,185,129,0.30)' : '1px solid rgba(240,180,41,0.30)',
                       }}>
                         {p.status}
                       </span>
@@ -397,21 +398,21 @@ export default function PayoutPage() {
                           borderRadius: 999,
                           fontSize: 12,
                           fontWeight: 700,
-                          background: p.paymentMethod === 'PAYPAL' ? '#eff6ff' : '#f0fdf4',
-                          color: p.paymentMethod === 'PAYPAL' ? '#2563eb' : '#16a34a',
-                          border: p.paymentMethod === 'PAYPAL' ? '1px solid #bfdbfe' : '1px solid #bbf7d0',
+                          background: p.paymentMethod === 'PAYPAL' ? 'rgba(37,99,235,0.15)' : 'rgba(16,185,129,0.15)',
+                          color: p.paymentMethod === 'PAYPAL' ? '#60a5fa' : '#10B981',
+                          border: p.paymentMethod === 'PAYPAL' ? '1px solid rgba(37,99,235,0.30)' : '1px solid rgba(16,185,129,0.30)',
                         }}>
                           {p.paymentMethod === 'PAYPAL' ? 'PayPal' : 'IBAN'}
                         </span>
                       ) : (
-                        <span style={{ color: '#94a3b8', fontSize: 13 }}>—</span>
+                        <span style={{ color: '#6B7280', fontSize: 13 }}>—</span>
                       )}
                     </td>
                     <td style={tdStyle}>
                       {p.paymentDetails ? (
-                        <span style={{ fontSize: 13, color: '#374151' }}>{p.paymentDetails}</span>
+                        <span style={{ fontSize: 13, color: '#9CA3AF' }}>{p.paymentDetails}</span>
                       ) : (
-                        <span style={{ color: '#94a3b8', fontSize: 13 }}>—</span>
+                        <span style={{ color: '#6B7280', fontSize: 13 }}>—</span>
                       )}
                     </td>
                     <td style={tdStyle}>
@@ -420,14 +421,14 @@ export default function PayoutPage() {
                           onClick={() => handleMarkPaid(p.id)}
                           style={{
                             padding: '5px 14px',
-                            background: 'linear-gradient(135deg, #16a34a, #15803d)',
+                            background: 'linear-gradient(135deg, #10B981, #059669)',
                             color: '#fff',
                             border: 'none',
-                            borderRadius: 6,
+                            borderRadius: 7,
                             cursor: 'pointer',
                             fontSize: 12,
                             fontWeight: 700,
-                            boxShadow: '0 1px 4px rgba(22,163,74,0.3)',
+                            boxShadow: '0 2px 6px rgba(16,185,129,0.30)',
                           }}
                         >
                           Mark Paid

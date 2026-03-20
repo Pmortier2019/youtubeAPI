@@ -10,9 +10,9 @@ function StatusBadge({ status }) {
   const isPaid = status === 'PAID'
   return (
     <span style={{
-      background: isPaid ? '#f0fdf4' : '#fff7ed',
-      color: isPaid ? '#15803d' : '#c2410c',
-      border: `1px solid ${isPaid ? '#bbf7d0' : '#fed7aa'}`,
+      background: isPaid ? 'rgba(16,185,129,0.15)' : 'rgba(240,180,41,0.15)',
+      color: isPaid ? '#10B981' : '#F0B429',
+      border: `1px solid ${isPaid ? 'rgba(16,185,129,0.30)' : 'rgba(240,180,41,0.30)'}`,
       borderRadius: 999,
       padding: '3px 10px',
       fontSize: 12,
@@ -66,26 +66,39 @@ function PaymentMethodsSection() {
   const typePlaceholder = (type) => type === 'PayPal' ? 'your@paypal.email' : 'NL91 ABNA 0417 1643 00'
   const typeLabel = (type) => type === 'PayPal' ? 'PayPal email address' : 'IBAN bank account'
 
+  const inputStyle = {
+    width: '100%',
+    height: 44,
+    padding: '0 12px',
+    borderRadius: 10,
+    border: '1px solid rgba(255,255,255,0.10)',
+    fontSize: 14,
+    background: 'rgba(255,255,255,0.04)',
+    color: '#F9FAFB',
+    outline: 'none',
+    boxSizing: 'border-box',
+  }
+
   return (
     <div style={{ marginBottom: 40 }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
         <div>
-          <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1A1A1A', marginBottom: 2, fontFamily: 'Georgia, "Times New Roman", serif' }}>Payment Methods</h2>
-          <p style={{ fontSize: 13, color: '#6B7280' }}>Where we send your payout</p>
+          <h2 style={{ fontSize: 18, fontWeight: 700, color: '#F9FAFB', marginBottom: 2 }}>Payment Methods</h2>
+          <p style={{ fontSize: 13, color: '#9CA3AF' }}>Where we send your payout</p>
         </div>
         {!showForm && (
           <button
             onClick={() => setShowForm(true)}
             style={{
-              padding: '8px 16px',
-              background: 'linear-gradient(135deg, #C9A84C, #A07830)',
-              color: '#fff',
+              padding: '10px 20px',
+              background: 'linear-gradient(135deg, #F0B429, #D97706)',
+              color: '#0B1120',
               border: 'none',
-              borderRadius: 8,
+              borderRadius: 10,
               fontSize: 13,
               fontWeight: 700,
               cursor: 'pointer',
-              boxShadow: '0 2px 10px rgba(201,168,76,0.35)',
+              boxShadow: '0 2px 12px rgba(240,180,41,0.35)',
             }}
           >+ Add method</button>
         )}
@@ -95,12 +108,12 @@ function PaymentMethodsSection() {
 
       {!loading && methods.length === 0 && !showForm && (
         <div style={{
-          background: '#fff',
-          border: '1.5px dashed #EAE4D9',
-          borderRadius: 10,
+          background: '#141E2E',
+          border: '1.5px dashed rgba(255,255,255,0.10)',
+          borderRadius: 16,
           padding: '32px 24px',
           textAlign: 'center',
-          color: '#94a3b8',
+          color: '#6B7280',
           fontSize: 14,
         }}>
           No payment methods added yet. Add one so we know where to send your earnings.
@@ -111,9 +124,9 @@ function PaymentMethodsSection() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: showForm ? 16 : 0 }}>
           {methods.map(m => (
             <div key={m.id} style={{
-              background: '#fff',
-              border: '1px solid #EAE4D9',
-              borderRadius: 10,
+              background: '#141E2E',
+              border: '1px solid rgba(255,255,255,0.08)',
+              borderRadius: 16,
               padding: '14px 18px',
               display: 'flex',
               alignItems: 'center',
@@ -123,24 +136,25 @@ function PaymentMethodsSection() {
               <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                 <span style={{
                   fontSize: 22,
-                  width: 40,
-                  height: 40,
-                  background: '#FDF8EE',
-                  borderRadius: 10,
+                  width: 44,
+                  height: 44,
+                  background: 'rgba(240,180,41,0.15)',
+                  borderRadius: 12,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   flexShrink: 0,
+                  border: '1px solid rgba(240,180,41,0.25)',
                 }}>{typeIcon(m.type)}</span>
                 <div>
-                  <div style={{ fontSize: 13, fontWeight: 700, color: '#1A1A1A', marginBottom: 2 }}>{m.type}</div>
-                  <div style={{ fontSize: 13, color: '#475569', fontFamily: 'monospace' }}>{m.details}</div>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: '#F0B429', marginBottom: 2 }}>{m.type}</div>
+                  <div style={{ fontSize: 13, color: '#9CA3AF', fontFamily: 'monospace' }}>{m.details}</div>
                 </div>
                 {m.default && (
                   <span style={{
-                    background: '#f0fdf4',
-                    color: '#15803d',
-                    border: '1px solid #bbf7d0',
+                    background: 'rgba(16,185,129,0.15)',
+                    color: '#10B981',
+                    border: '1px solid rgba(16,185,129,0.30)',
                     borderRadius: 999,
                     padding: '2px 8px',
                     fontSize: 11,
@@ -153,7 +167,7 @@ function PaymentMethodsSection() {
                 style={{
                   background: 'none',
                   border: 'none',
-                  color: '#B91C1C',
+                  color: '#EF4444',
                   cursor: 'pointer',
                   fontSize: 18,
                   padding: '4px 8px',
@@ -169,33 +183,25 @@ function PaymentMethodsSection() {
 
       {showForm && (
         <form onSubmit={handleAdd} style={{
-          background: '#fff',
-          border: '1px solid #EAE4D9',
-          borderRadius: 10,
-          padding: '20px 20px',
+          background: '#1A2540',
+          border: '1px solid rgba(255,255,255,0.08)',
+          borderRadius: 16,
+          padding: '20px',
         }}>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 12 }}>
             <div style={{ flex: '0 0 140px' }}>
-              <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#374151', marginBottom: 5 }}>Type</label>
+              <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#9CA3AF', marginBottom: 5 }}>Type</label>
               <select
                 value={form.type}
                 onChange={e => setForm(f => ({ ...f, type: e.target.value, details: '' }))}
-                style={{
-                  width: '100%',
-                  height: 40,
-                  padding: '0 10px',
-                  borderRadius: 8,
-                  border: '1.5px solid #EAE4D9',
-                  fontSize: 14,
-                  background: '#FDFAF5',
-                }}
+                style={inputStyle}
               >
                 <option value="IBAN">IBAN</option>
                 <option value="PayPal">PayPal</option>
               </select>
             </div>
             <div style={{ flex: 1, minWidth: 200 }}>
-              <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#374151', marginBottom: 5 }}>
+              <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#9CA3AF', marginBottom: 5 }}>
                 {typeLabel(form.type)}
               </label>
               <input
@@ -204,20 +210,12 @@ function PaymentMethodsSection() {
                 value={form.details}
                 onChange={e => setForm(f => ({ ...f, details: e.target.value }))}
                 required
-                style={{
-                  width: '100%',
-                  height: 40,
-                  padding: '0 12px',
-                  borderRadius: 8,
-                  border: '1.5px solid #EAE4D9',
-                  fontSize: 14,
-                  background: '#FDFAF5',
-                }}
+                style={inputStyle}
               />
             </div>
           </div>
 
-          <label style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14, cursor: 'pointer', fontSize: 13, color: '#374151' }}>
+          <label style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14, cursor: 'pointer', fontSize: 13, color: '#9CA3AF' }}>
             <input
               type="checkbox"
               checked={form.isDefault}
@@ -227,7 +225,15 @@ function PaymentMethodsSection() {
           </label>
 
           {error && (
-            <div style={{ background: '#fef2f2', border: '1px solid #fecaca', borderRadius: 6, padding: '8px 12px', color: '#B91C1C', fontSize: 13, marginBottom: 12 }}>
+            <div style={{
+              background: 'rgba(239,68,68,0.10)',
+              border: '1px solid rgba(239,68,68,0.30)',
+              borderRadius: 8,
+              padding: '8px 12px',
+              color: '#EF4444',
+              fontSize: 13,
+              marginBottom: 12,
+            }}>
               {error}
             </div>
           )}
@@ -237,26 +243,26 @@ function PaymentMethodsSection() {
               type="submit"
               disabled={saving}
               style={{
-                padding: '9px 20px',
-                background: saving ? '#D4AF37' : 'linear-gradient(135deg, #C9A84C, #A07830)',
-                color: '#fff',
+                padding: '10px 20px',
+                background: saving ? 'rgba(240,180,41,0.5)' : 'linear-gradient(135deg, #F0B429, #D97706)',
+                color: '#0B1120',
                 border: 'none',
-                borderRadius: 8,
+                borderRadius: 10,
                 fontSize: 13,
                 fontWeight: 700,
                 cursor: saving ? 'not-allowed' : 'pointer',
-                boxShadow: '0 2px 10px rgba(201,168,76,0.35)',
+                boxShadow: saving ? 'none' : '0 2px 12px rgba(240,180,41,0.35)',
               }}
             >{saving ? 'Saving...' : 'Save'}</button>
             <button
               type="button"
               onClick={() => { setShowForm(false); setError(null) }}
               style={{
-                padding: '9px 20px',
-                background: 'none',
-                color: '#6B7280',
-                border: '1px solid #EAE4D9',
-                borderRadius: 8,
+                padding: '10px 20px',
+                background: 'rgba(255,255,255,0.06)',
+                color: '#D1D5DB',
+                border: '1px solid rgba(255,255,255,0.12)',
+                borderRadius: 10,
                 fontSize: 13,
                 fontWeight: 600,
                 cursor: 'pointer',
@@ -282,19 +288,19 @@ export default function MyPayoutPage() {
   }, [])
 
   return (
-    <div style={{ padding: '40px 40px 60px' }}>
+    <div style={{ padding: '40px 48px 60px', background: '#0B1120', minHeight: '100vh' }}>
       <div style={{ marginBottom: 36 }}>
-        <h1 style={{ fontSize: 28, fontWeight: 800, color: '#1A1A1A', marginBottom: 6, fontFamily: 'Georgia, "Times New Roman", serif' }}>My Payouts</h1>
-        <p style={{ fontSize: 14, color: '#6B7280' }}>Manage your payment methods and view payout history</p>
+        <h1 style={{ fontSize: 26, fontWeight: 700, color: '#F9FAFB', marginBottom: 6 }}>My Payouts</h1>
+        <p style={{ fontSize: 14, color: '#9CA3AF' }}>Manage your payment methods and view payout history</p>
       </div>
 
       <PaymentMethodsSection />
 
       {/* Timing notice */}
       <div style={{
-        background: 'linear-gradient(135deg, #FDF8EE 0%, #F7F4EF 100%)',
-        border: '1.5px solid #E8D9A0',
-        borderRadius: 12,
+        background: 'linear-gradient(135deg, #1A2540, #141E2E)',
+        border: '1px solid rgba(240,180,41,0.20)',
+        borderRadius: 16,
         padding: '16px 20px',
         marginBottom: 32,
         display: 'flex',
@@ -302,26 +308,26 @@ export default function MyPayoutPage() {
         gap: 12,
       }}>
         <span style={{ fontSize: 20, flexShrink: 0, marginTop: 1 }}>💡</span>
-        <div style={{ fontSize: 14, color: '#A07830', lineHeight: 1.7 }}>
-          Payouts are typically processed <strong>every 2 months</strong> after your registration.
+        <div style={{ fontSize: 14, color: '#9CA3AF', lineHeight: 1.7 }}>
+          Payouts are typically processed <strong style={{ color: '#F9FAFB' }}>every 2 months</strong> after your registration.
           You'll receive an email when your payment is ready.
-          <span style={{ display: 'block', marginTop: 4, color: '#C9A84C', fontSize: 13 }}>
+          <span style={{ display: 'block', marginTop: 4, color: '#F0B429', fontSize: 13 }}>
             Note: your first payout may take longer depending on the total number of active creators.
           </span>
         </div>
       </div>
 
-      <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1A1A1A', marginBottom: 16, fontFamily: 'Georgia, "Times New Roman", serif' }}>Payout History</h2>
+      <h2 style={{ fontSize: 18, fontWeight: 700, color: '#F9FAFB', marginBottom: 16 }}>Payout History</h2>
 
       {loading && <div style={{ color: '#6B7280', fontSize: 14 }}>Loading...</div>}
 
       {error && (
         <div style={{
-          background: '#fef2f2',
-          border: '1px solid #fecaca',
-          borderRadius: 8,
+          background: 'rgba(239,68,68,0.10)',
+          border: '1px solid rgba(239,68,68,0.30)',
+          borderRadius: 10,
           padding: '10px 14px',
-          color: '#B91C1C',
+          color: '#EF4444',
           fontSize: 14,
           marginBottom: 20,
         }}>{error}</div>
@@ -329,15 +335,15 @@ export default function MyPayoutPage() {
 
       {!loading && !error && payouts.length === 0 && (
         <div style={{
-          background: '#fff',
-          borderRadius: 12,
+          background: '#141E2E',
+          borderRadius: 16,
           padding: '48px 40px',
           textAlign: 'center',
-          border: '1px solid #EAE4D9',
-          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
         }}>
           <span style={{ fontSize: 40, display: 'block', marginBottom: 12 }}>💳</span>
-          <p style={{ color: '#1A1A1A', fontWeight: 700, fontSize: 16, marginBottom: 6 }}>No payouts yet</p>
+          <p style={{ color: '#F9FAFB', fontWeight: 700, fontSize: 16, marginBottom: 6 }}>No payouts yet</p>
           <p style={{ color: '#6B7280', fontSize: 14 }}>
             Your first payout will appear here once processed — typically around 2 months after registration.
           </p>
@@ -346,16 +352,16 @@ export default function MyPayoutPage() {
 
       {!loading && payouts.length > 0 && (
         <div style={{
-          background: '#fff',
-          borderRadius: 12,
-          border: '1px solid #EAE4D9',
-          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
+          background: '#141E2E',
+          borderRadius: 16,
+          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
           overflow: 'hidden',
         }}>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
-              <tr style={{ background: '#FDFAF5', borderBottom: '1px solid #EAE4D9' }}>
-                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: 12, fontWeight: 700, color: '#6B7280', letterSpacing: 0.5 }}>AMOUNT (€)</th>
+              <tr style={{ background: 'rgba(255,255,255,0.03)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: 12, fontWeight: 700, color: '#6B7280', letterSpacing: 0.5 }}>AMOUNT</th>
                 <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: 12, fontWeight: 700, color: '#6B7280', letterSpacing: 0.5 }}>PERIOD</th>
                 <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: 12, fontWeight: 700, color: '#6B7280', letterSpacing: 0.5 }}>STATUS</th>
                 <th style={{ padding: '14px 20px', textAlign: 'left', fontSize: 12, fontWeight: 700, color: '#6B7280', letterSpacing: 0.5 }}>PAYMENT METHOD</th>
@@ -366,18 +372,20 @@ export default function MyPayoutPage() {
               {payouts.map((payout, i) => (
                 <tr
                   key={payout.id}
-                  style={{ borderBottom: i < payouts.length - 1 ? '1px solid #EAE4D9' : 'none' }}
+                  style={{ borderBottom: i < payouts.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none' }}
+                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.03)'}
+                  onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                 >
-                  <td style={{ padding: '14px 20px', fontSize: 15, fontWeight: 700, color: '#1A1A1A' }}>
-                    € {Number(payout.amount).toFixed(2)}
+                  <td style={{ padding: '14px 20px', fontSize: 16, fontWeight: 800, color: '#F0B429' }}>
+                    €{Number(payout.amount).toFixed(2)}
                   </td>
-                  <td style={{ padding: '14px 20px', fontSize: 13, color: '#374151' }}>
+                  <td style={{ padding: '14px 20px', fontSize: 13, color: '#9CA3AF' }}>
                     {MONTHS[payout.month - 1]} {payout.year}
                   </td>
                   <td style={{ padding: '14px 20px' }}>
                     <StatusBadge status={payout.status} />
                   </td>
-                  <td style={{ padding: '14px 20px', fontSize: 13, color: '#374151' }}>
+                  <td style={{ padding: '14px 20px', fontSize: 13, color: '#9CA3AF' }}>
                     {payout.paymentMethod}
                   </td>
                   <td style={{ padding: '14px 20px', fontSize: 13, color: '#6B7280' }}>

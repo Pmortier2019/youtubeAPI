@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react'
 import { getAllPayouts, markPayoutPaid } from '../../api'
 
 const STATUS_CONFIG = {
-  PENDING: { bg: '#fef9c3', color: '#a16207', dot: '#f59e0b' },
-  PAID: { bg: '#dcfce7', color: '#15803d', dot: '#22c55e' },
+  PENDING: { bg: 'rgba(240,180,41,0.15)',  color: '#F0B429', dot: '#F0B429', border: 'rgba(240,180,41,0.30)'  },
+  PAID:    { bg: 'rgba(16,185,129,0.15)',  color: '#10B981', dot: '#10B981', border: 'rgba(16,185,129,0.30)' },
 }
 
 function StatusBadge({ status }) {
-  const s = STATUS_CONFIG[status] || { bg: '#f3f4f6', color: '#6b7280', dot: '#9ca3af' }
+  const s = STATUS_CONFIG[status] || { bg: 'rgba(107,114,128,0.15)', color: '#9CA3AF', dot: '#6B7280', border: 'rgba(107,114,128,0.30)' }
   return (
     <span style={{
       display: 'inline-flex',
@@ -16,9 +16,10 @@ function StatusBadge({ status }) {
       background: s.bg,
       color: s.color,
       fontSize: 12,
-      fontWeight: 700,
+      fontWeight: 600,
       padding: '3px 10px',
       borderRadius: 999,
+      border: `1px solid ${s.border}`,
     }}>
       <span style={{ width: 6, height: 6, borderRadius: '50%', background: s.dot, display: 'inline-block' }} />
       {status}
@@ -27,16 +28,16 @@ function StatusBadge({ status }) {
 }
 
 function MethodIcon({ method }) {
-  if (!method) return <span style={{ color: '#cbd5e1' }}>—</span>
+  if (!method) return <span style={{ color: '#6B7280' }}>—</span>
   const icon = method === 'PayPal' ? '💳' : method === 'IBAN' ? '🏦' : '💰'
   return (
     <span style={{
       display: 'inline-flex',
       alignItems: 'center',
       gap: 6,
-      background: '#FDF8EE',
-      color: '#A07830',
-      border: '1px solid #E8D9A0',
+      background: 'rgba(240,180,41,0.10)',
+      color: '#F0B429',
+      border: '1px solid rgba(240,180,41,0.25)',
       fontSize: 12,
       fontWeight: 700,
       padding: '3px 10px',
@@ -68,8 +69,8 @@ export default function PayoutsAdminPage() {
   }
 
   if (loading) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300 }}>
-      <div style={{ color: '#C9A84C', fontSize: 16, fontWeight: 600 }}>Loading payouts...</div>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300, background: '#0B1120' }}>
+      <div style={{ color: '#F0B429', fontSize: 16, fontWeight: 600 }}>Loading payouts...</div>
     </div>
   )
 
@@ -79,29 +80,31 @@ export default function PayoutsAdminPage() {
     .reduce((s, p) => s + Number(p.amount ?? 0), 0)
 
   return (
-    <div style={{ padding: '40px 40px 60px' }}>
+    <div style={{ padding: '40px 48px 60px', background: '#0B1120', minHeight: '100vh' }}>
       {/* Page header */}
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 36, flexWrap: 'wrap', gap: 16 }}>
         <div>
-          <h1 style={{ fontSize: 28, fontWeight: 800, color: '#1A1A1A', marginBottom: 6, fontFamily: 'Georgia, "Times New Roman", serif' }}>Payout Requests</h1>
-          <p style={{ fontSize: 14, color: '#6B7280' }}>Manage and process creator payout requests</p>
+          <h1 style={{ fontSize: 26, fontWeight: 700, color: '#F9FAFB', marginBottom: 6 }}>Payout Requests</h1>
+          <p style={{ fontSize: 14, color: '#9CA3AF' }}>Manage and process creator payout requests</p>
         </div>
         {pendingCount > 0 && (
           <div style={{
-            background: '#fff',
-            border: '1px solid #EAE4D9',
-            borderRadius: 10,
-            padding: '12px 20px',
+            background: '#141E2E',
+            border: '1px solid rgba(255,255,255,0.08)',
+            borderRadius: 16,
+            padding: '16px 24px',
             display: 'flex',
-            gap: 24,
+            gap: 32,
+            boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
           }}>
             <div>
-              <div style={{ fontSize: 11, color: '#94a3b8', fontWeight: 700, letterSpacing: 0.5, marginBottom: 2 }}>PENDING</div>
-              <div style={{ fontSize: 20, fontWeight: 800, color: '#f59e0b' }}>{pendingCount}</div>
+              <div style={{ fontSize: 11, color: '#6B7280', fontWeight: 700, letterSpacing: 0.8, marginBottom: 4, textTransform: 'uppercase' }}>Pending</div>
+              <div style={{ fontSize: 22, fontWeight: 800, color: '#F0B429' }}>{pendingCount}</div>
             </div>
+            <div style={{ width: 1, background: 'rgba(255,255,255,0.08)' }} />
             <div>
-              <div style={{ fontSize: 11, color: '#94a3b8', fontWeight: 700, letterSpacing: 0.5, marginBottom: 2 }}>TOTAL DUE</div>
-              <div style={{ fontSize: 20, fontWeight: 800, color: '#22c55e' }}>€{totalPending.toFixed(2)}</div>
+              <div style={{ fontSize: 11, color: '#6B7280', fontWeight: 700, letterSpacing: 0.8, marginBottom: 4, textTransform: 'uppercase' }}>Total Due</div>
+              <div style={{ fontSize: 22, fontWeight: 800, color: '#F0B429' }}>€{totalPending.toFixed(2)}</div>
             </div>
           </div>
         )}
@@ -109,12 +112,12 @@ export default function PayoutsAdminPage() {
 
       {payouts.length === 0 && (
         <div style={{
-          background: '#fff',
-          borderRadius: 12,
+          background: '#141E2E',
+          borderRadius: 16,
           padding: '80px 40px',
           textAlign: 'center',
-          border: '1px solid #EAE4D9',
-          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
         }}>
           <span style={{ fontSize: 48, display: 'block', marginBottom: 16 }}>💳</span>
           <p style={{ color: '#6B7280', fontSize: 15 }}>No payout requests yet.</p>
@@ -123,23 +126,23 @@ export default function PayoutsAdminPage() {
 
       {payouts.length > 0 && (
         <div style={{
-          background: '#fff',
-          borderRadius: 12,
-          border: '1px solid #EAE4D9',
-          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
+          background: '#141E2E',
+          borderRadius: 16,
+          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
           overflow: 'hidden',
         }}>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
-              <tr style={{ background: '#FDFAF5' }}>
+              <tr style={{ background: 'rgba(255,255,255,0.03)' }}>
                 {['Creator', 'Amount', 'Period', 'Method', 'Details', 'Status', 'Requested', 'Action'].map(h => (
                   <th key={h} style={{
                     textAlign: 'left',
                     padding: '12px 20px',
-                    fontSize: 12,
+                    fontSize: 11,
                     fontWeight: 700,
                     color: '#6B7280',
-                    letterSpacing: 0.5,
+                    letterSpacing: 0.8,
                     textTransform: 'uppercase',
                     whiteSpace: 'nowrap',
                   }}>{h}</th>
@@ -150,19 +153,19 @@ export default function PayoutsAdminPage() {
               {payouts.map(p => (
                 <tr
                   key={p.id}
-                  style={{ borderTop: '1px solid #EAE4D9' }}
-                  onMouseEnter={e => e.currentTarget.style.background = '#FDFAF5'}
+                  style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
+                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.03)'}
                   onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                 >
-                  <td style={{ padding: '16px 20px', fontSize: 14, fontWeight: 600, color: '#1A1A1A' }}>
+                  <td style={{ padding: '16px 20px', fontSize: 14, fontWeight: 600, color: '#F9FAFB' }}>
                     {p.creatorName ?? p.creatorId ?? '—'}
                   </td>
                   <td style={{ padding: '16px 20px' }}>
-                    <span style={{ fontSize: 18, fontWeight: 800, color: '#22c55e' }}>
+                    <span style={{ fontSize: 18, fontWeight: 800, color: '#F0B429' }}>
                       €{Number(p.amount ?? 0).toFixed(2)}
                     </span>
                   </td>
-                  <td style={{ padding: '16px 20px', fontSize: 13, color: '#374151', fontWeight: 600 }}>
+                  <td style={{ padding: '16px 20px', fontSize: 13, color: '#9CA3AF', fontWeight: 600 }}>
                     {p.month}/{p.year}
                   </td>
                   <td style={{ padding: '16px 20px' }}>
@@ -179,7 +182,7 @@ export default function PayoutsAdminPage() {
                   <td style={{ padding: '16px 20px' }}>
                     <StatusBadge status={p.status} />
                   </td>
-                  <td style={{ padding: '16px 20px', fontSize: 13, color: '#94a3b8' }}>
+                  <td style={{ padding: '16px 20px', fontSize: 13, color: '#6B7280' }}>
                     {p.requestedAt ? new Date(p.requestedAt).toLocaleDateString() : '—'}
                   </td>
                   <td style={{ padding: '16px 20px' }}>
@@ -188,14 +191,14 @@ export default function PayoutsAdminPage() {
                         onClick={() => handleMarkPaid(p.id)}
                         style={{
                           padding: '7px 16px',
-                          background: 'linear-gradient(135deg, #22c55e, #16a34a)',
+                          background: 'linear-gradient(135deg, #10B981, #059669)',
                           color: '#fff',
                           border: 'none',
                           borderRadius: 7,
                           cursor: 'pointer',
                           fontSize: 13,
                           fontWeight: 700,
-                          boxShadow: '0 2px 6px rgba(34,197,94,0.3)',
+                          boxShadow: '0 2px 8px rgba(16,185,129,0.35)',
                           transition: 'all 0.15s ease',
                           whiteSpace: 'nowrap',
                         }}

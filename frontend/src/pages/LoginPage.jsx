@@ -3,6 +3,18 @@ import { useNavigate, Link } from 'react-router-dom'
 import { login } from '../api'
 import { useAuth } from '../AuthContext'
 
+const inputBase = {
+  width: '100%',
+  padding: '12px 16px',
+  fontSize: 15,
+  borderRadius: 10,
+  outline: 'none',
+  background: 'rgba(255,255,255,0.04)',
+  color: '#F9FAFB',
+  transition: 'border 0.15s ease',
+  boxSizing: 'border-box',
+}
+
 export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -30,107 +42,163 @@ export default function LoginPage() {
     }
   }
 
+  const features = [
+    {
+      symbol: '♪',
+      title: 'License your sound',
+      text: 'Upload once, earn every time a creator uses your track in a Short.',
+    },
+    {
+      symbol: '📈',
+      title: 'Real-time analytics',
+      text: 'Track views, earnings, and campaign performance across all Shorts.',
+    },
+    {
+      symbol: '💎',
+      title: 'Transparent payouts',
+      text: 'RPM-based earnings with full history and flexible payout options.',
+    },
+  ]
+
   return (
-    <div style={{
-      display: 'flex',
-      minHeight: '100vh',
-    }}>
-      {/* Left panel — navy with gold accents */}
+    <div style={{ display: 'flex', minHeight: '100vh', fontFamily: 'Inter, sans-serif' }}>
+
+      {/* Left panel */}
       <div style={{
         flex: '0 0 45%',
-        background: '#1A2744',
+        background: '#070E1A',
+        borderRight: '1px solid rgba(255,255,255,0.08)',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'flex-start',
         padding: '60px 64px',
       }}>
-        {/* Logo */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 48 }}>
-          <span style={{ fontSize: 36 }}>🎵</span>
-          <span style={{ color: '#C9A84C', fontWeight: 800, fontSize: 26, letterSpacing: '-0.5px', fontFamily: 'Georgia, "Times New Roman", serif' }}>PierreMusic</span>
+        {/* Brand */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 56 }}>
+          <div style={{
+            width: 48,
+            height: 48,
+            borderRadius: 12,
+            background: 'linear-gradient(135deg, #F0B429, #D97706)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: 26,
+            fontWeight: 900,
+            color: '#0B1120',
+            boxShadow: '0 4px 20px rgba(240,180,41,0.40)',
+            flexShrink: 0,
+          }}>♪</div>
+          <span style={{
+            color: '#F9FAFB',
+            fontWeight: 700,
+            fontSize: 28,
+            letterSpacing: '-0.5px',
+          }}>PierreMusic</span>
         </div>
 
         {/* Tagline */}
         <h1 style={{
-          color: '#fff',
-          fontSize: 38,
+          color: '#F9FAFB',
+          fontSize: 40,
           fontWeight: 800,
           lineHeight: 1.2,
           marginBottom: 20,
-          letterSpacing: '-0.5px',
-          fontFamily: 'Georgia, "Times New Roman", serif',
+          letterSpacing: '-0.8px',
         }}>
-          Get paid for every Short
+          Turn Your Sound Into{' '}
+          <span style={{
+            borderBottom: '3px solid #F0B429',
+            paddingBottom: 2,
+          }}>Revenue</span>
         </h1>
-        <p style={{ color: '#94A3B8', fontSize: 16, marginBottom: 48, lineHeight: 1.6 }}>
-          Join the platform that connects sound creators with YouTube Shorts creators and pays you for every view.
+        <p style={{
+          color: '#9CA3AF',
+          fontSize: 16,
+          marginBottom: 52,
+          lineHeight: 1.7,
+          maxWidth: 380,
+        }}>
+          The platform that connects sound creators with YouTube Shorts creators — and pays you for every view.
         </p>
 
-        {/* Feature bullets */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-          {[
-            { icon: '📈', text: 'Track views in real time across all Shorts' },
-            { icon: '💰', text: 'Automatic earnings calculated by RPM rate' },
-            { icon: '✅', text: 'Transparent payout system with full history' },
-          ].map(f => (
-            <div key={f.icon} style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+        {/* Feature list */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+          {features.map(f => (
+            <div key={f.symbol} style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
               <div style={{
-                width: 40,
-                height: 40,
+                width: 42,
+                height: 42,
                 borderRadius: 10,
-                background: 'rgba(201,168,76,0.15)',
-                border: '1px solid rgba(201,168,76,0.35)',
+                background: 'rgba(240,180,41,0.15)',
+                border: '1px solid rgba(240,180,41,0.30)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 fontSize: 18,
                 flexShrink: 0,
-              }}>{f.icon}</div>
-              <span style={{ color: '#cbd5e1', fontSize: 14, lineHeight: 1.5 }}>{f.text}</span>
+              }}>{f.symbol}</div>
+              <div>
+                <div style={{ color: '#F9FAFB', fontSize: 14, fontWeight: 600, marginBottom: 3 }}>{f.title}</div>
+                <div style={{ color: '#6B7280', fontSize: 13, lineHeight: 1.55 }}>{f.text}</div>
+              </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Right panel — form */}
+      {/* Right panel */}
       <div style={{
         flex: 1,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: '#F7F4EF',
+        background: '#0B1120',
         padding: 40,
       }}>
         <div style={{
           width: '100%',
-          maxWidth: 400,
-          background: '#fff',
-          borderRadius: 16,
-          padding: '48px 40px',
-          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
-          border: '1px solid #EAE4D9',
+          maxWidth: 420,
+          background: '#141E2E',
+          borderRadius: 20,
+          padding: '48px 44px',
+          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
         }}>
-          <h2 style={{ fontSize: 26, fontWeight: 800, marginBottom: 6, color: '#1A1A1A', fontFamily: 'Georgia, "Times New Roman", serif' }}>Welcome back</h2>
-          <p style={{ color: '#6B7280', fontSize: 14, marginBottom: 32 }}>Sign in to your PierreMusic account</p>
+          <h2 style={{
+            fontSize: 28,
+            fontWeight: 700,
+            marginBottom: 6,
+            color: '#F9FAFB',
+            letterSpacing: '-0.4px',
+          }}>Welcome back</h2>
+          <p style={{ color: '#9CA3AF', fontSize: 14, marginBottom: 32 }}>
+            Sign in to your PierreMusic account
+          </p>
 
           {error && (
             <div style={{
-              background: '#fef2f2',
-              border: '1px solid #fecaca',
-              borderRadius: 8,
-              padding: '10px 14px',
-              marginBottom: 20,
-              color: '#B91C1C',
+              background: 'rgba(239,68,68,0.15)',
+              border: '1px solid rgba(239,68,68,0.35)',
+              borderRadius: 10,
+              padding: '11px 16px',
+              marginBottom: 22,
+              color: '#FCA5A5',
               fontSize: 14,
             }}>{error}</div>
           )}
 
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
             <div>
-              <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#374151', marginBottom: 6 }}>
-                Email address
-              </label>
+              <label style={{
+                display: 'block',
+                fontSize: 13,
+                fontWeight: 600,
+                color: '#9CA3AF',
+                marginBottom: 7,
+                letterSpacing: '0.2px',
+              }}>Email address</label>
               <input
                 type="email"
                 placeholder="you@example.com"
@@ -140,23 +208,23 @@ export default function LoginPage() {
                 onBlur={() => setEmailFocus(false)}
                 required
                 style={{
-                  width: '100%',
-                  height: 48,
-                  padding: '0 14px',
-                  fontSize: 15,
-                  borderRadius: 10,
-                  border: emailFocus ? '2px solid #C9A84C' : '1.5px solid #EAE4D9',
-                  outline: 'none',
-                  background: '#FDFAF5',
-                  color: '#1A1A1A',
-                  transition: 'border 0.15s ease',
+                  ...inputBase,
+                  border: emailFocus
+                    ? '2px solid #F0B429'
+                    : '1px solid rgba(255,255,255,0.10)',
                 }}
               />
             </div>
+
             <div>
-              <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#374151', marginBottom: 6 }}>
-                Password
-              </label>
+              <label style={{
+                display: 'block',
+                fontSize: 13,
+                fontWeight: 600,
+                color: '#9CA3AF',
+                marginBottom: 7,
+                letterSpacing: '0.2px',
+              }}>Password</label>
               <input
                 type="password"
                 placeholder="••••••••"
@@ -166,16 +234,10 @@ export default function LoginPage() {
                 onBlur={() => setPassFocus(false)}
                 required
                 style={{
-                  width: '100%',
-                  height: 48,
-                  padding: '0 14px',
-                  fontSize: 15,
-                  borderRadius: 10,
-                  border: passFocus ? '2px solid #C9A84C' : '1.5px solid #EAE4D9',
-                  outline: 'none',
-                  background: '#FDFAF5',
-                  color: '#1A1A1A',
-                  transition: 'border 0.15s ease',
+                  ...inputBase,
+                  border: passFocus
+                    ? '2px solid #F0B429'
+                    : '1px solid rgba(255,255,255,0.10)',
                 }}
               />
             </div>
@@ -185,26 +247,31 @@ export default function LoginPage() {
               disabled={loading}
               style={{
                 width: '100%',
-                height: 48,
-                background: loading ? '#D4AF37' : 'linear-gradient(135deg, #C9A84C, #A07830)',
-                color: '#fff',
+                padding: '14px 0',
+                background: loading
+                  ? 'rgba(240,180,41,0.5)'
+                  : 'linear-gradient(135deg, #F0B429, #D97706)',
+                color: '#0B1120',
                 border: 'none',
                 borderRadius: 10,
                 fontSize: 15,
                 fontWeight: 700,
                 cursor: loading ? 'not-allowed' : 'pointer',
-                marginTop: 8,
+                marginTop: 6,
                 transition: 'opacity 0.15s ease',
-                boxShadow: '0 2px 10px rgba(201,168,76,0.35)',
+                boxShadow: loading ? 'none' : '0 2px 12px rgba(240,180,41,0.35)',
+                letterSpacing: '0.2px',
               }}
             >
-              {loading ? 'Signing in...' : 'Sign in'}
+              {loading ? 'Signing in...' : 'Sign In →'}
             </button>
           </form>
 
-          <p style={{ textAlign: 'center', marginTop: 24, fontSize: 14, color: '#6B7280' }}>
+          <p style={{ textAlign: 'center', marginTop: 28, fontSize: 14, color: '#6B7280' }}>
             No account yet?{' '}
-            <Link to="/register" style={{ color: '#A07830', fontWeight: 600 }}>Create one</Link>
+            <Link to="/register" style={{ color: '#F0B429', fontWeight: 600, textDecoration: 'none' }}>
+              Create one
+            </Link>
           </p>
         </div>
       </div>
