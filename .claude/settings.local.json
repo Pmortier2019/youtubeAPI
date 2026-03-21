@@ -35,7 +35,15 @@
       "Bash(grep -roh '#[0-9a-fA-F]\\\\{6\\\\}\\\\|rgba\\([0-9, .]*\\)'  /c/Users/Piete/IdeaProjects/YoutubeAPI1/frontend/src --include=\"*.jsx\" | sort | uniq -c | sort -rn | head -40)",
       "Bash(cd /c/Users/Piete/IdeaProjects/YoutubeAPI1/frontend/src\ngrep -rn \"#6366f1\\\\|#8b5cf6\\\\|#a5b4fc\\\\|#c7d2fe\\\\|#4338ca\\\\|#a78bfa\\\\|#ede9fe\\\\|#eef2ff\\\\|#f0f4ff\" pages/ components/ --include=\"*.jsx\" | grep -v \".orig\")",
       "Bash(ls /c/Users/Piete/IdeaProjects/YoutubeAPI1/*.cmd /c/Users/Piete/IdeaProjects/YoutubeAPI1/mvnw* 2>/dev/null; which mvn 2>/dev/null; ls /c/Users/Piete/IdeaProjects/YoutubeAPI1/target/*.jar 2>/dev/null)",
-      "Bash(openssl rand:*)"
+      "Bash(openssl rand:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(xargs grep:*)",
+      "Bash(git push:*)",
+      "Bash(for f:*)",
+      "Bash(do echo:*)",
+      "Read(//c/Users/Piete/jaar2/youtubeAPI/frontend/src/pages/creator/**)",
+      "Bash(done)"
     ]
   }
 }

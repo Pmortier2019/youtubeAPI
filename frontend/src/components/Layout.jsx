@@ -85,7 +85,7 @@ export default function Layout({ children }) {
             fontSize: 10,
             fontWeight: 600,
             letterSpacing: '1.2px',
-            color: '#64748B',
+            color: '#94A3B8',
             textTransform: 'uppercase',
           }}>Navigation</div>
 
@@ -98,7 +98,7 @@ export default function Layout({ children }) {
                 alignItems: 'center',
                 gap: 11,
                 padding: '10px 20px',
-                color: isActive ? '#F0B429' : '#CBD5E1',
+                color: isActive ? '#F0B429' : '#F1F5F9',
                 fontWeight: isActive ? 600 : 400,
                 fontSize: 14,
                 background: isActive ? 'rgba(240,180,41,0.10)' : 'transparent',
@@ -127,7 +127,7 @@ export default function Layout({ children }) {
                   <Icon
                     size={18}
                     style={{
-                      color: isActive ? '#F0B429' : '#94A3B8',
+                      color: isActive ? '#F0B429' : '#CBD5E1',
                       flexShrink: 0,
                       transition: 'color 0.15s ease',
                     }}
