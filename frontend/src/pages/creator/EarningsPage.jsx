@@ -323,9 +323,23 @@ export default function EarningsPage() {
         <p style={{ fontSize: 13, color: '#374151', marginBottom: 4 }}>
           Payouts are normally processed automatically. Have a question about your payout? Get in touch.
         </p>
-        <p style={{ fontSize: 12, color: '#6B7280', marginBottom: 24 }}>
+        <p style={{ fontSize: 12, color: '#6B7280', marginBottom: 16 }}>
           You can also manually submit a request for a specific month below.
         </p>
+        {pendingPayout < 39 && (
+          <div style={{
+            background: '#FEF3C7',
+            border: '1px solid #FDE68A',
+            borderRadius: 10,
+            padding: '10px 14px',
+            marginBottom: 20,
+            fontSize: 13,
+            color: '#92400E',
+          }}>
+            A minimum balance of <strong>€39.00</strong> is required to request a payout.
+            You currently have <strong>€{Number(pendingPayout).toFixed(2)}</strong>.
+          </div>
+        )}
 
         <form onSubmit={handleRequestPayout} style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
@@ -403,17 +417,17 @@ export default function EarningsPage() {
           <div>
             <button
               type="submit"
-              disabled={submitting}
+              disabled={submitting || pendingPayout < 39}
               style={{
                 padding: '10px 28px',
-                background: submitting ? 'rgba(240,180,41,0.5)' : 'linear-gradient(135deg, #F0B429, #D97706)',
+                background: (submitting || pendingPayout < 39) ? 'rgba(240,180,41,0.35)' : 'linear-gradient(135deg, #F0B429, #D97706)',
                 color: '#111827',
                 border: 'none',
                 borderRadius: 10,
-                cursor: submitting ? 'not-allowed' : 'pointer',
+                cursor: (submitting || pendingPayout < 39) ? 'not-allowed' : 'pointer',
                 fontSize: 14,
                 fontWeight: 700,
-                boxShadow: submitting ? 'none' : '0 2px 12px rgba(240,180,41,0.35)',
+                boxShadow: (submitting || pendingPayout < 39) ? 'none' : '0 2px 12px rgba(240,180,41,0.35)',
                 transition: 'all 0.2s ease',
               }}
             >{submitting ? 'Submitting...' : '💳 Request Payout'}</button>

@@ -46,18 +46,18 @@ export default function LoginPage() {
   const features = [
     {
       Icon: Music,
-      title: 'License your sound',
-      text: 'Upload once, earn every time a creator uses your track in a Short.',
+      title: 'Use a sound, earn views',
+      text: 'Pick a track from an active library, use it in your Short and build up earnings per 1,000 views.',
     },
     {
       Icon: TrendingUp,
-      title: 'Real-time analytics',
-      text: 'Track views, earnings, and campaign performance across all Shorts.',
+      title: 'Automatic view tracking',
+      text: 'Connect your YouTube channel and your views are tracked daily — no manual work.',
     },
     {
       Icon: ShieldCheck,
-      title: 'Transparent payouts',
-      text: 'RPM-based earnings with full history and flexible payout options.',
+      title: 'Transparent earnings',
+      text: 'See exactly what you have built up and request a payout once you reach the threshold.',
     },
   ]
 
@@ -95,7 +95,7 @@ export default function LoginPage() {
           marginBottom: 20,
           letterSpacing: '-0.8px',
         }}>
-          Turn Your Sound Into{' '}
+          Turn Your Shorts Into{' '}
           <span style={{
             borderBottom: '3px solid #F0B429',
             paddingBottom: 2,
@@ -108,7 +108,7 @@ export default function LoginPage() {
           lineHeight: 1.7,
           maxWidth: 380,
         }}>
-          The platform that connects sound creators with YouTube Shorts creators — and pays you for every view.
+          Make YouTube Shorts with tracks from our campaigns and build up earnings with every view.
         </p>
 
         {/* Feature list */}

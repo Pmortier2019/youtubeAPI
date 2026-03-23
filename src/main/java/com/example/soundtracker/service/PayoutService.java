@@ -24,12 +24,20 @@ public class PayoutService {
         this.earningsService = earningsService;
     }
 
+    private static final BigDecimal MINIMUM_PAYOUT = new BigDecimal("39.00");
+
     @Transactional
     public Payout requestPayout(AppUser user, RequestPayoutRequest req) {
         EarningsService.EarningsSummary summary = earningsService.getEarnings(user);
         BigDecimal pending = summary.pendingPayout();
         if (pending.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("No pending payout available");
+        }
+        if (pending.compareTo(MINIMUM_PAYOUT) < 0) {
+            throw new IllegalArgumentException(
+                "Minimum payout amount is €39.00. Your current balance is €" +
+                pending.setScale(2, java.math.RoundingMode.HALF_UP) + "."
+            );
         }
         Payout payout = new Payout(
                 user,
