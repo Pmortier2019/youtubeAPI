@@ -114,7 +114,7 @@ export default function LoginPage() {
         {/* Feature list */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
           {features.map(f => (
-            <div key={f.symbol} style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
+            <div key={f.title} style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
               <div style={{
                 width: 42,
                 height: 42,
@@ -132,6 +132,36 @@ export default function LoginPage() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Subtle new-user nudge */}
+        <div style={{
+          marginTop: 48,
+          paddingTop: 28,
+          borderTop: '1px solid rgba(255,255,255,0.07)',
+        }}>
+          <p style={{ color: '#6B7280', fontSize: 14, marginBottom: 12 }}>
+            New here?
+          </p>
+          <Link
+            to="/register"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8,
+              color: '#F0B429',
+              fontSize: 14,
+              fontWeight: 600,
+              textDecoration: 'none',
+              border: '1px solid rgba(240,180,41,0.35)',
+              borderRadius: 8,
+              padding: '9px 16px',
+              background: 'rgba(240,180,41,0.07)',
+              transition: 'background 0.15s ease',
+            }}
+          >
+            Create a free account →
+          </Link>
         </div>
       </div>
 
