@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../AuthContext'
 import { useState, useEffect } from 'react'
 import {
@@ -73,6 +73,7 @@ function NavItem({ to, label, Icon }) {
 
 export default function Layout({ children }) {
   const { role, logout } = useAuth()
+  const navigate = useNavigate()
   const [logoutHover, setLogoutHover] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
@@ -233,7 +234,7 @@ export default function Layout({ children }) {
             Join Discord
           </a>
           <button
-            onClick={logout}
+            onClick={() => { logout(); navigate('/login') }}
             onMouseEnter={() => setLogoutHover(true)}
             onMouseLeave={() => setLogoutHover(false)}
             style={{
