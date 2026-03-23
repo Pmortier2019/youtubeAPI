@@ -32,6 +32,45 @@ const CREATOR_LINKS = [
 
 const SIDEBAR_WIDTH = 260
 
+function NavItem({ to, label, Icon }) {
+  const [hovered, setHovered] = useState(false)
+  return (
+    <NavLink
+      to={to}
+      style={({ isActive }) => ({
+        display: 'flex',
+        alignItems: 'center',
+        gap: 11,
+        padding: '10px 20px',
+        color: isActive ? '#F0B429' : (hovered ? '#FFFFFF' : '#F1F5F9'),
+        fontWeight: isActive ? 600 : 400,
+        fontSize: 14,
+        background: isActive ? 'rgba(240,180,41,0.10)' : (hovered ? 'rgba(255,255,255,0.06)' : 'transparent'),
+        borderLeft: isActive ? '3px solid #F0B429' : '3px solid transparent',
+        transition: 'all 0.15s ease',
+        cursor: 'pointer',
+        textDecoration: 'none',
+      })}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {({ isActive }) => (
+        <>
+          <Icon
+            size={18}
+            style={{
+              color: isActive ? '#F0B429' : (hovered ? '#F1F5F9' : '#CBD5E1'),
+              flexShrink: 0,
+              transition: 'color 0.15s ease',
+            }}
+          />
+          <span>{label}</span>
+        </>
+      )}
+    </NavLink>
+  )
+}
+
 export default function Layout({ children }) {
   const { role, logout } = useAuth()
   const [logoutHover, setLogoutHover] = useState(false)
@@ -141,52 +180,7 @@ export default function Layout({ children }) {
           }}>Navigation</div>
 
           {links.map(({ to, label, Icon }) => (
-            <NavLink
-              key={to}
-              to={to}
-              style={({ isActive }) => ({
-                display: 'flex',
-                alignItems: 'center',
-                gap: 11,
-                padding: '10px 20px',
-                color: isActive ? '#F0B429' : '#F1F5F9',
-                fontWeight: isActive ? 600 : 400,
-                fontSize: 14,
-                background: isActive ? 'rgba(240,180,41,0.10)' : 'transparent',
-                borderLeft: isActive ? '3px solid #F0B429' : '3px solid transparent',
-                transition: 'all 0.15s ease',
-                cursor: 'pointer',
-                textDecoration: 'none',
-              })}
-              onMouseEnter={e => {
-                const el = e.currentTarget
-                if (!el.getAttribute('data-active')) {
-                  el.style.color = '#F1F5F9'
-                  el.style.background = 'rgba(255,255,255,0.04)'
-                }
-              }}
-              onMouseLeave={e => {
-                const el = e.currentTarget
-                if (!el.getAttribute('data-active')) {
-                  el.style.color = ''
-                  el.style.background = ''
-                }
-              }}
-            >
-              {({ isActive }) => (
-                <>
-                  <Icon
-                    size={18}
-                    style={{
-                      color: isActive ? '#F0B429' : '#CBD5E1',
-                      flexShrink: 0,
-                      transition: 'color 0.15s ease',
-                    }}
-                  />
-                  <span>{label}</span>
-                </>
-              )}
-            </NavLink>
+            <NavItem key={to} to={to} label={label} Icon={Icon} />
           ))}
         </nav>
 
