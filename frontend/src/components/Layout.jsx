@@ -2,7 +2,7 @@ import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../AuthContext'
 import { useState, useEffect } from 'react'
 import {
-  Search, BarChart2, Music, Megaphone, Users, DollarSign, CreditCard,
+  Search, BarChart2, Music, Users, DollarSign, CreditCard,
   Video, UserCog, Landmark, TrendingUp, Play, Rocket, PiggyBank, Wallet,
   LogOut, Menu, X
 } from 'lucide-react'
@@ -11,7 +11,6 @@ const ADMIN_LINKS = [
   { to: '/admin/review', label: 'Review', Icon: Search },
   { to: '/admin/stats', label: 'Statistics', Icon: BarChart2 },
   { to: '/admin/sounds', label: 'Sound Library', Icon: Music },
-  { to: '/admin/campaigns', label: 'Campaigns', Icon: Megaphone },
   { to: '/admin/participations', label: 'Participations', Icon: Users },
   { to: '/admin/payout', label: 'Payouts', Icon: DollarSign },
   { to: '/admin/payouts', label: 'Payout Requests', Icon: CreditCard },
@@ -25,7 +24,7 @@ const CREATOR_LINKS = [
   { to: '/creator/channels', label: 'My Channels', Icon: Video },
   { to: '/creator/shorts', label: 'My Shorts', Icon: Play },
   { to: '/sounds', label: 'Sound Library', Icon: Music },
-  { to: '/campaigns', label: 'Campaigns', Icon: Rocket },
+  { to: '/campaigns', label: 'Affiliate', Icon: Rocket },
   { to: '/me/earnings', label: 'Earnings', Icon: PiggyBank },
   { to: '/me/payout', label: 'My Payout', Icon: Wallet },
 ]

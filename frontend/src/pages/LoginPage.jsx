@@ -108,7 +108,7 @@ export default function LoginPage() {
           lineHeight: 1.7,
           maxWidth: 380,
         }}>
-          Make YouTube Shorts with tracks from our campaigns and build up earnings with every view.
+          Make YouTube Shorts with tracks from our sound library and build up earnings with every view.
         </p>
 
         {/* Feature list */}
