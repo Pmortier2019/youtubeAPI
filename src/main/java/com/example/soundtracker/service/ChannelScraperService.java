@@ -310,7 +310,7 @@ public class ChannelScraperService {
         ObjectNode context = objectMapper.createObjectNode();
         ObjectNode client = objectMapper.createObjectNode();
         client.put("clientName", "WEB");
-        client.put("clientVersion", "2.20240101.00.00");
+        client.put("clientVersion", "2.20250101.00.00");
         client.put("hl", "en");
         client.put("gl", "US");
         context.set("client", client);
@@ -327,7 +327,7 @@ public class ChannelScraperService {
                 .header("Content-Type", "application/json")
                 .header("User-Agent", USER_AGENT)
                 .header("X-YouTube-Client-Name", "1")
-                .header("X-YouTube-Client-Version", "2.20240101.00.00")
+                .header("X-YouTube-Client-Version", "2.20250101.00.00")
                 .POST(HttpRequest.BodyPublishers.ofString(objectMapper.writeValueAsString(body)))
                 .build();
 
