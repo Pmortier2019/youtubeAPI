@@ -1,10 +1,10 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { useAuth } from '../AuthContext'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Search, BarChart2, Music, Megaphone, Users, DollarSign, CreditCard,
   Video, UserCog, Landmark, TrendingUp, Play, Rocket, PiggyBank, Wallet,
-  LogOut, ChevronRight
+  LogOut, Menu, X
 } from 'lucide-react'
 
 const ADMIN_LINKS = [
@@ -30,32 +30,66 @@ const CREATOR_LINKS = [
   { to: '/me/payout', label: 'My Payout', Icon: Wallet },
 ]
 
+const SIDEBAR_WIDTH = 260
+
 export default function Layout({ children }) {
   const { role, logout } = useAuth()
   const [logoutHover, setLogoutHover] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
+  const location = useLocation()
   const links = role === 'ADMIN' ? ADMIN_LINKS : CREATOR_LINKS
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768)
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  // Close sidebar when navigating on mobile
+  useEffect(() => {
+    if (isMobile) setSidebarOpen(false)
+  }, [location.pathname, isMobile])
+
+  const sidebarVisible = !isMobile || sidebarOpen
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh' }}>
+
+      {/* Mobile overlay */}
+      {isMobile && sidebarOpen && (
+        <div
+          onClick={() => setSidebarOpen(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0,0,0,0.55)',
+            zIndex: 99,
+          }}
+        />
+      )}
+
       {/* Sidebar */}
       <aside style={{
         position: 'fixed',
         top: 0,
         left: 0,
-        width: 260,
+        width: SIDEBAR_WIDTH,
         height: '100vh',
         background: '#070E1A',
         borderRight: '1px solid rgba(255,255,255,0.06)',
         display: 'flex',
         flexDirection: 'column',
         zIndex: 100,
+        transform: sidebarVisible ? 'translateX(0)' : `translateX(-${SIDEBAR_WIDTH}px)`,
+        transition: 'transform 0.25s ease',
       }}>
 
         {/* Brand */}
         <div style={{ padding: '24px 24px 0' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
             <Music size={26} color="#F0B429" strokeWidth={2} />
-            <div>
+            <div style={{ flex: 1 }}>
               <div style={{
                 color: '#F9FAFB',
                 fontWeight: 700,
@@ -70,6 +104,23 @@ export default function Layout({ children }) {
                 letterSpacing: '0.3px',
               }}>Creator Platform</div>
             </div>
+            {/* Close button — mobile only */}
+            {isMobile && (
+              <button
+                onClick={() => setSidebarOpen(false)}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: '#94A3B8',
+                  cursor: 'pointer',
+                  padding: 4,
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <X size={20} />
+              </button>
+            )}
           </div>
           <div style={{
             height: 1,
@@ -110,7 +161,7 @@ export default function Layout({ children }) {
               onMouseEnter={e => {
                 const el = e.currentTarget
                 if (!el.getAttribute('data-active')) {
-                  el.style.color = '#9CA3AF'
+                  el.style.color = '#F1F5F9'
                   el.style.background = 'rgba(255,255,255,0.04)'
                 }
               }}
@@ -214,9 +265,51 @@ export default function Layout({ children }) {
         </div>
       </aside>
 
+      {/* Mobile top bar */}
+      {isMobile && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 56,
+          background: '#070E1A',
+          borderBottom: '1px solid rgba(255,255,255,0.06)',
+          display: 'flex',
+          alignItems: 'center',
+          padding: '0 16px',
+          gap: 12,
+          zIndex: 98,
+        }}>
+          <button
+            onClick={() => setSidebarOpen(true)}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: '#F1F5F9',
+              cursor: 'pointer',
+              padding: 6,
+              display: 'flex',
+              alignItems: 'center',
+              borderRadius: 8,
+            }}
+          >
+            <Menu size={22} />
+          </button>
+          <Music size={20} color="#F0B429" strokeWidth={2} />
+          <span style={{
+            color: '#F9FAFB',
+            fontWeight: 700,
+            fontSize: 16,
+            letterSpacing: '-0.3px',
+          }}>PierreMusic</span>
+        </div>
+      )}
+
       {/* Main content */}
       <main style={{
-        marginLeft: 260,
+        marginLeft: isMobile ? 0 : SIDEBAR_WIDTH,
+        marginTop: isMobile ? 56 : 0,
         flex: 1,
         background: '#F8F9FA',
         minHeight: '100vh',
