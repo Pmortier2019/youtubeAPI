@@ -57,10 +57,8 @@ public class ShortController {
      * Body: { "soundVideoId": "nnW0krX0X3c", "creator": "naam" }
      */
     @PostMapping("/scrape-sound")
-    public Map<String, Object> scrapeSound(@RequestBody Map<String, String> body) throws Exception {
-        String soundVideoId = body.get("soundVideoId");
-        String creator = body.get("creator");
-        int count = soundScrapeService.scrapeAndSave(soundVideoId, creator);
+    public Map<String, Object> scrapeSound(@Valid @RequestBody ScrapeSoundRequest req) throws Exception {
+        int count = soundScrapeService.scrapeAndSave(req.soundVideoId(), req.creator());
         return Map.of("newShortsFetched", count);
     }
 
