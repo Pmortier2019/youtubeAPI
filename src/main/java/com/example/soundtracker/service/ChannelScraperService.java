@@ -142,6 +142,16 @@ public class ChannelScraperService {
      */
     @Transactional
     public int scrapeChannelShorts(YoutubeChannel channel) throws Exception {
+        return scrapeChannelShorts(channel, false);
+    }
+
+    /**
+     * Scrapes Shorts from a channel. Pass {@code initialScrape=true} on first channel add
+     * to look back 30 days so existing Shorts appear immediately. On re-scrapes, pass
+     * {@code false} to limit to the last 5 days.
+     */
+    @Transactional
+    public int scrapeChannelShorts(YoutubeChannel channel, boolean initialScrape) throws Exception {
         String channelId = channel.getChannelId();
         String creatorName = channel.getAppUser().getCreatorName() != null
                 ? channel.getAppUser().getCreatorName()
@@ -157,8 +167,10 @@ public class ChannelScraperService {
             }
         }
 
-        // Only accept videos published in the last 5 days
-        LocalDateTime cutoff = LocalDateTime.now(ZoneOffset.UTC).minusDays(5);
+        // On initial channel add, look back 30 days so existing Shorts are captured.
+        // On re-scrapes, only accept Shorts published in the last 5 days.
+        int lookbackDays = initialScrape ? 30 : 5;
+        LocalDateTime cutoff = LocalDateTime.now(ZoneOffset.UTC).minusDays(lookbackDays);
         List<String> filteredVideoIds = filterByPublishDate(newVideoIds, cutoff);
 
         int count = 0;

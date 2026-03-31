@@ -50,7 +50,7 @@ public class YoutubeChannelService {
 
         // Initial scrape
         try {
-            channelScraperService.scrapeChannelShorts(channel);
+            channelScraperService.scrapeChannelShorts(channel, true); // initialScrape=true: 30-day look-back
         } catch (Exception e) {
             // Log but do not fail the registration
             System.err.println("Initial scrape failed for channel " + channelId + ": " + e.getMessage());
