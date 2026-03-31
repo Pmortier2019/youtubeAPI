@@ -134,3 +134,9 @@ export const getSounds = () => request('/sounds')
 export const getSoundPreview = (videoId) => request(`/sounds/preview?videoId=${encodeURIComponent(videoId)}`)
 export const addSound = (data) => request('/sounds', { method: 'POST', body: JSON.stringify(data) })
 export const deleteSound = (id) => request(`/sounds/${id}`, { method: 'DELETE' })
+
+// Agreements
+export const getAgreementStatus = () => request('/agreements/status')
+export const getAgreementCurrent = () => request('/agreements/current')
+export const acceptAgreement = (version) =>
+  request('/agreements/accept', { method: 'POST', body: JSON.stringify({ version }) })

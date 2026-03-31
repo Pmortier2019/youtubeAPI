@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider, useAuth } from './AuthContext'
 import ProtectedRoute from './components/ProtectedRoute'
+import AgreementGate from './components/AgreementGate'
 import Layout from './components/Layout'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
@@ -84,40 +85,40 @@ function AppRoutes() {
         </ProtectedRoute>
       } />
 
-      {/* Creator routes inside Layout */}
+      {/* Creator routes inside Layout — gated by agreement acceptance */}
       <Route path="/me/stats" element={
         <ProtectedRoute role="CREATOR">
-          <Layout><MyStatsPage /></Layout>
+          <AgreementGate><Layout><MyStatsPage /></Layout></AgreementGate>
         </ProtectedRoute>
       } />
       <Route path="/me/payout" element={
         <ProtectedRoute role="CREATOR">
-          <Layout><MyPayoutPage /></Layout>
+          <AgreementGate><Layout><MyPayoutPage /></Layout></AgreementGate>
         </ProtectedRoute>
       } />
       <Route path="/campaigns" element={
         <ProtectedRoute role="CREATOR">
-          <Layout><CampaignsBrowsePage /></Layout>
+          <AgreementGate><Layout><CampaignsBrowsePage /></Layout></AgreementGate>
         </ProtectedRoute>
       } />
       <Route path="/me/earnings" element={
         <ProtectedRoute role="CREATOR">
-          <Layout><EarningsPage /></Layout>
+          <AgreementGate><Layout><EarningsPage /></Layout></AgreementGate>
         </ProtectedRoute>
       } />
       <Route path="/creator/channels" element={
         <ProtectedRoute role="CREATOR">
-          <Layout><MyChannelsPage /></Layout>
+          <AgreementGate><Layout><MyChannelsPage /></Layout></AgreementGate>
         </ProtectedRoute>
       } />
       <Route path="/creator/shorts" element={
         <ProtectedRoute role="CREATOR">
-          <Layout><MyShortsPage /></Layout>
+          <AgreementGate><Layout><MyShortsPage /></Layout></AgreementGate>
         </ProtectedRoute>
       } />
       <Route path="/sounds" element={
         <ProtectedRoute role="CREATOR">
-          <Layout><CreatorSoundLibraryPage /></Layout>
+          <AgreementGate><Layout><CreatorSoundLibraryPage /></Layout></AgreementGate>
         </ProtectedRoute>
       } />
 

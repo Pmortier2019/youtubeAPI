@@ -95,3 +95,19 @@ CREATE INDEX IF NOT EXISTS idx_payouts_status
 
 CREATE INDEX IF NOT EXISTS idx_payment_methods_user
     ON payment_methods (app_user_id);
+
+-- ---------------------------------------------------------------------------
+-- creator_agreement_acceptances (PIE-15)
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS creator_agreement_acceptances (
+    id                  BIGSERIAL       PRIMARY KEY,
+    user_id             BIGINT          NOT NULL REFERENCES app_users(id),
+    agreement_version   VARCHAR(20)     NOT NULL DEFAULT '1.0',
+    accepted_at         TIMESTAMPTZ     NOT NULL DEFAULT NOW(),
+    ip_address          VARCHAR(45),
+    user_agent          TEXT,
+    CONSTRAINT uq_user_agreement_version UNIQUE (user_id, agreement_version)
+);
+
+CREATE INDEX IF NOT EXISTS idx_creator_agreement_user
+    ON creator_agreement_acceptances (user_id);
