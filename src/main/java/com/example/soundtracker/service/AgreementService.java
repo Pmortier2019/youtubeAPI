@@ -14,6 +14,8 @@ public class AgreementService {
 
     public static final String CURRENT_AGREEMENT_VERSION = "1.0";
 
+    public static final int MIN_PAYOUT_USD = 25;
+
     public static final String AGREEMENT_TITLE = "Creator Revenue Share Agreement";
 
     public static final String AGREEMENT_EFFECTIVE_DATE = "2026-03-31";
@@ -74,7 +76,7 @@ PierreMusic reserves the right to determine total view counts based on available
 
 #### 7. Minimum Payout Threshold
 
-Payments are only issued when your accumulated balance exceeds **$50 USD**. Balances below this amount roll over to the next payment period.
+Payments are only issued when your accumulated balance exceeds **$25 USD**. Balances below this amount roll over to the next payment period.
 
 #### 8. Payment Timing
 
