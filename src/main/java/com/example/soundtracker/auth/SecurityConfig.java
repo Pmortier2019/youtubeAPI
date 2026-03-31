@@ -37,6 +37,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/stats/**").permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        // Shorts management is admin-only (creators access their shorts via /api/me/*)
+                        .requestMatchers("/api/shorts/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/campaigns/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PATCH, "/api/campaigns/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/sounds/**").hasRole("ADMIN")
