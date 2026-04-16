@@ -11,7 +11,7 @@ public record VideoDetailsResponse(List<Item> items) {
     public record Item(String id, Snippet snippet, ContentDetails contentDetails) {}
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public record Snippet(String title) {}
+    public record Snippet(String title, String publishedAt) {}
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     public record ContentDetails(String duration) {}

@@ -131,8 +131,9 @@ public class YouTubeApiClient {
         for (VideoDetailsResponse.Item item : response.items()) {
             if (item == null || item.id() == null) continue;
             String title = item.snippet() != null ? item.snippet().title() : "";
+            String publishedAt = item.snippet() != null ? item.snippet().publishedAt() : null;
             long seconds = parseDurationSeconds(item.contentDetails() != null ? item.contentDetails().duration() : null);
-            out.put(item.id(), new VideoDetail(title, seconds));
+            out.put(item.id(), new VideoDetail(title, seconds, publishedAt));
         }
         return out;
     }
@@ -151,6 +152,17 @@ public class YouTubeApiClient {
         try { return Long.parseLong(s); } catch (Exception e) { return 0L; }
     }
 
+    /**
+     * Returns the uploads-playlist ID for the given channel ID (UC...).
+     * Converts UC -> UU directly without an extra API call.
+     */
+    public String fetchUploadsPlaylistIdByChannelId(String channelId) {
+        if (channelId == null || !channelId.startsWith("UC")) {
+            throw new IllegalArgumentException("Invalid channel ID: " + channelId);
+        }
+        return "UU" + channelId.substring(2);
+    }
+
     public record VideoStats(long views, long likes, long comments) {}
-    public record VideoDetail(String title, long durationSeconds) {}
+    public record VideoDetail(String title, long durationSeconds, String publishedAt) {}
 }
