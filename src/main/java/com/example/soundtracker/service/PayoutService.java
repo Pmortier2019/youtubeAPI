@@ -5,12 +5,14 @@ import com.example.soundtracker.domain.AppUser;
 import com.example.soundtracker.domain.Payout;
 import com.example.soundtracker.domain.PayoutStatus;
 import com.example.soundtracker.repo.PayoutRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -54,8 +56,8 @@ public class PayoutService {
         return payoutRepo.save(payout);
     }
 
-    public List<Payout> listAll() {
-        return payoutRepo.findAll();
+    public Page<Payout> listAll(int page, int size) {
+        return payoutRepo.findAll(PageRequest.of(page, size, Sort.by("requestedAt").descending()));
     }
 
     @Transactional

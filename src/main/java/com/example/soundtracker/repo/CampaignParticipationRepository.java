@@ -11,5 +11,6 @@ public interface CampaignParticipationRepository extends JpaRepository<CampaignP
     List<CampaignParticipation> findByCampaignIdAndStatus(Long id, ParticipationStatus status);
     List<CampaignParticipation> findByCreatorName(String name);
     List<CampaignParticipation> findByCreatorNameAndStatus(String creatorName, ParticipationStatus status);
+    List<CampaignParticipation> findByAppUserIdAndStatus(Long appUserId, ParticipationStatus status);
     boolean existsByCampaignIdAndVideoId(Long campaignId, String videoId);
 }

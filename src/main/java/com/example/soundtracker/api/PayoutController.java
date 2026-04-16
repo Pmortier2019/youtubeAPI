@@ -4,6 +4,7 @@ import com.example.soundtracker.domain.AppUser;
 import com.example.soundtracker.domain.Payout;
 import com.example.soundtracker.service.PoolPayoutService;
 import com.example.soundtracker.service.PayoutService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -34,8 +35,11 @@ public class PayoutController {
     }
 
     @GetMapping("/payouts")
-    public List<Payout> listAll() {
-        return payoutService.listAll();
+    public Page<Payout> listAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "25") int size
+    ) {
+        return payoutService.listAll(page, size);
     }
 
     @PatchMapping("/payouts/{id}/paid")
@@ -57,8 +61,11 @@ public class PayoutController {
     }
 
     @GetMapping("/admin/payout/history")
-    public List<Payout> payoutHistory() {
-        return payoutService.listAll();
+    public Page<Payout> payoutHistory(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "25") int size
+    ) {
+        return payoutService.listAll(page, size);
     }
 
     @PatchMapping("/admin/payout/{id}/paid")

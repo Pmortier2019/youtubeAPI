@@ -1,5 +1,6 @@
 package com.example.soundtracker.service;
 
+import com.example.soundtracker.domain.AppUser;
 import com.example.soundtracker.domain.Campaign;
 import com.example.soundtracker.domain.CampaignParticipation;
 import com.example.soundtracker.domain.CampaignStatus;
@@ -32,7 +33,8 @@ public class ParticipationService {
     }
 
     @Transactional
-    public CampaignParticipation joinCampaign(Long campaignId, String creatorName, String url) {
+    public CampaignParticipation joinCampaign(Long campaignId, AppUser user, String url) {
+        String creatorName = user.getCreatorName();
         String videoId = YouTubeVideoIdExtractor.extract(url);
 
         Campaign campaign = campaignRepo.findById(campaignId)
@@ -69,6 +71,7 @@ public class ParticipationService {
         CampaignParticipation participation = new CampaignParticipation(
                 campaign,
                 null,
+                user,
                 creatorName,
                 url,
                 videoId,

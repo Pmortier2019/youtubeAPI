@@ -5,11 +5,13 @@ import com.example.soundtracker.domain.Role;
 import com.example.soundtracker.repo.AppUserRepository;
 import com.example.soundtracker.repo.EmailVerificationTokenRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -25,10 +27,12 @@ public class AdminUserController {
     }
 
     @GetMapping
-    public List<UserDto> listAll() {
-        return userRepo.findAll().stream()
-                .map(UserDto::from)
-                .toList();
+    public Page<UserDto> listAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "25") int size
+    ) {
+        return userRepo.findAll(PageRequest.of(page, size, Sort.by("id").descending()))
+                .map(UserDto::from);
     }
 
     @PatchMapping("/{id}/role")

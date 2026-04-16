@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,4 +31,8 @@ JOIN ShortVideo s ON s.videoId = v.videoId
 WHERE s.creator = :creator
 """)
     Long sumViewsByCreator(String creator);
+
+    /** Fetch all snapshots for the given dates in a single query — used by PayoutCalculatorService. */
+    @Query("SELECT v FROM VideoSnapshot v WHERE v.snapshotDate IN :dates")
+    List<VideoSnapshot> findBySnapshotDateIn(Collection<LocalDate> dates);
 }

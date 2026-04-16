@@ -32,7 +32,7 @@ public class ParticipationController {
         if (!user.isEmailVerified()) {
             throw new IllegalStateException("Email address not verified. Please verify your email before joining a campaign.");
         }
-        return participationService.joinCampaign(id, user.getCreatorName(), req.url());
+        return participationService.joinCampaign(id, user, req.url());
     }
 
     @GetMapping("/campaigns/{id}/participations")

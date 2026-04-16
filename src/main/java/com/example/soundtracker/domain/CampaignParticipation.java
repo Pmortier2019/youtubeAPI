@@ -1,5 +1,6 @@
 package com.example.soundtracker.domain;
 
+import com.example.soundtracker.domain.AppUser;
 import jakarta.persistence.*;
 import java.time.Instant;
 
@@ -26,6 +27,10 @@ public class CampaignParticipation {
     @JoinColumn(name = "short_video_id")
     private ShortVideo shortVideo;
 
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "app_user_id")
+    private AppUser appUser;
+
     @Column(nullable = false, length = 128)
     private String creatorName;
 
@@ -47,10 +52,12 @@ public class CampaignParticipation {
 
     protected CampaignParticipation() {}
 
-    public CampaignParticipation(Campaign campaign, ShortVideo shortVideo, String creatorName,
-                                 String shortUrl, String videoId, ParticipationStatus status) {
+    public CampaignParticipation(Campaign campaign, ShortVideo shortVideo, AppUser appUser,
+                                 String creatorName, String shortUrl, String videoId,
+                                 ParticipationStatus status) {
         this.campaign = campaign;
         this.shortVideo = shortVideo;
+        this.appUser = appUser;
         this.creatorName = creatorName;
         this.shortUrl = shortUrl;
         this.videoId = videoId;
@@ -60,6 +67,7 @@ public class CampaignParticipation {
     public Long getId() { return id; }
     public Campaign getCampaign() { return campaign; }
     public ShortVideo getShortVideo() { return shortVideo; }
+    public AppUser getAppUser() { return appUser; }
     public String getCreatorName() { return creatorName; }
     public String getShortUrl() { return shortUrl; }
     public String getVideoId() { return videoId; }

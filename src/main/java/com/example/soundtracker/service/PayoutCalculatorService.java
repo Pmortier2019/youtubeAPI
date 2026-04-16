@@ -11,6 +11,7 @@ import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class PayoutCalculatorService {
@@ -27,16 +28,19 @@ public class PayoutCalculatorService {
         LocalDate start = ym.atDay(1);
         LocalDate end = ym.atEndOfMonth();
 
+        // Load all shorts and build a videoId -> creator map in one query
         List<ShortVideo> shorts = shortRepo.findAll();
+        Map<String, String> videoCreator = shorts.stream()
+                .collect(Collectors.toMap(ShortVideo::getVideoId, ShortVideo::getCreator, (a, b) -> a));
+
+        // Fetch all snapshots for start and end date in two bulk queries (not N×2 queries)
+        Map<String, Long> startViews = snapshotsByDate(start);
+        Map<String, Long> endViews = snapshotsByDate(end);
 
         Map<String, Long> creatorViews = new HashMap<>();
-
-        for (ShortVideo sv : shorts) {
-            long startViews = findViewsOnDate(sv.getVideoId(), start);
-            long endViews = findViewsOnDate(sv.getVideoId(), end);
-            long growth = Math.max(0, endViews - startViews);
-
-            creatorViews.merge(sv.getCreator(), growth, Long::sum);
+        for (String videoId : videoCreator.keySet()) {
+            long growth = Math.max(0, endViews.getOrDefault(videoId, 0L) - startViews.getOrDefault(videoId, 0L));
+            creatorViews.merge(videoCreator.get(videoId), growth, Long::sum);
         }
 
         long total = creatorViews.values().stream().mapToLong(Long::longValue).sum();
@@ -51,18 +55,21 @@ public class PayoutCalculatorService {
                     : BigDecimal.valueOf(views).divide(BigDecimal.valueOf(total), 8, RoundingMode.HALF_UP);
 
             BigDecimal payout = pot.multiply(share).setScale(2, RoundingMode.HALF_UP);
-
             lines.add(new PayoutLine(creator, views, share, payout));
         }
 
         lines.sort(Comparator.comparing(PayoutLine::monthViews).reversed());
-
         return new PayoutReport(ym.toString(), pot, total, lines);
     }
 
-    private long findViewsOnDate(String videoId, LocalDate date) {
-        Optional<VideoSnapshot> snap = snapRepo.findTopByVideoIdAndSnapshotDateOrderByIdDesc(videoId, date);
-        return snap.map(VideoSnapshot::getViewCount).orElse(0L);
+    /** Returns a videoId -> viewCount map for all snapshots on the given date. */
+    private Map<String, Long> snapshotsByDate(LocalDate date) {
+        return snapRepo.findBySnapshotDateIn(List.of(date)).stream()
+                .collect(Collectors.toMap(
+                        VideoSnapshot::getVideoId,
+                        VideoSnapshot::getViewCount,
+                        Long::max  // keep highest if multiple snapshots per day
+                ));
     }
 
     public record PayoutLine(String creator, long monthViews, BigDecimal share, BigDecimal payout) {}

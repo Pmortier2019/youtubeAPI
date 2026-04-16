@@ -3,12 +3,14 @@ package com.example.soundtracker.api;
 import com.example.soundtracker.domain.YoutubeChannel;
 import com.example.soundtracker.repo.YoutubeChannelRepository;
 import com.example.soundtracker.service.YoutubeChannelService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -25,10 +27,12 @@ public class AdminChannelController {
     }
 
     @GetMapping
-    public List<ChannelAdminDto> listAll() {
-        return channelRepository.findAll().stream()
-                .map(ChannelAdminDto::from)
-                .toList();
+    public Page<ChannelAdminDto> listAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "25") int size
+    ) {
+        return channelRepository.findAll(PageRequest.of(page, size, Sort.by("addedAt").descending()))
+                .map(ChannelAdminDto::from);
     }
 
     @PostMapping("/{id}/scrape")

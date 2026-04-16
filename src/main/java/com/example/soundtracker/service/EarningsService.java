@@ -33,8 +33,16 @@ public class EarningsService {
     }
 
     public EarningsSummary getEarnings(AppUser user) {
-        List<CampaignParticipation> approved = participationRepo
-                .findByCreatorNameAndStatus(user.getCreatorName(), ParticipationStatus.APPROVED);
+        // Prefer querying by user ID (reliable), fall back to name for legacy rows without app_user_id
+        List<CampaignParticipation> approved;
+        if (user.getId() != null) {
+            approved = participationRepo.findByAppUserIdAndStatus(user.getId(), ParticipationStatus.APPROVED);
+            if (approved.isEmpty()) {
+                approved = participationRepo.findByCreatorNameAndStatus(user.getCreatorName(), ParticipationStatus.APPROVED);
+            }
+        } else {
+            approved = participationRepo.findByCreatorNameAndStatus(user.getCreatorName(), ParticipationStatus.APPROVED);
+        }
 
         List<CampaignEarning> breakdown = new ArrayList<>();
         BigDecimal totalEarned = BigDecimal.ZERO;
