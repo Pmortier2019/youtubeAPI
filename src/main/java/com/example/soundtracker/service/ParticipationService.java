@@ -85,10 +85,14 @@ public class ParticipationService {
     public CampaignParticipation updateStatus(Long participationId, ParticipationStatus status) {
         CampaignParticipation participation = participationRepo.findById(participationId)
                 .orElseThrow(() -> new NoSuchElementException("No participation with id: " + participationId));
-        participation.setStatus(status);
         if (status == ParticipationStatus.APPROVED) {
+            Campaign campaign = participation.getCampaign();
+            if (campaign.getSpentBudget().compareTo(campaign.getTotalBudget()) >= 0) {
+                throw new IllegalStateException("Cannot approve: campaign budget would be exceeded.");
+            }
             participation.setApprovedAt(Instant.now());
         }
+        participation.setStatus(status);
         return participationRepo.save(participation);
     }
 }

@@ -18,14 +18,19 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
+@org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
 public class SecurityConfig {
 
     private final AppUserDetailsService userDetailsService;
     private final JwtAuthFilter jwtAuthFilter;
+    private final AuthRateLimitFilter authRateLimitFilter;
 
-    public SecurityConfig(AppUserDetailsService userDetailsService, JwtAuthFilter jwtAuthFilter) {
+    public SecurityConfig(AppUserDetailsService userDetailsService,
+                          JwtAuthFilter jwtAuthFilter,
+                          AuthRateLimitFilter authRateLimitFilter) {
         this.userDetailsService = userDetailsService;
         this.jwtAuthFilter = jwtAuthFilter;
+        this.authRateLimitFilter = authRateLimitFilter;
     }
 
     @Bean
@@ -41,12 +46,14 @@ public class SecurityConfig {
                         .requestMatchers("/api/shorts/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/campaigns/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PATCH, "/api/campaigns/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PATCH, "/api/participations/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/sounds/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/sounds/**").hasRole("ADMIN")
                         .requestMatchers("/api/**").authenticated()
                         .anyRequest().permitAll()
                 )
                 .authenticationProvider(authenticationProvider())
+                .addFilterBefore(authRateLimitFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

@@ -5,6 +5,7 @@ import com.example.soundtracker.domain.CampaignParticipation;
 import com.example.soundtracker.domain.ParticipationStatus;
 import com.example.soundtracker.service.ParticipationService;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +29,9 @@ public class ParticipationController {
             @RequestBody JoinCampaignRequest req,
             @AuthenticationPrincipal AppUser user
     ) {
+        if (!user.isEmailVerified()) {
+            throw new IllegalStateException("Email address not verified. Please verify your email before joining a campaign.");
+        }
         return participationService.joinCampaign(id, user.getCreatorName(), req.url());
     }
 
@@ -36,6 +40,7 @@ public class ParticipationController {
         return participationService.listByCampaign(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PatchMapping("/participations/{id}/status")
     public CampaignParticipation updateStatus(
             @PathVariable Long id,

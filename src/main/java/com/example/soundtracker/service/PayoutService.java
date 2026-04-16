@@ -28,6 +28,9 @@ public class PayoutService {
 
     @Transactional
     public Payout requestPayout(AppUser user, RequestPayoutRequest req) {
+        if (!user.isEmailVerified()) {
+            throw new IllegalStateException("Email address not verified. Please verify your email before requesting a payout.");
+        }
         EarningsService.EarningsSummary summary = earningsService.getEarnings(user);
         BigDecimal pending = summary.pendingPayout();
         if (pending.compareTo(BigDecimal.ZERO) <= 0) {
